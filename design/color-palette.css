@@ -1,0 +1,41 @@
+:root {
+/* white */
+--white-100: #fff;
+/* black */
+--black-100: #000;
+--black-200: #000000;
+--black-300: rgba(0,0,0,0);
+/* lightblue */
+--lightblue-100: #bce1fb;
+/* deepskyblue */
+--deepskyblue-100: #3eb0f2;
+--deepskyblue-200: #23a1eb;
+/* aliceblue */
+--aliceblue-100: #e1f0fd;
+/* steelblue */
+--steelblue-100: #0877c1;
+--steelblue-200: #085f9c;
+/* dodgerblue */
+--dodgerblue-100: #0a66c2;
+/* royalblue */
+--royalblue-100: #1877f2;
+/* mediumslateblue */
+--mediumslateblue-100: #5865f2;
+/* crimson */
+--crimson-100: #e4405f;
+/* lightskyblue */
+--lightskyblue-100: #81cbf8;
+/* gray */
+--gray-100: rgba(128,128,128,0.4);
+/* Brand Colors */
+--whitesmoke: #F8F8F8;
+--deepskyblue: #20A0E8;
+--deepskyblue: #48B0E8;
+/* Homepage Colors */
+--lavender: #D6E9F8;
+--linen: #EBE9E3;
+--black: #0A110F;
+--cornflowerblue: #299CE9;
+--steelblue: #4290BB;
+--mintcream: #F5FAF4;
+}
