@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Code2 } from "lucide-react";
 import { ClockWidget } from "./ClockWidget";
 
 const navLinks = [
@@ -18,8 +19,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-extrabold text-sm">
-                MA
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+                <Code2 size={18} strokeWidth={2.5} />
               </div>
               <span className="font-bold text-base">Muhamad Aris</span>
             </div>

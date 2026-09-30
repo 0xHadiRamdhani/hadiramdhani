@@ -2,13 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Globe, Camera, Briefcase, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Phone, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
-const socialLinks = {
-  github: "",
-  instagram: "",
-  linkedin: "",
-};
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -38,12 +34,6 @@ export default function Contact() {
     }
   };
 
-  const socials = [
-    { name: "GitHub", url: socialLinks.github, icon: Globe },
-    { name: "Instagram", url: socialLinks.instagram, icon: Camera },
-    { name: "LinkedIn", url: socialLinks.linkedin, icon: Briefcase },
-    { name: "Email", url: "mailto:bachungans@gmail.com", icon: Mail },
-  ].filter((s) => s.url);
 
   return (
     <section id="contact" className="w-full py-16 sm:py-24 bg-muted/30 border-t border-border">
@@ -97,28 +87,7 @@ export default function Contact() {
               </a>
             </div>
 
-            {socials.length > 0 && (
-              <div>
-                <h3 className="text-sm font-bold text-foreground mb-3">Find Me Online</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {socials.map((social) => {
-                    const Icon = social.icon;
-                    return (
-                      <a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2.5 rounded-xl border border-border bg-card p-3.5 hover:border-primary/40 hover:shadow-sm transition-all group"
-                      >
-                        <Icon size={16} className="text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                        <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">{social.name}</span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+
 
             {/* LocalTime Card inline */}
             <div className="rounded-xl border border-border bg-card p-5">
