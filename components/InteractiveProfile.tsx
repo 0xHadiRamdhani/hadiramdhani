@@ -10,17 +10,21 @@ type RoleData = {
 };
 
 const roles: Record<string, RoleData> = {
-  "Web Developer": {
-    title: "Web Developer",
-    skills: ["React / Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+  "Coding": {
+    title: "Coding",
+    skills: ["Software Engineering", "Mobile Development", "Dart / Flutter", "TypeScript"],
   },
-  "Software Engineer": {
-    title: "Software Engineer",
-    skills: ["Python", "Java", "C++", "SQL"],
+  "Hacking": {
+    title: "Hacking",
+    skills: ["Cybersecurity", "Penetration Testing", "Linux / Terminal", "Networking"],
   },
-  "Creator": {
-    title: "Creator",
-    skills: ["Video Editing", "Photography", "Design", "Storytelling"],
+  "Electrical": {
+    title: "Electrical",
+    skills: ["Hardware & Circuits", "Microcontrollers", "IoT Devices", "Soldering"],
+  },
+  "Coffee": {
+    title: "Coffee",
+    skills: ["Caffeine Fuel", "Espresso", "Manual Brew", "Late Night Coding"],
   },
 };
 
@@ -34,7 +38,7 @@ export default function InteractiveProfile() {
       {/* Interactive Bio */}
       <div className="rounded-xl border border-border bg-card p-5 sm:p-6 flex flex-col gap-4">
         <div className="text-lg sm:text-xl font-semibold text-foreground">
-          I&apos;m a{" "}
+          I love{" "}
           <button
             onClick={() => setCurrentRoleIndex((prev) => (prev + 1) % roleKeys.length)}
             className="text-primary font-bold underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all cursor-pointer"

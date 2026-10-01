@@ -57,14 +57,14 @@ export default function Hero() {
             </div>
 
             {/* Stats row - like imphnen */}
-            <div className="flex flex-wrap items-center gap-0 pt-2">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-y-4 gap-x-0 pt-2 w-full">
               {[
                 { value: "4", label: "Interests" },
                 { value: "3", label: "School Levels" },
                 { value: "∞", label: "Things To Learn" },
               ].map((stat, i) => (
                 <div key={stat.label} className="flex items-center">
-                  <div className="flex flex-col items-start px-4 first:pl-0">
+                  <div className="flex flex-col items-center sm:items-start px-4 sm:px-4 sm:first:pl-0">
                     <div className="text-2xl sm:text-3xl font-bold text-primary">{stat.value}</div>
                     <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
                   </div>
