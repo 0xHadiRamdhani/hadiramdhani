@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Building2, Users } from "lucide-react";
+import { Building2, Users, Award, ExternalLink } from "lucide-react";
 
 export default function Experience() {
   return (
@@ -19,7 +19,7 @@ export default function Experience() {
           Experience & <span className="text-primary-gradient">Affiliations</span>
         </motion.h2>
 
-        <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           {/* Card 1: SBM ITB */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,7 @@ export default function Experience() {
           >
             <div className="absolute inset-0 bg-primary/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out z-10 pointer-events-none" />
             
-            <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-muted">
+            <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-muted">
               <Image
                 src="/sbm-itb.jpg"
                 alt="Software Engineer at SBM ITB"
@@ -62,7 +62,7 @@ export default function Experience() {
           >
             <div className="absolute inset-0 bg-blue-500/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out z-10 pointer-events-none" />
             
-            <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-muted">
+            <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-muted">
               <Image
                 src="/imphnen.png"
                 alt="Part of IMPHNEN"
@@ -80,6 +80,43 @@ export default function Experience() {
               </h3>
               <p className="text-muted-foreground font-medium text-lg">
                 Active Member
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Card 3: SBM ITB Certificate */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="relative group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg hover:border-amber-400/40 transition-all duration-300 md:col-span-2 lg:col-span-1"
+          >
+            <div className="absolute inset-0 bg-amber-500/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out z-10 pointer-events-none" />
+            
+            <a href="/sbm-itb-certificate.jpg" target="_blank" rel="noopener noreferrer" className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-50 border-b border-border/50 block cursor-pointer p-4 sm:p-6">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/sbm-itb-certificate.jpg"
+                  alt="SBM ITB Certificate"
+                  fill
+                  className="object-contain drop-shadow-sm group-hover:scale-[1.03] transition-transform duration-700"
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors z-10 flex items-center justify-center">
+                 <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" size={32} />
+              </div>
+            </a>
+            <div className="relative z-20 p-6 sm:p-8 flex flex-col justify-center flex-1">
+              <div className="flex items-center gap-2 text-amber-500 mb-3">
+                <Award size={20} />
+                <span className="font-mono text-sm font-semibold uppercase tracking-wider">Achievement</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1 group-hover:text-amber-500 transition-colors">
+                Internship Certificate
+              </h3>
+              <p className="text-muted-foreground font-medium text-lg">
+                SBM ITB
               </p>
             </div>
           </motion.div>

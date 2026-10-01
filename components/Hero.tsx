@@ -86,7 +86,7 @@ export default function Hero() {
           >
             <div className="relative w-full max-w-sm">
               {/* Card */}
-              <div 
+              <div
                 onClick={() => setIsModalOpen(true)}
                 className="relative bg-white border border-border rounded-2xl p-6 sm:p-8 shadow-lg overflow-hidden cursor-pointer hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
               >
@@ -186,7 +186,7 @@ export default function Hero() {
             >
               {/* Top accent bar */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary-300 to-primary-600" />
-              
+
               {/* Close Button */}
               <button
                 onClick={() => setIsModalOpen(false)}
