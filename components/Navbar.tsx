@@ -9,7 +9,9 @@ import { ClockWidget } from "./ClockWidget";
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Journey", href: "#journey" },
+  { name: "Experience", href: "#experience" },
   { name: "Interests", href: "#hobbies" },
+  { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -52,7 +54,7 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-lg overflow-hidden border border-primary/20 shrink-0">
               <Image
                 src="/avatar.jpg"
-                alt="Muhamad Aris"
+                alt="Hadi Ramdhani"
                 width={32}
                 height={32}
                 className="w-full h-full object-cover object-top"
@@ -68,7 +70,7 @@ export default function Navbar() {
                   pastHero ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
               >
-                Muhamad Aris
+                Hadi Ramdhani
               </span>
             </div>
           </Link>

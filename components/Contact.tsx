@@ -15,10 +15,18 @@ export default function Contact() {
     e.preventDefault();
     setStatus("loading");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formsubmit.co/ajax/hadsxdev@icloud.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          _subject: `Pesan Portfolio dari ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
       if (res.ok) {
         setStatus("success");
@@ -39,9 +47,7 @@ export default function Contact() {
     <section id="contact" className="w-full py-16 sm:py-24 bg-muted/30 border-t border-border">
       <div className="container">
         <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary-500">
-            Contact
-          </span>
+          
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
             Let&apos;s build something <span className="text-primary-gradient">together.</span>
           </h2>
@@ -60,7 +66,7 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:bachungans@gmail.com"
+                href="mailto:hadsxdev@icloud.com"
                 className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 sm:p-5 hover:border-primary/40 hover:shadow-sm transition-all group"
               >
                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -68,12 +74,12 @@ export default function Contact() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-xs text-muted-foreground mb-0.5">Email</div>
-                  <div className="text-sm font-semibold text-foreground truncate">bachungans@gmail.com</div>
+                  <div className="text-sm font-semibold text-foreground truncate">hadsxdev@icloud.com</div>
                 </div>
                 <ArrowRight size={16} className="text-muted-foreground shrink-0 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="tel:+6283857451951"
+                href="tel:+6283199456915"
                 className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 sm:p-5 hover:border-primary/40 hover:shadow-sm transition-all group"
               >
                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -81,7 +87,7 @@ export default function Contact() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-xs text-muted-foreground mb-0.5">Phone</div>
-                  <div className="text-sm font-semibold text-foreground">+62 838-5745-1951</div>
+                  <div className="text-sm font-semibold text-foreground">+62 831-9945-6915</div>
                 </div>
                 <ArrowRight size={16} className="text-muted-foreground shrink-0 group-hover:translate-x-1 transition-transform" />
               </a>
@@ -92,7 +98,7 @@ export default function Contact() {
             {/* LocalTime Card inline */}
             <div className="rounded-xl border border-border bg-card p-5">
               <div className="text-xs font-bold text-primary tracking-widest uppercase mb-3">My Local Time</div>
-              <div className="text-foreground/70 text-sm">📍 Jakarta, Indonesia (WIB / UTC+7)</div>
+              <div className="text-foreground/70 text-sm">📍 Kota Bandung, Jawa Barat (WIB / UTC+7)</div>
               <div className="text-xs text-muted-foreground mt-1">
                 Walaupun Anda berada di zona waktu berbeda, widget waktu menampilkan waktu lokal saya.
               </div>

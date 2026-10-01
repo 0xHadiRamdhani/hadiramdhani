@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Video, Camera, Map, Code2, ArrowRight } from "lucide-react";
+import { Code2, Terminal, Zap, Coffee, ArrowRight } from "lucide-react";
 
 const hobbies = [
   {
@@ -14,27 +14,27 @@ const hobbies = [
     hoverBorder: "hover:border-primary/50",
   },
   {
-    icon: Video,
-    title: "Editing",
-    description: "Exploring visual storytelling through photo and video editing.",
+    icon: Terminal,
+    title: "Hacking",
+    description: "Exploring system security and ethical hacking.",
     color: "text-purple-500",
     bg: "bg-purple-500/5",
     border: "border-purple-500/20",
     hoverBorder: "hover:border-purple-500/50",
   },
   {
-    icon: Camera,
-    title: "Fotografi",
-    description: "Capturing moments, details, and perspectives.",
+    icon: Zap,
+    title: "Electrical",
+    description: "Exploring electronics, circuits, and hardware.",
     color: "text-amber-500",
     bg: "bg-amber-500/5",
     border: "border-amber-500/20",
     hoverBorder: "hover:border-amber-500/50",
   },
   {
-    icon: Map,
-    title: "Traveling",
-    description: "Discovering new places and experiences.",
+    icon: Coffee,
+    title: "Coffee",
+    description: "Brewing the best code with a cup of coffee.",
     color: "text-green-500",
     bg: "bg-green-500/5",
     border: "border-green-500/20",
@@ -47,9 +47,7 @@ export default function Hobbies() {
     <section id="hobbies" className="w-full py-16 sm:py-24 bg-white">
       <div className="container">
         <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary-500">
-            Interests
-          </span>
+          
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
             Things I <span className="text-primary-gradient">Love</span>
           </h2>

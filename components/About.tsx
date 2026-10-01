@@ -16,23 +16,21 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="flex flex-col space-y-6"
           >
-            <span className="inline-flex w-fit items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary-500">
-              About Me
-            </span>
+            
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
               A student who loves turning ideas into something{" "}
               <span className="text-primary-gradient">real.</span>
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Saya adalah Muhamad Aris, mahasiswa Program Studi Teknik Informatika di Universitas Sains Indonesia. Saya tertarik dengan dunia teknologi, coding, kreativitas digital, editing, fotografi, dan traveling.
+              Saya adalah Hadi Ramdhani, siswa jurusan Software Engineering di SMK Bani Ma'sum. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.
             </p>
 
             {/* Quick facts */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                { label: "📚 University", value: "Universitas Sains Indonesia" },
-                { label: "🎓 Program", value: "Teknik Informatika" },
-                { label: "📍 Location", value: "Indonesia" },
+                { label: "📚 School", value: "SMK Bani Ma'sum" },
+                { label: "🎓 Major", value: "Software Engineering" },
+                { label: "📍 Location", value: "Kota Bandung, Jawa Barat" },
                 { label: "💼 Status", value: "Open to Collaborate" },
               ].map((fact) => (
                 <div

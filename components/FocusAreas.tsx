@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const areas = [
-  { title: "Frontend Development", status: "ACTIVE", percentage: 92 },
-  { title: "Mobile Development", status: "LEARNING", percentage: 75 },
-  { title: "User Interface Design", status: "DESIGNING", percentage: 85 },
-  { title: "System Architecture", status: "BUILDING", percentage: 70 },
+  { title: "Mobile Development", status: "ACTIVE", percentage: 90 },
+  { title: "Frontend Development", status: "BUILDING", percentage: 85 },
+  { title: "Backend Development", status: "LEARNING", percentage: 75 },
+  { title: "UI/UX Design", status: "DESIGNING", percentage: 80 },
 ];
 
 export default function FocusAreas() {
@@ -14,9 +14,7 @@ export default function FocusAreas() {
     <section className="w-full py-16 sm:py-24 bg-white border-b border-border">
       <div className="container">
         <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary-500">
-            Skills
-          </span>
+          
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
             Areas of <span className="text-primary-gradient">Focus</span>
           </h2>

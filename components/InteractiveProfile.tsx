@@ -89,7 +89,7 @@ export default function InteractiveProfile() {
           </div>
           <div>
             <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EXPERIENCE</div>
-            <div className="font-bold text-foreground text-sm">Mahasiswa</div>
+            <div className="font-bold text-foreground text-sm">Siswa</div>
           </div>
         </div>
 
@@ -100,7 +100,7 @@ export default function InteractiveProfile() {
           </div>
           <div>
             <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EDUCATION</div>
-            <div className="font-bold text-foreground text-sm">Teknik Informatika</div>
+            <div className="font-bold text-foreground text-sm">Software Engineering</div>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export default function InteractiveProfile() {
           </div>
           <div>
             <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EMAIL</div>
-            <div className="font-bold text-foreground text-xs sm:text-sm break-all">bachungans@gmail.com</div>
+            <div className="font-bold text-foreground text-xs sm:text-sm break-all">hadsxdev@icloud.com</div>
           </div>
         </div>
       </div>

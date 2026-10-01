@@ -19,8 +19,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Muhamad Aris - Informatics Engineering Student",
-  description: "Portfolio of Muhamad Aris, an Informatics Engineering student passionate about coding, editing, photography, and traveling.",
+  title: "Hadi Ramdhani - Software Engineering Student",
+  description: "Portfolio of Hadi Ramdhani, a Software Engineering student passionate about coding, hacking, electrical, and coffee.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

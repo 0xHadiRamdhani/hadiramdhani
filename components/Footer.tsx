@@ -7,7 +7,9 @@ import { ClockWidget } from "./ClockWidget";
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Journey", href: "#journey" },
+  { name: "Experience", href: "#experience" },
   { name: "Interests", href: "#hobbies" },
+  { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -22,10 +24,10 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
                 <Code2 size={18} strokeWidth={2.5} />
               </div>
-              <span className="font-bold text-base">Muhamad Aris</span>
+              <span className="font-bold text-base">Hadi Ramdhani</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Informatics Engineering Student • Creator • Explorer
+              Coding • Hacking • Electrical • Coffee
             </p>
           </div>
 
@@ -52,18 +54,18 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="mailto:bachungans@gmail.com"
+                  href="mailto:hadsxdev@icloud.com"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  bachungans@gmail.com
+                  hadsxdev@icloud.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+6283857451951"
+                  href="tel:+6283199456915"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  +62 838-5745-1951
+                  +62 831-9945-6915
                 </a>
               </li>
             </ul>
@@ -78,10 +80,10 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground text-center sm:text-left">
-            © 2026 Muhamad Aris. All rights reserved.
+            © 2026 Hadi Ramdhani. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
-            Jakarta • WIB
+            Kota Bandung • WIB
           </p>
         </div>
       </div>

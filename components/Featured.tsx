@@ -37,7 +37,7 @@ export default function Featured() {
 
           {/* Personal note */}
           <p className="text-foreground/60 text-sm sm:text-base leading-relaxed max-w-sm">
-            Teknik Informatika, gunung, kamera, dan kode — itulah ruang hidup saya. Saya percaya setiap hal yang dibuat dengan niat punya nilainya sendiri.
+            Software Engineering, terminal, hardware, dan kopi — itulah ruang hidup saya. Saya percaya setiap hal yang dibuat dengan niat punya nilainya sendiri.
           </p>
 
           {/* CTAs */}
@@ -86,10 +86,10 @@ export default function Featured() {
           className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-0 overflow-hidden order-1 lg:order-2"
         >
           <Image
-            src="/avatar.jpg"
-            alt="Muhamad Aris"
+            src="/featured.jpg"
+            alt="Hadi Ramdhani"
             fill
-            className="object-cover object-center"
+            className="object-cover object-[center_20%]"
           />
 
           {/* Left gradient blend */}
@@ -103,9 +103,9 @@ export default function Featured() {
               — The person
             </div>
             <div className="text-foreground font-bold text-lg sm:text-xl tracking-tight leading-none">
-              Muhamad Aris
+              Hadi Ramdhani
             </div>
-            <div className="text-foreground/50 text-xs mt-0.5">Indonesia · 2026</div>
+            <div className="text-foreground/50 text-xs mt-0.5">Kota Bandung, Jawa Barat · 2026</div>
           </div>
         </motion.div>
 

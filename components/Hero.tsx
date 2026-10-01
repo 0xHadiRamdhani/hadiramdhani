@@ -28,14 +28,14 @@ export default function Hero() {
             {/* Headline */}
             <div className="space-y-3 sm:space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                <span className="block text-foreground">Muhamad</span>
-                <span className="block text-primary-gradient">Aris</span>
+                <span className="block text-foreground">Hadi</span>
+                <span className="block text-primary-gradient">Ramdhani</span>
               </h1>
               <p className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground/60 tracking-tight">
                 Code. Create. Explore.
               </p>
               <p className="max-w-lg text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Mahasiswa Teknik Informatika yang memiliki ketertarikan pada coding, editing, fotografi, dan traveling.
+                Siswa Software Engineering yang memiliki ketertarikan pada coding, hacking, electrical, dan coffee.
               </p>
             </div>
 
@@ -98,7 +98,7 @@ export default function Hero() {
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-primary/20 mb-4 sm:mb-5 shrink-0">
                     <Image
                       src="/avatar.jpg"
-                      alt="Muhamad Aris"
+                      alt="Hadi Ramdhani"
                       width={80}
                       height={80}
                       className="w-full h-full object-cover object-top"
@@ -106,23 +106,23 @@ export default function Hero() {
                     />
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-1">Muhamad Aris</h3>
-                  <p className="text-primary font-medium text-sm mb-4">Informatics Engineering Student</p>
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-1">Hadi Ramdhani</h3>
+                  <p className="text-primary font-medium text-sm mb-4">Software Engineering Student</p>
 
                   <div className="space-y-3 border-t border-border pt-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <MapPin size={14} className="text-primary shrink-0" />
-                      Indonesia
+                      Kota Bandung, Jawa Barat
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                      Currently studying at Universitas Sains Indonesia
+                      Currently studying at SMK Bani Ma'sum
                     </div>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {["Coding", "Editing", "Fotografi", "Traveling"].map((tag) => (
+                    {["Coding", "Hacking", "Electrical", "Coffee"].map((tag) => (
                       <span
                         key={tag}
                         className="inline-flex items-center rounded-full bg-primary/5 border border-primary/20 px-2.5 py-1 text-xs font-medium text-primary"
