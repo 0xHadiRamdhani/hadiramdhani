@@ -40,7 +40,7 @@ export default function Hero() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="hidden sm:flex sm:flex-row gap-3">
               <Link
                 href="#contact"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white px-6 py-3.5 text-sm sm:text-base font-semibold hover:bg-primary-500 transition-all shadow-sm hover:shadow group"
