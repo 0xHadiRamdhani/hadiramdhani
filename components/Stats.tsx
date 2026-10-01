@@ -6,7 +6,7 @@ import { useRef } from "react";
 const stats = [
   { id: "01", value: "4", label: "Interests" },
   { id: "02", value: "3", label: "School Levels Completed" },
-  { id: "03", value: "1", label: "Current University" },
+  { id: "03", value: "6", label: "Featured Projects" },
   { id: "04", value: "∞", label: "Things To Learn" },
 ];
 
