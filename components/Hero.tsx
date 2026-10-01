@@ -173,7 +173,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-3 sm:p-4"
             onClick={() => setIsModalOpen(false)}
           >
             <motion.div
@@ -181,7 +181,7 @@ export default function Hero() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-xl bg-white border border-border rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+              className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto bg-white border border-border rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl custom-scrollbar"
               onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
             >
               {/* Top accent bar */}
@@ -190,13 +190,13 @@ export default function Hero() {
               {/* Close Button */}
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
               >
-                <X size={20} />
+                <X size={16} className="sm:w-5 sm:h-5" />
               </button>
 
-              <div className="flex flex-col items-center text-center mt-2 mb-6">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-primary/10 mb-4 shadow-sm">
+              <div className="flex flex-col items-center text-center mt-0 sm:mt-2 mb-3 sm:mb-6">
+                <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 sm:border-4 border-primary/10 mb-2 sm:mb-4 shadow-sm">
                   <Image
                     src="/avatar.jpg"
                     alt="Hadi Ramdhani"
@@ -205,46 +205,46 @@ export default function Hero() {
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1">Hadi Ramdhani</h2>
-                <p className="text-primary font-medium">Software Engineering Student</p>
+                <h2 className="text-lg sm:text-3xl font-bold tracking-tight mb-0 sm:mb-1">Hadi Ramdhani</h2>
+                <p className="text-primary font-medium text-[11px] sm:text-base">Software Engineering Student</p>
               </div>
 
-              <div className="space-y-4 bg-muted/30 rounded-2xl p-5 border border-border/50">
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Nama</span>
-                  <span className="font-semibold text-foreground text-sm text-right">Hadi Ramdhani</span>
+              <div className="space-y-1.5 sm:space-y-4 bg-muted/30 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-border/50">
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Nama</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right">Hadi Ramdhani</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Umur</span>
-                  <span className="font-semibold text-foreground text-sm text-right">19 Tahun</span>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Umur</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right">19 Tahun</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Alamat</span>
-                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Komp. Puri Cipageran Indah 1, Kota Cimahi</span>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Alamat</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Komp. Puri Cipageran Indah 1, Kota Cimahi</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Sekolah</span>
-                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">SMK Bani Ma'sum</span>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Sekolah</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">SMK Bani Ma'sum</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Pekerjaan</span>
-                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Software Engineer di SBM ITB</span>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Pekerjaan</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Software Engineer di SBM ITB</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Hobi</span>
-                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Coding, Hacking, Electrical, Coffee</span>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Hobi</span>
+                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Coding, Hacking, Electrical, Coffee</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">Instagram</span>
-                  <Link href="https://instagram.com/hadiramdhani.tsx" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">@hadiramdhani.tsx</Link>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Instagram</span>
+                  <Link href="https://instagram.com/hadiramdhani.tsx" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">@hadiramdhani.tsx</Link>
                 </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-3">
-                  <span className="text-muted-foreground font-medium text-sm">TikTok</span>
-                  <Link href="https://tiktok.com/@hadimobileengineer" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">@hadimobileengineer</Link>
+                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">TikTok</span>
+                  <Link href="https://tiktok.com/@hadimobileengineer" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">@hadimobileengineer</Link>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground font-medium text-sm">WhatsApp</span>
-                  <Link href="https://wa.me/6283199456915" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">083199456915</Link>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">WhatsApp</span>
+                  <Link href="https://wa.me/6283199456915" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">083199456915</Link>
                 </div>
               </div>
             </motion.div>
