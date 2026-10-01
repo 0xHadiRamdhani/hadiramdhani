@@ -66,9 +66,12 @@ export default function Hobbies() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className={`group relative p-6 sm:p-8 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-xl hover:shadow-md transition-all duration-300 flex flex-col justify-between`}
+                className={`group overflow-hidden relative p-6 sm:p-8 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-xl hover:shadow-md transition-all duration-300 flex flex-col justify-between`}
               >
-                <div className="flex flex-col gap-4">
+                {/* Hover swipe effect */}
+                <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
+                
+                <div className="relative z-10 flex flex-col gap-4">
                   <div className={`w-12 h-12 rounded-xl ${hobby.bg} border ${hobby.border} flex items-center justify-center ${hobby.color} transition-all group-hover:scale-110`}>
                     <Icon size={22} />
                   </div>
@@ -77,7 +80,7 @@ export default function Hobbies() {
                     <p className="text-muted-foreground text-sm leading-relaxed">{hobby.description}</p>
                   </div>
                 </div>
-                <div className={`inline-flex items-center gap-1.5 mt-5 text-sm font-medium ${hobby.color} transition-colors`}>
+                <div className={`relative z-10 inline-flex items-center gap-1.5 mt-5 text-sm font-medium ${hobby.color} transition-colors`}>
                   <span>Explore</span>
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </div>

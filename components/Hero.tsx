@@ -1,11 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, X } from "lucide-react";
 
 export default function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="relative w-full min-h-screen flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
       {/* Grid background */}
@@ -83,15 +86,18 @@ export default function Hero() {
           >
             <div className="relative w-full max-w-sm">
               {/* Card */}
-              <div className="relative bg-white border border-border rounded-2xl p-6 sm:p-8 shadow-lg overflow-hidden">
+              <div 
+                onClick={() => setIsModalOpen(true)}
+                className="relative bg-white border border-border rounded-2xl p-6 sm:p-8 shadow-lg overflow-hidden cursor-pointer hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
+              >
                 {/* Top accent bar */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary-300 to-primary-600 rounded-t-2xl" />
 
                 {/* Grid inside card */}
-                <div className="absolute inset-0 grid-bg opacity-40 rounded-2xl" />
+                <div className="absolute inset-0 grid-bg opacity-40 rounded-2xl pointer-events-none" />
 
                 {/* Floating orb */}
-                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl" />
+                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
 
                 <div className="relative z-10">
                   {/* Avatar photo */}
@@ -121,7 +127,7 @@ export default function Hero() {
                   </div>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mt-4">
+                  <div className="flex flex-wrap gap-2 mt-4 mb-5">
                     {["Coding", "Hacking", "Electrical", "Coffee"].map((tag) => (
                       <span
                         key={tag}
@@ -131,6 +137,12 @@ export default function Hero() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Indicator Tombol */}
+                  <div className="w-full bg-primary text-white rounded-xl px-4 py-3 flex items-center justify-between shadow-sm group-hover:bg-primary/90 group-hover:shadow-md transition-all duration-300">
+                    <span className="text-xs sm:text-sm font-semibold">Lihat Biodata Lengkap</span>
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </div>
 
@@ -138,14 +150,14 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-xs font-bold"
+                className="absolute -top-4 -right-4 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-xs font-bold pointer-events-none"
               >
                 {"</>"}
               </motion.div>
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-4 -left-4 w-10 h-10 rounded-xl bg-secondary-300/10 border border-secondary-300/20 flex items-center justify-center text-secondary-300 text-xs font-bold"
+                className="absolute -bottom-4 -left-4 w-10 h-10 rounded-xl bg-secondary-300/10 border border-secondary-300/20 flex items-center justify-center text-secondary-300 text-xs font-bold pointer-events-none"
               >
                 {"{}"}
               </motion.div>
@@ -153,6 +165,92 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Biodata Modal Overlay */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-xl bg-white border border-border rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
+            >
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary-300 to-primary-600" />
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="flex flex-col items-center text-center mt-2 mb-6">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-primary/10 mb-4 shadow-sm">
+                  <Image
+                    src="/avatar.jpg"
+                    alt="Hadi Ramdhani"
+                    width={112}
+                    height={112}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1">Hadi Ramdhani</h2>
+                <p className="text-primary font-medium">Software Engineering Student</p>
+              </div>
+
+              <div className="space-y-4 bg-muted/30 rounded-2xl p-5 border border-border/50">
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Nama</span>
+                  <span className="font-semibold text-foreground text-sm text-right">Hadi Ramdhani</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Umur</span>
+                  <span className="font-semibold text-foreground text-sm text-right">19 Tahun</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Alamat</span>
+                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Komp. Puri Cipageran Indah 1, Kota Cimahi</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Sekolah</span>
+                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">SMK Bani Ma'sum</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Pekerjaan</span>
+                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Software Engineer di SBM ITB</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Hobi</span>
+                  <span className="font-semibold text-foreground text-sm text-right max-w-[340px]">Coding, Hacking, Electrical, Coffee</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">Instagram</span>
+                  <Link href="https://instagram.com/hadiramdhani.tsx" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">@hadiramdhani.tsx</Link>
+                </div>
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <span className="text-muted-foreground font-medium text-sm">TikTok</span>
+                  <Link href="https://tiktok.com/@hadimobileengineer" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">@hadimobileengineer</Link>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground font-medium text-sm">WhatsApp</span>
+                  <Link href="https://wa.me/6283199456915" target="_blank" className="font-semibold text-primary hover:underline text-sm text-right max-w-[340px]">083199456915</Link>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -30,14 +30,17 @@ export default function FocusAreas() {
               transition={{ duration: 0.4, delay: index * 0.08 }}
               className="relative bg-card border border-border rounded-xl overflow-hidden p-5 sm:p-6 flex items-center justify-between group hover:border-primary/30 hover:shadow-sm transition-all"
             >
-              <div className="flex flex-col gap-1">
-                <h3 className="font-semibold text-foreground text-sm sm:text-base">{area.title}</h3>
+              {/* Hover swipe effect */}
+              <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
+              
+              <div className="relative z-10 flex flex-col gap-1">
+                <h3 className="font-semibold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">{area.title}</h3>
                 <div className="flex items-center gap-1.5 text-xs font-mono">
                   <span className="text-muted-foreground">STATUS:</span>
                   <span className="text-primary font-bold">{area.status}</span>
                 </div>
               </div>
-              <div className="text-lg sm:text-2xl font-mono font-bold text-muted-foreground/60 ml-4 shrink-0">
+              <div className="relative z-10 text-lg sm:text-2xl font-mono font-bold text-muted-foreground/60 ml-4 shrink-0">
                 [{area.percentage}%]
               </div>
 

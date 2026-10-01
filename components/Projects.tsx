@@ -139,12 +139,15 @@ export default async function Projects() {
           {projects.map((project, index) => (
             <div
               key={project.repo || index}
-              className="flex flex-col justify-between bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-primary/30 transition-all group"
+              className="relative overflow-hidden flex flex-col justify-between bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-primary/30 transition-all group"
             >
-              <div>
+              {/* Hover swipe effect */}
+              <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
+              
+              <div className="relative z-10 flex-1 flex flex-col">
                 {/* Card Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
                     <GithubIcon size={20} />
                   </div>
                   <Link
@@ -171,7 +174,7 @@ export default async function Projects() {
 
                 {/* Tech Stack badges */}
                 {project.stack && project.stack.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-3">
+                  <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
@@ -185,7 +188,7 @@ export default async function Projects() {
               </div>
 
               {/* Card Footer */}
-              <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground mt-5 pt-4 border-t border-border">
+              <div className="relative z-10 flex items-center gap-4 text-xs font-medium text-muted-foreground mt-5 pt-4 border-t border-border">
                 {project.language && (
                   <div className="flex items-center gap-1.5">
                     <span
