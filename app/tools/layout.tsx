@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronLeft, Wrench } from "lucide-react";
+import { ArrowLeft, Wrench } from "lucide-react";
 import type { ReactNode } from "react";
 
 export default function ToolsLayout({ children }: { children: ReactNode }) {
@@ -10,29 +10,27 @@ export default function ToolsLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {/* Secondary Navbar (hanya muncul di sub-page tools) */}
-      {!isMainToolsPage && (
-        <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 border-b border-border bg-white/70 dark:bg-black/70 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
-          <div className="container max-w-7xl mx-auto px-4 h-12 flex items-center justify-between">
-            <Link
-              href="/tools"
-              className="group flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-            >
-              <span className="flex items-center justify-center p-1 rounded-md bg-muted group-hover:bg-primary/10 transition-colors">
-                <ChevronLeft size={14} className="text-muted-foreground group-hover:text-primary" />
-              </span>
-              Kembali ke Katalog
-            </Link>
-            
-            <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-primary/5 text-primary text-xs font-semibold border border-primary/10">
-              <Wrench size={12} /> Live Browser Tool
+      <div className="pt-24 sm:pt-28">
+        {!isMainToolsPage && (
+          <div className="container max-w-5xl mx-auto px-4 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <Link
+                href="/tools"
+                className="group flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-muted/50 hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all text-sm font-semibold text-muted-foreground hover:text-primary w-fit"
+              >
+                <div className="flex items-center justify-center bg-white rounded-full p-1 shadow-sm group-hover:scale-110 transition-transform">
+                  <ArrowLeft size={14} className="text-foreground group-hover:text-primary" />
+                </div>
+                Kembali ke Katalog Tools
+              </Link>
+
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 text-primary text-xs font-semibold border border-primary/20 shadow-sm shadow-primary/5">
+                <Wrench size={12} />
+                <span className="tracking-wide uppercase">Client-Side Tool</span>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      
-      {/* Jarak padding menyesuaikan apakah ada secondary navbar atau tidak */}
-      <div className={isMainToolsPage ? "pt-24 sm:pt-28" : "pt-32 sm:pt-40"}>
+        )}
         {children}
       </div>
     </>
