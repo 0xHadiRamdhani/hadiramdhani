@@ -62,14 +62,14 @@ export default function SocialResizerPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">📲 Social Media Resizer</h1>
-          <p className="text-muted-foreground text-sm">Upload satu gambar → dapatkan semua ukuran media sosial sekaligus.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Social Media Resizer</h1>
+          <p className="text-muted-foreground text-sm">Upload satu gambar  dapatkan semua ukuran media sosial sekaligus.</p>
         </div>
 
-        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
 
         {!img ? (
-          <div onClick={() => inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) => e.preventDefault()}
+          <div onClick={() =>inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
             <p className="font-semibold text-foreground mb-1">Upload satu gambar</p>
@@ -86,7 +86,7 @@ export default function SocialResizerPage() {
               <div className="flex gap-2">
                 <button onClick={processAll} disabled={processing}
                   className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 disabled:opacity-50 transition-colors">
-                  {processing ? "Processing..." : "⚡ Generate All"}
+                  {processing ? "Processing..." : " Generate All"}
                 </button>
                 <button onClick={() => { setImg(null); setResults({}); inputRef.current!.value = ""; }}
                   className="px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">Clear</button>
@@ -95,7 +95,7 @@ export default function SocialResizerPage() {
 
             {Object.keys(results).length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {PRESETS.map((preset) => results[preset.id] && (
+                {PRESETS.map((preset) =>results[preset.id] && (
                   <div key={preset.id} className="bg-card border border-border rounded-xl overflow-hidden group">
                     <div className="relative overflow-hidden bg-muted/20" style={{ aspectRatio: `${preset.w}/${Math.min(preset.h, preset.w * 1.5)}` }}>
                       <img src={results[preset.id]} alt={preset.label} className="w-full h-full object-cover" />
@@ -103,9 +103,9 @@ export default function SocialResizerPage() {
                     <div className="p-3">
                       <p className="text-xs font-semibold text-foreground mb-0.5">{preset.label}</p>
                       <p className="text-xs text-muted-foreground mb-2">{preset.w}×{preset.h}px</p>
-                      <button onClick={() => download(preset.id, preset.label)}
+                      <button onClick={() =>download(preset.id, preset.label)}
                         className="flex items-center justify-center gap-1.5 w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-xs font-semibold transition-colors">
-                        <Download size={12} /> Download
+                        <Download size={12} />Download
                       </button>
                     </div>
                   </div>

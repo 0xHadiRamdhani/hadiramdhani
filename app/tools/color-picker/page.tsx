@@ -12,7 +12,7 @@ export default function ColorPickerPage() {
 
   const handleFile = (file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => setImg(e.target!.result as string);
+    reader.onload = (e) =>setImg(e.target!.result as string);
     reader.readAsDataURL(file);
   };
 
@@ -24,8 +24,8 @@ export default function ColorPickerPage() {
     const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
     const ctx = canvas.getContext("2d")!;
     const [r, g, b] = ctx.getImageData(x, y, 1, 1).data;
-    const hex = "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
-    setColors((prev) => [hex, ...prev.filter((c) => c !== hex)].slice(0, 20));
+    const hex = "#" + [r, g, b].map((v) =>v.toString(16).padStart(2, "0")).join("");
+    setColors((prev) => [hex, ...prev.filter((c) =>c !== hex)].slice(0, 20));
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -36,7 +36,7 @@ export default function ColorPickerPage() {
     const y = Math.round((e.clientY - rect.top) * (canvas.height / rect.height));
     const ctx = canvas.getContext("2d")!;
     const [r, g, b] = ctx.getImageData(x, y, 1, 1).data;
-    setHovering("#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join(""));
+    setHovering("#" + [r, g, b].map((v) =>v.toString(16).padStart(2, "0")).join(""));
   }, []);
 
   const onImgLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -48,20 +48,20 @@ export default function ColorPickerPage() {
     canvas.getContext("2d")!.drawImage(img, 0, 0);
   };
 
-  const copy = (val: string) => { navigator.clipboard.writeText(val); setCopied(val); setTimeout(() => setCopied(""), 2000); };
+  const copy = (val: string) => { navigator.clipboard.writeText(val); setCopied(val); setTimeout(() =>setCopied(""), 2000); };
 
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">🎯 Image Color Picker</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Color Picker</h1>
           <p className="text-muted-foreground text-sm">Klik bagian manapun pada gambar untuk mengambil kode warna (HEX).</p>
         </div>
 
-        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
 
         {!img ? (
-          <div onClick={() => inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) => e.preventDefault()}
+          <div onClick={() =>inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
             <p className="font-semibold text-foreground mb-1">Upload gambar</p>
@@ -97,7 +97,7 @@ export default function ColorPickerPage() {
                     <div key={c} className="flex items-center gap-2 bg-card border border-border rounded-xl px-3 py-2">
                       <div className="w-8 h-8 rounded-lg border border-border shrink-0" style={{ background: c }} />
                       <code className="font-mono text-sm flex-1">{c}</code>
-                      <button onClick={() => copy(c)} className="text-muted-foreground hover:text-primary">
+                      <button onClick={() =>copy(c)} className="text-muted-foreground hover:text-primary">
                         {copied === c ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
                       </button>
                     </div>

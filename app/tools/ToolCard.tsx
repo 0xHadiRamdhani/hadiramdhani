@@ -70,14 +70,12 @@ export function ToolCard({ tool, index }: Props) {
 
       {tool.status === "external" && (
         <div className="relative z-10 mt-3 pt-3 border-t border-border/50 flex items-center gap-1 text-[11px] text-blue-500 font-medium">
-          <ExternalLink size={11} />
-          Buka layanan
+          <ExternalLink size={11} />Buka layanan
         </div>
       )}
       {tool.status === "live" && (
         <div className="relative z-10 mt-3 pt-3 border-t border-border/50 flex items-center gap-1 text-[11px] text-green-600 font-medium">
-          <Zap size={11} />
-          Buka tool
+          <Zap size={11} />Buka tool
         </div>
       )}
     </motion.div>

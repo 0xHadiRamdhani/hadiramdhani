@@ -17,36 +17,35 @@ export default function DiffCheckerPage() {
     });
   })();
 
-  const changes = diff.filter((d) => d.changed).length;
+  const changes = diff.filter((d) =>d.changed).length;
 
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">📊 Text Diff Checker</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Text Diff Checker</h1>
           <p className="text-muted-foreground text-sm">Bandingkan dua teks baris per baris dan temukan perbedaannya.</p>
         </div>
 
         {changes > 0 && (
           <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-600 text-sm font-semibold">
-            ⚠️ {changes} baris berbeda ditemukan
+            ️ {changes} baris berbeda ditemukan
           </div>
         )}
         {diff.length > 0 && changes === 0 && (
-          <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-xl text-green-600 text-sm font-semibold">
-            ✅ Kedua teks identik!
+          <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-xl text-green-600 text-sm font-semibold">Kedua teks identik!
           </div>
         )}
 
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Teks A (Original)</label>
-            <textarea value={left} onChange={(e) => setLeft(e.target.value)} placeholder="Teks asli di sini..."
+            <textarea value={left} onChange={(e) =>setLeft(e.target.value)} placeholder="Teks asli di sini..."
               className="w-full min-h-[250px] p-4 rounded-xl border border-border bg-muted/20 font-mono text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Teks B (Modified)</label>
-            <textarea value={right} onChange={(e) => setRight(e.target.value)} placeholder="Teks yang diubah di sini..."
+            <textarea value={right} onChange={(e) =>setRight(e.target.value)} placeholder="Teks yang diubah di sini..."
               className="w-full min-h-[250px] p-4 rounded-xl border border-border bg-muted/20 font-mono text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
           </div>
         </div>

@@ -45,14 +45,14 @@ export default function ImageRotatorPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">🔃 Image Rotator & Flipper</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Rotator & Flipper</h1>
           <p className="text-muted-foreground text-sm">Putar dan balik gambar dengan presisi.</p>
         </div>
 
-        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
 
         {!img ? (
-          <div onClick={() => inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) => e.preventDefault()}
+          <div onClick={() =>inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
             <p className="font-semibold text-foreground mb-1">Upload gambar</p>
@@ -61,13 +61,13 @@ export default function ImageRotatorPage() {
         ) : (
           <div className="space-y-5">
             <div className="flex flex-wrap gap-2 bg-card border border-border rounded-xl p-4">
-              <button onClick={() => setRotation((r) => r - 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">↺ -90°</button>
-              <button onClick={() => setRotation((r) => r + 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">↻ +90°</button>
-              <button onClick={() => setFlipH((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipH ? "bg-primary text-white" : "bg-muted"}`}>↔ Flip H</button>
-              <button onClick={() => setFlipV((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipV ? "bg-primary text-white" : "bg-muted"}`}>↕ Flip V</button>
+              <button onClick={() =>setRotation((r) =>r - 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors"> -90°</button>
+              <button onClick={() =>setRotation((r) =>r + 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors"> +90°</button>
+              <button onClick={() =>setFlipH((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipH ? "bg-primary text-white" : "bg-muted"}`}>Flip H</button>
+              <button onClick={() =>setFlipV((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipV ? "bg-primary text-white" : "bg-muted"}`}>Flip V</button>
               <div className="flex items-center gap-2">
                 <label className="text-sm text-muted-foreground">Sudut:</label>
-                <input type="number" value={rotation} onChange={(e) => setRotation(+e.target.value)} className="w-20 px-2 py-1.5 border border-border rounded-lg font-mono text-sm outline-none" />
+                <input type="number" value={rotation} onChange={(e) =>setRotation(+e.target.value)} className="w-20 px-2 py-1.5 border border-border rounded-lg font-mono text-sm outline-none" />
                 <span className="text-muted-foreground text-sm">°</span>
               </div>
               <button onClick={() => { setRotation(0); setFlipH(false); setFlipV(false); }} className="px-4 py-2 bg-red-500/10 text-red-500 rounded-xl text-sm font-semibold hover:bg-red-500/20 transition-colors ml-auto">Reset</button>
@@ -79,7 +79,7 @@ export default function ImageRotatorPage() {
 
             <div className="flex gap-2">
               <button onClick={exportImage} className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
-                <Download size={15} /> Download Hasil
+                <Download size={15} />Download Hasil
               </button>
               <button onClick={() => { setImg(null); inputRef.current!.value = ""; }} className="px-4 py-3 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">Ganti Gambar</button>
             </div>

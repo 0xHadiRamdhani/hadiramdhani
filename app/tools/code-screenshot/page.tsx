@@ -33,7 +33,7 @@ export default function CodeScreenshotPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">💻 Code Screenshot Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Code Screenshot Generator</h1>
           <p className="text-muted-foreground text-sm">Buat screenshot kode yang cantik seperti VS Code. Cocok untuk share di sosmed.</p>
         </div>
 
@@ -41,7 +41,7 @@ export default function CodeScreenshotPage() {
           <div className="space-y-4">
             <textarea
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) =>setCode(e.target.value)}
               placeholder="Paste kode di sini..."
               className="w-full min-h-[200px] p-4 rounded-xl border border-border bg-muted/20 font-mono text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
             />
@@ -65,7 +65,7 @@ export default function CodeScreenshotPage() {
 
             <button onClick={download}
               className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
-              <Download size={16} /> Download PNG (2x)
+              <Download size={16} />Download PNG (2x)
             </button>
           </div>
 
@@ -73,12 +73,12 @@ export default function CodeScreenshotPage() {
           <div className="space-y-5">
             <div>
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">File Name</label>
-              <input type="text" value={fileName} onChange={(e) => setFileName(e.target.value)}
+              <input type="text" value={fileName} onChange={(e) =>setFileName(e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-xl font-mono text-sm outline-none focus:ring-2 focus:ring-primary/20" />
             </div>
             <div>
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">Language</label>
-              <select value={lang} onChange={(e) => setLang(e.target.value)}
+              <select value={lang} onChange={(e) =>setLang(e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary/20 bg-card">
                 {LANGUAGES.map((l) => <option key={l}>{l}</option>)}
               </select>
@@ -87,7 +87,7 @@ export default function CodeScreenshotPage() {
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">Theme</label>
               <div className="space-y-1.5">
                 {THEMES.map((t) => (
-                  <button key={t.id} onClick={() => setTheme(t)}
+                  <button key={t.id} onClick={() =>setTheme(t)}
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold transition-all ${theme.id === t.id ? "border-2 border-primary" : "border border-border hover:border-primary/40"}`}
                     style={{ background: t.bg }}>
                     <div className="flex gap-1">

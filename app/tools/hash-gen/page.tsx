@@ -5,11 +5,11 @@ import { Lock, Copy, Check } from "lucide-react";
 // Simple FNV-1a based hash (for demo, without SubtleCrypto complexities)
 async function sha256(msg: string) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(msg));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  return Array.from(new Uint8Array(buf)).map(b =>b.toString(16).padStart(2, "0")).join("");
 }
 async function sha1(msg: string) {
   const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(msg));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  return Array.from(new Uint8Array(buf)).map(b =>b.toString(16).padStart(2, "0")).join("");
 }
 
 // Simple MD5 implementation
@@ -65,22 +65,22 @@ export default function HashGenPage() {
     setLoading(false);
   };
 
-  const copy = (val: string, id: string) => { navigator.clipboard.writeText(val); setCopied(id); setTimeout(() => setCopied(""), 2000); };
+  const copy = (val: string, id: string) => { navigator.clipboard.writeText(val); setCopied(id); setTimeout(() =>setCopied(""), 2000); };
 
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Lock className="text-primary" /> Hash Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Lock className="text-primary" />Hash Generator</h1>
           <p className="text-muted-foreground text-sm">Generate MD5, SHA-1, dan SHA-256 hash dari teks apapun. Berguna untuk verifikasi integritas data.</p>
         </div>
 
         <div className="flex flex-col gap-3 mb-6">
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Masukkan teks yang ingin di-hash..."
+          <textarea value={input} onChange={(e) =>setInput(e.target.value)} placeholder="Masukkan teks yang ingin di-hash..."
             rows={4} className="w-full p-4 rounded-xl border border-border bg-muted/20 text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
           <button onClick={generate} disabled={!input || loading}
             className="px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 w-fit">
-            {loading ? "Generating..." : "🔐 Generate Hash"}
+            {loading ? "Generating..." : " Generate Hash"}
           </button>
         </div>
 
@@ -90,7 +90,7 @@ export default function HashGenPage() {
               <div key={algo} className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{algo}</span>
-                  <button onClick={() => copy(val, algo)} className="text-muted-foreground hover:text-primary">
+                  <button onClick={() =>copy(val, algo)} className="text-muted-foreground hover:text-primary">
                     {copied === algo ? <Check size={15} className="text-green-500" /> : <Copy size={15} />}
                   </button>
                 </div>

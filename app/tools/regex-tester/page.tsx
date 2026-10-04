@@ -32,7 +32,7 @@ export default function RegexTesterPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Search className="text-primary" /> Regex Tester</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Search className="text-primary" />Regex Tester</h1>
           <p className="text-muted-foreground text-sm">Test dan debug Regular Expression secara real-time dengan highlight match.</p>
         </div>
 
@@ -41,7 +41,7 @@ export default function RegexTesterPage() {
             <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Pattern</label>
             <div className="flex items-center gap-2">
               <span className="text-muted-foreground font-mono">/</span>
-              <input value={pattern} onChange={(e) => setPattern(e.target.value)} placeholder="[a-z]+" className="flex-1 bg-transparent font-mono text-sm outline-none" />
+              <input value={pattern} onChange={(e) =>setPattern(e.target.value)} placeholder="[a-z]+" className="flex-1 bg-transparent font-mono text-sm outline-none" />
               <span className="text-muted-foreground font-mono">/</span>
               <span className="font-mono text-primary text-sm">{flags}</span>
             </div>
@@ -50,14 +50,14 @@ export default function RegexTesterPage() {
             <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Flags</label>
             <div className="flex gap-1">
               {allFlags.map((f) => (
-                <button key={f} onClick={() => setFlags(prev => prev.includes(f) ? prev.replace(f, "") : prev + f)}
+                <button key={f} onClick={() =>setFlags(prev =>prev.includes(f) ? prev.replace(f, "") : prev + f)}
                   className={`w-8 h-8 rounded-lg font-mono text-sm font-bold transition-colors ${flags.includes(f) ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}>{f}</button>
               ))}
             </div>
           </div>
         </div>
 
-        {error && <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm">⚠️ {error}</div>}
+        {error && <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm">️ {error}</div>}
 
         {matches.length > 0 && (
           <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-xl">
@@ -69,7 +69,7 @@ export default function RegexTesterPage() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Teks Test</label>
-            <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Masukkan teks untuk ditest dengan regex..."
+            <textarea value={text} onChange={(e) =>setText(e.target.value)} placeholder="Masukkan teks untuk ditest dengan regex..."
               className="w-full min-h-[300px] p-4 rounded-xl border border-border bg-muted/20 font-mono text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
           </div>
           <div className="flex flex-col gap-2">

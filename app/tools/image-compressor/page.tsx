@@ -50,18 +50,18 @@ export default function ImageCompressorPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">🗜️ Image Compressor</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">️ Image Compressor</h1>
           <p className="text-muted-foreground text-sm">Kompres gambar JPEG/PNG langsung di browser tanpa upload ke server manapun.</p>
         </div>
 
         <input ref={inputRef} type="file" accept="image/*" className="hidden"
-          onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+          onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
 
         {!original ? (
           <div
-            onClick={() => inputRef.current?.click()}
+            onClick={() =>inputRef.current?.click()}
             onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }}
-            onDragOver={(e) => e.preventDefault()}
+            onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
           >
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
@@ -73,16 +73,15 @@ export default function ImageCompressorPage() {
             <div className="flex flex-col sm:flex-row gap-4 items-center p-4 bg-card border border-border rounded-xl">
               <div className="flex-1">
                 <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider block mb-2">Kualitas: {quality}%</label>
-                <input type="range" min={10} max={100} value={quality} onChange={(e) => setQuality(+e.target.value)} className="w-full" />
+                <input type="range" min={10} max={100} value={quality} onChange={(e) =>setQuality(+e.target.value)} className="w-full" />
               </div>
               <div className="flex gap-2 shrink-0">
                 <button onClick={compress} disabled={processing}
                   className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
-                  {processing ? "Compressing..." : "⚡ Compress"}
+                  {processing ? "Compressing..." : " Compress"}
                 </button>
                 <button onClick={() => { setOriginal(null); setCompressed(null); inputRef.current!.value = ""; }}
-                  className="px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">
-                  Clear
+                  className="px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">Clear
                 </button>
               </div>
             </div>
@@ -104,7 +103,7 @@ export default function ImageCompressorPage() {
                 <div className="bg-card border border-border rounded-xl overflow-hidden">
                   <div className="p-3 border-b border-border flex items-center justify-between">
                     <span className="text-sm font-semibold text-muted-foreground">Compressed ({(compressed.size / 1024).toFixed(1)} KB)</span>
-                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline"><Download size={12} /> Download</button>
+                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline"><Download size={12} />Download</button>
                   </div>
                   <img src={compressed.src} alt="Compressed" className="w-full object-contain max-h-64" />
                 </div>

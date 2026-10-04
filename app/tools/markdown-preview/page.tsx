@@ -34,7 +34,7 @@ Ini adalah **teks tebal**, *miring*, dan ***keduanya***.
 
 Kamu bisa membuat \`kode inline\` dan link seperti [Google](https://google.com).
 
-> Ini adalah blockquote yang bagus.
+>Ini adalah blockquote yang bagus.
 
 - Item satu
 - Item dua
@@ -50,14 +50,14 @@ Markdown previewer ini berjalan 100% di browser!
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">👁️ Markdown Previewer</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">️ Markdown Previewer</h1>
           <p className="text-muted-foreground text-sm">Tulis Markdown dan lihat preview-nya secara real-time.</p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Markdown</label>
-            <textarea value={md} onChange={(e) => setMd(e.target.value)}
+            <textarea value={md} onChange={(e) =>setMd(e.target.value)}
               className="w-full min-h-[600px] p-4 rounded-xl border border-border bg-muted/20 font-mono text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none leading-relaxed" />
           </div>
           <div className="flex flex-col gap-2">

@@ -9,7 +9,7 @@ function hexToRgb(hex: string) {
   return { r, g, b };
 }
 function rgbToHex(r: number, g: number, b: number) {
-  return "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
+  return "#" + [r, g, b].map((v) =>v.toString(16).padStart(2, "0")).join("");
 }
 function rgbToHsl(r: number, g: number, b: number) {
   r /= 255; g /= 255; b /= 255;
@@ -37,10 +37,10 @@ export default function ColorConverterPage() {
   const copy = (val: string, id: string) => {
     navigator.clipboard.writeText(val);
     setCopied(id);
-    setTimeout(() => setCopied(""), 2000);
+    setTimeout(() =>setCopied(""), 2000);
   };
 
-  const updateFromRgb = (nr: number, ng: number, nb: number) => setHex(rgbToHex(nr, ng, nb));
+  const updateFromRgb = (nr: number, ng: number, nb: number) =>setHex(rgbToHex(nr, ng, nb));
 
   const formats = [
     { id: "hex", label: "HEX", value: hex },
@@ -55,7 +55,7 @@ export default function ColorConverterPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">🎨 Color Converter</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Color Converter</h1>
           <p className="text-muted-foreground text-sm">Konversi warna antara HEX, RGB, HSL, dan format CSS lainnya.</p>
         </div>
 
@@ -65,7 +65,7 @@ export default function ColorConverterPage() {
             <div className="flex-1 w-full">
               <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Pilih Warna</label>
               <div className="flex gap-3 items-center">
-                <input type="color" value={hex} onChange={(e) => setHex(e.target.value)} className="w-12 h-10 rounded-lg cursor-pointer border border-border" />
+                <input type="color" value={hex} onChange={(e) =>setHex(e.target.value)} className="w-12 h-10 rounded-lg cursor-pointer border border-border" />
                 <input type="text" value={hex} onChange={(e) => /^#[0-9a-fA-F]{0,6}$/.test(e.target.value) && setHex(e.target.value)}
                   className="flex-1 px-4 py-2 border border-border rounded-xl font-mono text-sm outline-none focus:ring-2 focus:ring-primary/20" />
               </div>
@@ -74,7 +74,7 @@ export default function ColorConverterPage() {
                   <div key={label}>
                     <label className="text-xs font-bold text-muted-foreground">{label}: {val}</label>
                     <input type="range" min={0} max={max} value={val}
-                      onChange={(e) => updateFromRgb(label === "R" ? +e.target.value : r, label === "G" ? +e.target.value : g, label === "B" ? +e.target.value : b)}
+                      onChange={(e) =>updateFromRgb(label === "R" ? +e.target.value : r, label === "G" ? +e.target.value : g, label === "B" ? +e.target.value : b)}
                       className="w-full h-2 rounded cursor-pointer" />
                   </div>
                 ))}
@@ -90,7 +90,7 @@ export default function ColorConverterPage() {
                 <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">{f.label}</div>
                 <code className="text-sm font-mono text-foreground">{f.value}</code>
               </div>
-              <button onClick={() => copy(f.value, f.id)} className="ml-2 p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-primary shrink-0">
+              <button onClick={() =>copy(f.value, f.id)} className="ml-2 p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-primary shrink-0">
                 {copied === f.id ? <Check size={15} className="text-green-500" /> : <Copy size={15} />}
               </button>
             </div>

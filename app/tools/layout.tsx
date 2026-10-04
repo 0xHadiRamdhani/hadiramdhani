@@ -20,8 +20,7 @@ export default function ToolsLayout({ children }: { children: ReactNode }) {
               >
                 <div className="flex items-center justify-center bg-white rounded-full p-1 shadow-sm group-hover:scale-110 transition-transform">
                   <ArrowLeft size={14} className="text-foreground group-hover:text-primary" />
-                </div>
-                Kembali ke Katalog Tools
+                </div>Kembali ke Katalog Tools
               </Link>
 
               <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 text-primary text-xs font-semibold border border-primary/20 shadow-sm shadow-primary/5">

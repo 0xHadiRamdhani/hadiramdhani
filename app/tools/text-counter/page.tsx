@@ -9,7 +9,7 @@ export default function TextCounterPage() {
   const chars = text.length;
   const charsNoSpace = text.replace(/\s/g, "").length;
   const sentences = text.split(/[.!?]+/).filter(Boolean).length;
-  const paragraphs = text.split(/\n\s*\n/).filter((p) => p.trim()).length;
+  const paragraphs = text.split(/\n\s*\n/).filter((p) =>p.trim()).length;
   const readTime = Math.max(1, Math.ceil(words / 200));
 
   const stats = [
@@ -25,8 +25,7 @@ export default function TextCounterPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2">
-            <Type className="text-primary" /> Text & Word Counter
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Type className="text-primary" />Text & Word Counter
           </h1>
           <p className="text-muted-foreground text-sm">Analisis teks secara real-time: kata, karakter, kalimat, dan estimasi waktu baca.</p>
         </div>
@@ -43,11 +42,11 @@ export default function TextCounterPage() {
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Teks Kamu</label>
-            <button onClick={() => setText("")} className="text-xs text-red-500 hover:underline font-semibold">Clear</button>
+            <button onClick={() =>setText("")} className="text-xs text-red-500 hover:underline font-semibold">Clear</button>
           </div>
           <textarea
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) =>setText(e.target.value)}
             placeholder="Ketik atau paste teks di sini... Statistik diperbarui secara real-time."
             className="w-full min-h-[400px] p-4 rounded-xl border border-border bg-muted/20 text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all leading-relaxed"
           />

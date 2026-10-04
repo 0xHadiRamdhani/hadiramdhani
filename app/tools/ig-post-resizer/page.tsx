@@ -36,12 +36,12 @@ export default function IgPostResizerPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">📸 Instagram Post Resizer</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Instagram Post Resizer</h1>
           <p className="text-muted-foreground text-sm">Resize foto ke format Instagram yang tepat: Square, Portrait, atau Landscape.</p>
         </div>
-        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && (setImg(URL.createObjectURL(e.target.files[0])), setResult(null))} />
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && (setImg(URL.createObjectURL(e.target.files[0])), setResult(null))} />
         {!img ? (
-          <div onClick={() => inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); setImg(URL.createObjectURL(e.dataTransfer.files[0])); setResult(null); }} onDragOver={(e) => e.preventDefault()}
+          <div onClick={() =>inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); setImg(URL.createObjectURL(e.dataTransfer.files[0])); setResult(null); }} onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
             <p className="font-semibold text-foreground">Upload foto</p>
@@ -58,11 +58,11 @@ export default function IgPostResizerPage() {
             </div>
             <div className="flex gap-2">
               <button onClick={process} className="px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90">Resize</button>
-              {result && <a href={result} download="instagram_post.jpg" className="flex items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl text-sm font-semibold hover:bg-green-600"><Download size={14} /> Download</a>}
+              {result && <a href={result} download="instagram_post.jpg" className="flex items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl text-sm font-semibold hover:bg-green-600"><Download size={14} />Download</a>}
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="border border-border rounded-xl overflow-hidden"><div className="p-2 text-xs text-muted-foreground border-b border-border">Original</div><img src={img} className="w-full object-contain max-h-64" /></div>
-              {result && <div className="border border-border rounded-xl overflow-hidden"><div className="p-2 text-xs text-green-600 border-b border-border font-semibold">✅ {ratio[2]}</div><img src={result} className="w-full object-contain max-h-64" /></div>}
+              {result && <div className="border border-border rounded-xl overflow-hidden"><div className="p-2 text-xs text-green-600 border-b border-border font-semibold"> {ratio[2]}</div><img src={result} className="w-full object-contain max-h-64" /></div>}
             </div>
           </div>
         )}

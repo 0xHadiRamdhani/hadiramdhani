@@ -19,11 +19,11 @@ function extractColors(canvas: HTMLCanvasElement, count = 12): string[] {
   }
 
   return Object.entries(buckets)
-    .sort(([, a], [, b]) => b - a)
+    .sort(([, a], [, b]) =>b - a)
     .slice(0, count)
     .map(([key]) => {
       const [r, g, b] = key.split(",").map(Number);
-      return "#" + [r, g, b].map((v) => Math.min(255, v).toString(16).padStart(2, "0")).join("");
+      return "#" + [r, g, b].map((v) =>Math.min(255, v).toString(16).padStart(2, "0")).join("");
     });
 }
 
@@ -49,22 +49,22 @@ export default function PaletteGenPage() {
     setPalette(extractColors(canvas));
   };
 
-  const copy = (val: string) => { navigator.clipboard.writeText(val); setCopied(val); setTimeout(() => setCopied(""), 2000); };
-  const copyAll = () => { navigator.clipboard.writeText(palette.join(", ")); setCopied("all"); setTimeout(() => setCopied(""), 2000); };
+  const copy = (val: string) => { navigator.clipboard.writeText(val); setCopied(val); setTimeout(() =>setCopied(""), 2000); };
+  const copyAll = () => { navigator.clipboard.writeText(palette.join(", ")); setCopied("all"); setTimeout(() =>setCopied(""), 2000); };
 
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">🌈 Image Palette Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Palette Generator</h1>
           <p className="text-muted-foreground text-sm">Ekstrak palet warna dominan dari gambar apapun secara otomatis.</p>
         </div>
 
-        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
         <canvas ref={canvasRef} className="hidden" />
 
         {!img ? (
-          <div onClick={() => inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) => e.preventDefault()}
+          <div onClick={() =>inputRef.current?.click()} onDrop={(e) => { e.preventDefault(); e.dataTransfer.files[0] && handleFile(e.dataTransfer.files[0]); }} onDragOver={(e) =>e.preventDefault()}
             className="border-2 border-dashed border-border rounded-2xl p-16 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
             <Upload className="mx-auto mb-4 text-muted-foreground" size={48} />
             <p className="font-semibold text-foreground mb-1">Upload gambar</p>
@@ -89,7 +89,7 @@ export default function PaletteGenPage() {
 
               {/* Color swatches row */}
               <div className="flex mb-4 rounded-xl overflow-hidden h-12">
-                {palette.map((c) => <div key={c} className="flex-1 cursor-pointer hover:flex-[2] transition-all duration-300" style={{ background: c }} onClick={() => copy(c)} title={c} />)}
+                {palette.map((c) => <div key={c} className="flex-1 cursor-pointer hover:flex-[2] transition-all duration-300" style={{ background: c }} onClick={() =>copy(c)} title={c} />)}
               </div>
 
               <div className="grid grid-cols-2 gap-2">
@@ -97,7 +97,7 @@ export default function PaletteGenPage() {
                   <div key={c} className="flex items-center gap-2 bg-card border border-border rounded-xl px-3 py-2 group">
                     <div className="w-7 h-7 rounded-lg border border-border shrink-0" style={{ background: c }} />
                     <code className="font-mono text-xs flex-1">{c}</code>
-                    <button onClick={() => copy(c)} className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary transition-all">
+                    <button onClick={() =>copy(c)} className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary transition-all">
                       {copied === c ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
                     </button>
                   </div>

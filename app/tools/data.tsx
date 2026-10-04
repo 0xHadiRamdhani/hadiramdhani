@@ -41,8 +41,8 @@ export const categories: Category[] = [
       { id: "image-rotator", name: "Image Rotator & Flipper", description: "Putar dan balik gambar", status: "live", icon: <RotateCw {...smallIconProps} /> },
       { id: "image-compressor", name: "Image Compressor", description: "Kompres ukuran file gambar", status: "live", icon: <Minimize2 {...smallIconProps} /> },
       { id: "format-converter", name: "Image Format Converter", description: "PNG, JPG, WebP, AVIF dll", status: "live", icon: <FileImage {...smallIconProps} /> },
-      { id: "img-to-base64", name: "Image → Base64", description: "Konversi gambar ke string Base64", status: "live", icon: <Binary {...smallIconProps} /> },
-      { id: "base64-to-img", name: "Base64 → Image", description: "Konversi Base64 kembali ke gambar", status: "live", icon: <Image {...smallIconProps} /> },
+      { id: "img-to-base64", name: "Image  Base64", description: "Konversi gambar ke string Base64", status: "live", icon: <Binary {...smallIconProps} /> },
+      { id: "base64-to-img", name: "Base64  Image", description: "Konversi Base64 kembali ke gambar", status: "live", icon: <Image {...smallIconProps} /> },
       { id: "color-picker", name: "Image Color Picker", description: "Ambil kode warna dari gambar manapun", status: "live", icon: <Search {...smallIconProps} /> },
       { id: "palette-gen", name: "Image Palette Generator", description: "Ekstrak palet warna dari gambar", status: "live", icon: <Palette {...smallIconProps} /> },
     ],
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     icon: <Users {...iconProps} />,
     tools: [
       { id: "ig-post-resizer", name: "Instagram Post Resizer", description: "1:1, 4:5, 1.91:1 siap posting", status: "live", icon: <Image {...smallIconProps} /> },
-      { id: "social-resizer", name: "Social Media Resizer", description: "Satu gambar → semua format sosmed", status: "live", icon: <Maximize2 {...smallIconProps} /> },
+      { id: "social-resizer", name: "Social Media Resizer", description: "Satu gambar  semua format sosmed", status: "live", icon: <Maximize2 {...smallIconProps} /> },
     ],
   },
   {
@@ -84,7 +84,7 @@ export const categories: Category[] = [
       { id: "url-encoder", name: "URL Encoder/Decoder", description: "Encode dan decode URL string", status: "live", icon: <Link2 {...smallIconProps} /> },
       { id: "html-encoder", name: "HTML Encoder/Decoder", description: "Encode entitas HTML", status: "live", icon: <Code {...smallIconProps} /> },
       { id: "regex-tester", name: "Regex Tester", description: "Test dan debug regular expression", status: "live", icon: <Search {...smallIconProps} /> },
-      { id: "color-converter", name: "Color Converter", description: "HEX ↔ RGB ↔ HSL konversi warna", status: "live", icon: <Palette {...smallIconProps} /> },
+      { id: "color-converter", name: "Color Converter", description: "HEX  RGB  HSL konversi warna", status: "live", icon: <Palette {...smallIconProps} /> },
       { id: "timestamp-converter", name: "Timestamp Converter", description: "Unix timestamp ke tanggal dan sebaliknya", status: "live", icon: <Clock {...smallIconProps} /> },
       { id: "uuid-gen", name: "UUID Generator", description: "Generate UUID/GUID v4 secara acak", status: "live", icon: <FingerprintIcon {...smallIconProps} /> },
       { id: "hash-gen", name: "Hash Generator", description: "MD5, SHA-1, SHA-256 hash dari teks", status: "live", icon: <Lock {...smallIconProps} /> },
