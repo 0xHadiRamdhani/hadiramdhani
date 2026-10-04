@@ -10,10 +10,6 @@ export default function ToolsPage() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const totalLive = useMemo(
-    () => categories.flatMap((c) => c.tools).filter((t) => t.status === "live").length,
-    []
-  );
   const totalTools = useMemo(() => categories.flatMap((c) => c.tools).length, []);
 
   const filtered = useMemo(() => {
@@ -39,29 +35,21 @@ export default function ToolsPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-primary/20 mb-6">
-            <Zap size={12} />
-            {totalLive} tools berjalan langsung di browser
-          </div>
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
             Developer &amp; Creative{" "}
             <span className="text-primary-gradient">Tools</span>
           </h1>
           <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
-            {totalTools}+ tools lengkap untuk developer dan kreator. Tools{" "}
-            <span className="text-green-600 font-semibold">live</span> berjalan langsung di
-            browser, <span className="text-blue-500 font-semibold">external</span> membuka
-            layanan terpercaya, dan{" "}
-            <span className="text-amber-500 font-semibold">coming soon</span> segera hadir.
+            Kumpulan {totalTools}+ tools esensial untuk developer dan kreator. Semuanya berjalan langsung di dalam browsermu secara aman dan instan tanpa perlu memproses data di server.
           </p>
         </motion.div>
 
         {/* Stats */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-10 sm:mb-14">
           {[
-            { label: "Total Tools", value: totalTools + "+", color: "text-foreground" },
-            { label: "Live & Fungsional", value: totalLive, color: "text-green-600" },
+            { label: "Total Tools", value: totalTools, color: "text-foreground" },
             { label: "Kategori", value: categories.length, color: "text-primary" },
+            { label: "Client-side", value: "100%", color: "text-green-600" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className={`text-3xl sm:text-4xl font-bold ${stat.color}`}>{stat.value}</div>
@@ -88,11 +76,10 @@ export default function ToolsPage() {
         <div className="flex flex-wrap gap-2 mb-8 sm:mb-12">
           <button
             onClick={() => setActiveCategory("all")}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              activeCategory === "all"
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "all"
                 ? "bg-primary text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground"
-            }`}
+              }`}
           >
             Semua
           </button>
@@ -100,11 +87,10 @@ export default function ToolsPage() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                activeCategory === cat.id
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat.id
                   ? "bg-primary text-white shadow-sm"
                   : "bg-card border border-border text-muted-foreground hover:text-foreground"
-              }`}
+                }`}
             >
               <span className="flex items-center gap-1.5">
                 {cat.icon} <span>{cat.label}</span>

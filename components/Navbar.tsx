@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { ClockWidget } from "./ClockWidget";
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,16 +81,21 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center justify-center gap-1 lg:gap-2 flex-1 px-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium px-3 py-2 rounded-md text-foreground/70 hover:text-primary transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-primary rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.href === "/tools" && pathname.startsWith("/tools");
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-medium px-3 py-2 rounded-md transition-colors relative group ${
+                    isActive ? "text-primary bg-primary/5" : "text-foreground/70 hover:text-primary hover:bg-muted/50"
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute bottom-1 left-3 right-3 h-0.5 rounded-full transition-transform origin-left ${isActive ? "bg-primary scale-x-100" : "bg-primary scale-x-0 group-hover:scale-x-100"}`} />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Clock widget desktop */}
@@ -112,17 +119,22 @@ export default function Navbar() {
         <div className="fixed inset-0 z-40 bg-white flex flex-col">
           <div className="flex flex-col h-full pt-20 pb-8 px-6">
             <nav className="flex flex-col gap-2 flex-1">
-              {navLinks.map((link, i) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl text-xl font-semibold text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all"
-                >
-                  <span className="text-primary font-mono text-sm">0{i + 1}.</span>
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link, i) => {
+                const isActive = link.href === "/tools" && pathname.startsWith("/tools");
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-4 rounded-xl text-xl font-semibold transition-all ${
+                      isActive ? "text-primary bg-primary/10" : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                    }`}
+                  >
+                    <span className={`font-mono text-sm ${isActive ? "text-primary" : "text-primary/70"}`}>0{i + 1}.</span>
+                    {link.name}
+                  </Link>
+                );
+              })}
             </nav>
             <div className="pt-6 border-t border-border">
               <ClockWidget compact />
