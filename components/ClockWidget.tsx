@@ -41,7 +41,6 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
         <span className="hidden sm:inline">BANDUNG</span>
         <span className="text-primary font-bold">{time}</span>
         <span>WIB</span>
-        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
       </div>
     );
   }
