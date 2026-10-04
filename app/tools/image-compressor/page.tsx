@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
-import { Upload, Download } from "lucide-react";
+import { Upload, Download , Minimize2} from "lucide-react";
 
 export default function ImageCompressorPage() {
   const [original, setOriginal] = useState<{ src: string; size: number; name: string } | null>(null);
@@ -50,7 +50,11 @@ export default function ImageCompressorPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">️ Image Compressor</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Minimize2 size={28} /></span>
+            {/* ️ Image Compressor */}
+            ️ Image Compressor
+          </h1>
           <p className="text-muted-foreground text-sm">Kompres gambar JPEG/PNG langsung di browser tanpa upload ke server manapun.</p>
         </div>
 

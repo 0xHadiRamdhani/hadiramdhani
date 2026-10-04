@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Upload, Copy, Check } from "lucide-react";
+import { Upload, Copy, Check , Binary} from "lucide-react";
 
 export default function ImgToBase64Page() {
   const [result, setResult] = useState<{ base64: string; mimeType: string; size: number } | null>(null);
@@ -25,7 +25,11 @@ export default function ImgToBase64Page() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image  Base64</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Binary size={28} /></span>
+            {/* Image  Base64 */}
+            Image  Base64
+          </h1>
           <p className="text-muted-foreground text-sm">Konversi gambar ke string Base64 untuk digunakan di HTML, CSS, atau API.</p>
         </div>
 

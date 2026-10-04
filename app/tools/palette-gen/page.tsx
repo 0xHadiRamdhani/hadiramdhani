@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Upload, Copy, Check } from "lucide-react";
+import { Upload, Copy, Check, Palette } from "lucide-react";
 
 function extractColors(canvas: HTMLCanvasElement, count = 12): string[] {
   const ctx = canvas.getContext("2d")!;
@@ -56,7 +56,11 @@ export default function PaletteGenPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Palette Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Palette size={28} /></span>
+            {/* Image Palette Generator */}
+            Image Palette Generator
+          </h1>
           <p className="text-muted-foreground text-sm">Ekstrak palet warna dominan dari gambar apapun secara otomatis.</p>
         </div>
 

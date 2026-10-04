@@ -11,15 +11,15 @@ export default function ToolsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const totalLive = useMemo(
-    () =>categories.flatMap((c) =>c.tools).filter((t) =>t.status === "live").length,
+    () => categories.flatMap((c) => c.tools).filter((t) => t.status === "live").length,
     []
   );
-  const totalTools = useMemo(() =>categories.flatMap((c) =>c.tools).length, []);
+  const totalTools = useMemo(() => categories.flatMap((c) => c.tools).length, []);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return categories
-      .filter((cat) =>activeCategory === "all" || cat.id === activeCategory)
+      .filter((cat) => activeCategory === "all" || cat.id === activeCategory)
       .map((cat) => ({
         ...cat,
         tools: cat.tools.filter(
@@ -27,7 +27,7 @@ export default function ToolsPage() {
             !q || t.name.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)
         ),
       }))
-      .filter((cat) =>cat.tools.length > 0);
+      .filter((cat) => cat.tools.length > 0);
   }, [search, activeCategory]);
 
   return (
@@ -39,15 +39,16 @@ export default function ToolsPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">Developer &amp; Creative{" "}
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
+            Developer &amp; Creative{" "}
             <span className="text-primary-gradient">Tools</span>
           </h1>
           <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
             {totalTools}+ tools lengkap untuk developer dan kreator. Tools{" "}
-            <span className="text-green-600 font-semibold">live</span>berjalan langsung di
-            browser, <span className="text-blue-500 font-semibold">external</span>membuka
+            <span className="text-green-600 font-semibold">live</span> berjalan langsung di
+            browser, <span className="text-blue-500 font-semibold">external</span> membuka
             layanan terpercaya, dan{" "}
-            <span className="text-amber-500 font-semibold">coming soon</span>segera hadir.
+            <span className="text-amber-500 font-semibold">coming soon</span> segera hadir.
           </p>
         </motion.div>
 
@@ -72,7 +73,7 @@ export default function ToolsPage() {
             <input
               type="text"
               value={search}
-              onChange={(e) =>setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Cari tool... (contoh: JSON, Base64, Compressor)"
               className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
             />
@@ -82,20 +83,21 @@ export default function ToolsPage() {
         {/* Category Tabs */}
         <div className="flex flex-wrap gap-2 mb-8 sm:mb-12">
           <button
-            onClick={() =>setActiveCategory("all")}
+            onClick={() => setActiveCategory("all")}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "all"
-                ? "bg-primary text-white shadow-sm"
-                : "bg-card border border-border text-muted-foreground hover:text-foreground"
+              ? "bg-primary text-white shadow-sm"
+              : "bg-card border border-border text-muted-foreground hover:text-foreground"
               }`}
-          >Semua
+          >
+            Semua
           </button>
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() =>setActiveCategory(cat.id)}
+              onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat.id
-                  ? "bg-primary text-white shadow-sm"
-                  : "bg-card border border-border text-muted-foreground hover:text-foreground"
+                ? "bg-primary text-white shadow-sm"
+                : "bg-card border border-border text-muted-foreground hover:text-foreground"
                 }`}
             >
               <span className="flex items-center gap-1.5">
@@ -107,10 +109,8 @@ export default function ToolsPage() {
 
         {/* Tools Grid */}
         {filtered.length === 0 ? (
-          <div className="text-center py-20 text-muted-foreground flex flex-col items-center justify-center">
-            <div className="text-4xl mb-4 bg-muted/50 p-4 rounded-full text-muted-foreground">
-              <Search size={32} />
-            </div>
+          <div className="text-center py-20 text-muted-foreground">
+            <div className="text-4xl mb-4">🔍</div>
             <p className="text-lg font-medium">Tidak ada tool yang cocok</p>
             <p className="text-sm mt-1">Coba kata kunci lain</p>
           </div>

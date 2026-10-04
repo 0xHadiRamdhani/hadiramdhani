@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Copy, Check, Download } from "lucide-react";
+import { Copy, Check, Download, Code } from "lucide-react";
 
 const THEMES = [
   { id: "dark", label: "Dark", bg: "#1e1e2e", text: "#cdd6f4", comment: "#6c7086", keyword: "#cba6f7", string: "#a6e3a1", number: "#fab387", header: "#313244" },
@@ -33,7 +33,11 @@ export default function CodeScreenshotPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Code Screenshot Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Code size={28} /></span>
+            {/* Code Screenshot Generator */}
+            Code Screenshot Generator
+          </h1>
           <p className="text-muted-foreground text-sm">Buat screenshot kode yang cantik seperti VS Code. Cocok untuk share di sosmed.</p>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Braces, RefreshCw, Copy, Check, Trash2, ArrowDownUp } from "lucide-react";
+import { Braces, RefreshCw, Copy, Check, Trash2, ArrowDownUp , FileJson} from "lucide-react";
 
 export default function JsonFormatterPage() {
   const [input, setInput] = useState("");

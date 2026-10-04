@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Globe, Copy, Check } from "lucide-react";
+import { Globe, Copy, Check , Code} from "lucide-react";
 
 const htmlEntities: [RegExp, string][] = [
   [/&/g, "&amp;"], [/</g, "&lt;"], [/>/g, "&gt;"], [/"/g, "&quot;"], [/'/g, "&#39;"],

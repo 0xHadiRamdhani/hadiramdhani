@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Upload, Download } from "lucide-react";
+import { Upload, Download , Palette} from "lucide-react";
 
 const GRADIENTS = [
   { label: "Sunset", value: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" },
@@ -51,7 +51,11 @@ export default function ScreenshotBeautifierPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Screenshot Beautifier</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Palette size={28} /></span>
+            {/* Screenshot Beautifier */}
+            Screenshot Beautifier
+          </h1>
           <p className="text-muted-foreground text-sm">Percantik screenshot dengan gradient background, shadow, dan border radius elegan.</p>
         </div>
 

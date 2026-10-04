@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Copy, Check, Zap } from "lucide-react";
+import { Copy, Check, Zap , FileEdit} from "lucide-react";
 
 function minifyCSS(css: string) {
   return css

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check , GitBranch} from "lucide-react";
 
 export default function AiReadmePage() {
   const [projectName, setProjectName] = useState("");
@@ -91,7 +91,11 @@ Distributed under the MIT License. See \`LICENSE\` for more information.
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">README Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><GitBranch size={28} /></span>
+            {/* README Generator */}
+            README Generator
+          </h1>
           <p className="text-muted-foreground text-sm">Buat README.md profesional untuk project GitHub kamu dengan cepat.</p>
         </div>
 

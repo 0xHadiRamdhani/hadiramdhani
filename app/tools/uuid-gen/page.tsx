@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Copy, Check, RefreshCw } from "lucide-react";
+import { Copy, Check, RefreshCw , Hash} from "lucide-react";
 
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -23,7 +23,11 @@ export default function UuidGenPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">UUID Generator</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Hash size={28} /></span>
+            {/* UUID Generator */}
+            UUID Generator
+          </h1>
           <p className="text-muted-foreground text-sm">Generate UUID v4 secara acak. Aman digunakan sebagai ID unik.</p>
         </div>
 

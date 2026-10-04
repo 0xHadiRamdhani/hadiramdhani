@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { SplitSquareHorizontal } from "lucide-react";
 
 export default function DiffCheckerPage() {
   const [left, setLeft] = useState("");
@@ -23,7 +24,11 @@ export default function DiffCheckerPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Text Diff Checker</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><SplitSquareHorizontal size={28} /></span>
+            {/* Text Diff Checker */}
+            Text Diff Checker
+          </h1>
           <p className="text-muted-foreground text-sm">Bandingkan dua teks baris per baris dan temukan perbedaannya.</p>
         </div>
 

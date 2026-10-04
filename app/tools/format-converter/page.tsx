@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Upload, Download } from "lucide-react";
+import { Upload, Download , FileImage} from "lucide-react";
 
 const FORMATS = ["image/jpeg", "image/png", "image/webp"] as const;
 const FORMAT_LABELS: Record<string, string> = { "image/jpeg": "JPG", "image/png": "PNG", "image/webp": "WebP" };
@@ -45,7 +45,11 @@ export default function FormatConverterPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Format Converter</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><FileImage size={28} /></span>
+            {/* Image Format Converter */}
+            Image Format Converter
+          </h1>
           <p className="text-muted-foreground text-sm">Konversi gambar antara JPG, PNG, dan WebP di browser.</p>
         </div>
 

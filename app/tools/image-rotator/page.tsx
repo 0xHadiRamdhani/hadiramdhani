@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { Upload, Download } from "lucide-react";
+import { Upload, Download , RotateCw} from "lucide-react";
 
 export default function ImageRotatorPage() {
   const [img, setImg] = useState<string | null>(null);
@@ -45,7 +45,11 @@ export default function ImageRotatorPage() {
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Image Rotator & Flipper</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><RotateCw size={28} /></span>
+            {/* Image Rotator & Flipper */}
+            Image Rotator & Flipper
+          </h1>
           <p className="text-muted-foreground text-sm">Putar dan balik gambar dengan presisi.</p>
         </div>
 

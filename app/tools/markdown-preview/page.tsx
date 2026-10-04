@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Eye } from "lucide-react";
 
 // Simple markdown parser (subset)
 function parseMarkdown(md: string) {
@@ -50,7 +51,11 @@ Markdown previewer ini berjalan 100% di browser!
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">️ Markdown Previewer</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Eye size={28} /></span>
+            {/* ️ Markdown Previewer */}
+            ️ Markdown Previewer
+          </h1>
           <p className="text-muted-foreground text-sm">Tulis Markdown dan lihat preview-nya secara real-time.</p>
         </div>
 
