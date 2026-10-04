@@ -203,6 +203,7 @@ export default function Hero() {
                     width={112}
                     height={112}
                     className="w-full h-full object-cover object-top"
+                    priority
                   />
                 </div>
                 <h2 className="text-lg sm:text-3xl font-bold tracking-tight mb-0 sm:mb-1">Hadi Ramdhani</h2>

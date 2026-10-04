@@ -7,12 +7,13 @@ import { Menu, X } from "lucide-react";
 import { ClockWidget } from "./ClockWidget";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Journey", href: "#journey" },
-  { name: "Experience", href: "#experience" },
-  { name: "Interests", href: "#hobbies" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/#about" },
+  { name: "Journey", href: "/#journey" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Interests", href: "/#hobbies" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Tools", href: "/tools" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -58,6 +59,7 @@ export default function Navbar() {
                 width={32}
                 height={32}
                 className="w-full h-full object-cover object-top"
+                priority
               />
             </div>
 
