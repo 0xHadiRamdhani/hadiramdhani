@@ -84,6 +84,30 @@ export default function UrlScannerTool() {
               <p>{error}</p>
             </div>
           )}
+
+          <div className="mt-6 pt-5 border-t border-border/50">
+            <details className="group">
+              <summary className="flex items-center gap-2 cursor-pointer text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                <Activity size={16} />
+                Apa saja data yang dimunculkan?
+              </summary>
+              <div className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                <ul className="space-y-2 list-disc list-inside">
+                  <li><strong className="text-foreground">Screenshot Visual:</strong> Tangkapan layar web aslinya</li>
+                  <li><strong className="text-foreground">URL & Domain:</strong> Tautan lengkap dan domain utama</li>
+                  <li><strong className="text-foreground">Waktu Pindaian:</strong> Waktu web terakhir dianalisis</li>
+                  <li><strong className="text-foreground">Negara Server:</strong> Lokasi geografis server web</li>
+                  <li><strong className="text-foreground">Software Server:</strong> Jenis server (Nginx, Apache, dll)</li>
+                </ul>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li><strong className="text-foreground">IP Address:</strong> Alamat IP dari server web</li>
+                  <li><strong className="text-foreground">Nomor ASN:</strong> Identitas jaringan / ISP (Autonomous System)</li>
+                  <li><strong className="text-foreground">Status Keamanan:</strong> Indikator Malicious (Berbahaya) atau Clean</li>
+                  <li><strong className="text-foreground">Laporan Detail:</strong> Tautan ke hasil analisis teknis mendalam</li>
+                </ul>
+              </div>
+            </details>
+          </div>
         </div>
 
         {results && results.length > 0 && (
