@@ -5,7 +5,7 @@ import {
   Minimize2, FileImage, Layers, Binary, Search, EyeOff, Film, Video,
   Music, FileText, SplitSquareHorizontal, FileJson, CheckSquare, Settings,
   Hash, Code, Type, Layout, Terminal, Clock, Lock, Zap, Box, FileEdit, Link2,
-  List, Check, BookOpen, Wind, GitBranch
+  List, Check, BookOpen, Wind, GitBranch, Globe, Shield, Radar
 } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -91,6 +91,20 @@ export const categories: Category[] = [
       { id: "css-minifier", name: "CSS Minifier", description: "Minify CSS untuk performa lebih baik", status: "live", icon: <FileEdit {...smallIconProps} /> },
       { id: "diff-checker", name: "Text Diff Checker", description: "Bandingkan dua teks dan temukan perbedaan", status: "live", icon: <SplitSquareHorizontal {...smallIconProps} /> },
       { id: "markdown-preview", name: "Markdown Previewer", description: "Preview Markdown secara realtime", status: "live", icon: <Eye {...smallIconProps} /> },
+    ],
+  },
+  {
+    id: "osint-tools",
+    label: "OSINT Tools",
+    icon: <Radar {...iconProps} />,
+    tools: [
+      { id: "ip-lookup", name: "IP & Geo Lookup", description: "Lacak lokasi, ISP, dan ASN dari sebuah IP Address secara realtime", status: "live", icon: <Globe {...smallIconProps} /> },
+      { id: "mac-lookup", name: "MAC Vendor Lookup", description: "Cek nama vendor atau pabrikan dari sebuah MAC Address", status: "live", icon: <Search {...smallIconProps} /> },
+      { id: "shodan", name: "Shodan", description: "Search engine untuk perangkat yang terhubung internet", status: "external", externalUrl: "https://www.shodan.io/", icon: <Search {...smallIconProps} /> },
+      { id: "virustotal", name: "VirusTotal", description: "Analisis file mencurigakan, domain, IP, dan URL", status: "external", externalUrl: "https://www.virustotal.com/", icon: <Shield {...smallIconProps} /> },
+      { id: "whois", name: "Whois Lookup", description: "Cek informasi kepemilikan domain dan IP", status: "external", externalUrl: "https://who.is/", icon: <Globe {...smallIconProps} /> },
+      { id: "hunter", name: "Hunter.io", description: "Cari alamat email profesional dari sebuah domain", status: "external", externalUrl: "https://hunter.io/", icon: <FileText {...smallIconProps} /> },
+      { id: "haveibeenpwned", name: "Have I Been Pwned", description: "Cek apakah email/telepon Anda pernah bocor", status: "external", externalUrl: "https://haveibeenpwned.com/", icon: <EyeOff {...smallIconProps} /> },
     ],
   },
 ];

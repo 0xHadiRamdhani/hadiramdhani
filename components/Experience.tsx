@@ -124,6 +124,7 @@ export default function Experience() {
                         src={exp.image}
                         alt={exp.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-contain drop-shadow-sm group-hover:scale-[1.03] transition-transform duration-700"
                       />
                     </div>
@@ -132,6 +133,7 @@ export default function Experience() {
                       src={exp.image}
                       alt={exp.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
                   )}
@@ -197,6 +199,7 @@ export default function Experience() {
                   src={selectedExp.image}
                   alt={selectedExp.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className={selectedExp.imageFit === "contain" ? "object-contain drop-shadow-sm p-4" : "object-cover object-center"}
                 />
                 <div className={`absolute inset-0 ${selectedExp.imageFit === "contain" ? "bg-gradient-to-t from-black/80 via-black/20 to-transparent" : "bg-gradient-to-t from-black/60 to-transparent"}`} />

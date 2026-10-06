@@ -33,16 +33,16 @@ export default function Base64ToolPage() {
           <p className="text-muted-foreground text-sm">Encode teks ke Base64 atau decode Base64 kembali ke teks asli.</p>
         </div>
 
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex bg-muted p-1 rounded-xl">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+          <div className="flex bg-muted p-1 rounded-xl w-full sm:w-auto">
             {(["encode", "decode"] as const).map((m) => (
               <button key={m} onClick={() => { setMode(m); process(input, m); }}
-                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${mode === m ? "bg-white shadow text-primary" : "text-muted-foreground"}`}>
+                className={`flex-1 sm:flex-none px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${mode === m ? "bg-white shadow text-primary" : "text-muted-foreground"}`}>
                 {m}
               </button>
             ))}
           </div>
-          <button onClick={swap} className="flex items-center gap-2 px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">
+          <button onClick={swap} className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">
             <ArrowLeftRight size={15} />Swap
           </button>
         </div>

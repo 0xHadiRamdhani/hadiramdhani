@@ -31,7 +31,7 @@ export default function ToolsPage() {
   }, [search, activeCategory]);
 
   return (
-    <main className="min-h-screen pt-24 sm:pt-32 pb-24 px-4 bg-background">
+    <main className="min-h-screen pb-24 px-4 bg-background">
       <div className="container max-w-7xl mx-auto">
         {/* Hero */}
         <motion.div
@@ -81,10 +81,10 @@ export default function ToolsPage() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 sm:mb-12">
+        <div className="flex overflow-x-auto custom-scrollbar pb-2 sm:flex-wrap gap-2 mb-8 sm:mb-12">
           <button
             onClick={() => setActiveCategory("all")}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "all"
+            className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "all"
               ? "bg-primary text-white shadow-sm"
               : "bg-card border border-border text-muted-foreground hover:text-foreground"
               }`}
@@ -95,7 +95,7 @@ export default function ToolsPage() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat.id
+              className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat.id
                 ? "bg-primary text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground"
                 }`}
@@ -132,7 +132,7 @@ export default function ToolsPage() {
                   <div className="flex-1 h-px bg-border ml-4" />
                 </motion.div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-3">
                   {cat.tools.map((tool, i) => (
                     <ToolCard key={tool.id} tool={tool} index={i} />
                   ))}
