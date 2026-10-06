@@ -25,3 +25,4 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message || "Failed to fetch from urlscan.io" }, { status: 500 });
   }
 }
+

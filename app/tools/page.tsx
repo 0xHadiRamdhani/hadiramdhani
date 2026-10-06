@@ -24,7 +24,11 @@ export default function ToolsPage() {
         ...cat,
         tools: cat.tools.filter(
           (t) =>
-            !q || t.name.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)
+            !q || 
+            t.name.toLowerCase().includes(q) || 
+            t.description.toLowerCase().includes(q) ||
+            cat.label.toLowerCase().includes(q) ||
+            cat.id.toLowerCase().includes(q)
         ),
       }))
       .filter((cat) => cat.tools.length > 0);
