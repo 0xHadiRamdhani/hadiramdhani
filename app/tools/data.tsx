@@ -100,6 +100,7 @@ export const categories: Category[] = [
     tools: [
       { id: "ip-lookup", name: "IP & Geo Lookup", description: "Lacak lokasi, ISP, dan ASN dari sebuah IP Address secara realtime", status: "live", icon: <Globe {...smallIconProps} /> },
       { id: "mac-lookup", name: "MAC Vendor Lookup", description: "Cek nama vendor atau pabrikan dari sebuah MAC Address", status: "live", icon: <Search {...smallIconProps} /> },
+      { id: "url-scanner", name: "URL Scanner", description: "Cari hasil pindaian situs web menggunakan database urlscan.io", status: "live", icon: <Shield {...smallIconProps} /> },
       { id: "shodan", name: "Shodan", description: "Search engine untuk perangkat yang terhubung internet", status: "external", externalUrl: "https://www.shodan.io/", icon: <Search {...smallIconProps} /> },
       { id: "virustotal", name: "VirusTotal", description: "Analisis file mencurigakan, domain, IP, dan URL", status: "external", externalUrl: "https://www.virustotal.com/", icon: <Shield {...smallIconProps} /> },
       { id: "whois", name: "Whois Lookup", description: "Cek informasi kepemilikan domain dan IP", status: "external", externalUrl: "https://who.is/", icon: <Globe {...smallIconProps} /> },
