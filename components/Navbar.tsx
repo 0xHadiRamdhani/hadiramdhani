@@ -67,14 +67,14 @@ export default function Navbar() {
 
             {/* Name slides in from below when past hero */}
             <div className="overflow-hidden h-5 relative w-0 transition-all duration-500"
-              style={{ width: pastHero ? "120px" : "0px" }}
+              style={{ width: pastHero ? (pathname.startsWith("/tools") ? "210px" : "120px") : "0px" }}
             >
               <span
                 className={`font-bold text-sm text-foreground whitespace-nowrap absolute transition-all duration-500 ${
                   pastHero ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
               >
-                Hadi Ramdhani
+                {pathname.startsWith("/tools") ? "Developer & Creative Tools" : "Hadi Ramdhani"}
               </span>
             </div>
           </Link>

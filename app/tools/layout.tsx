@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ToolsNavigation } from "./ToolsNavigation";
+import Navbar from "@/components/Navbar";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function ToolsLayout({ children }: { children: ReactNode }) {
   return (
     <>
+      <Navbar />
       <ToolsNavigation>{children}</ToolsNavigation>
     </>
   );
