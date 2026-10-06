@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { ClockWidget } from "./ClockWidget";
+import { categories } from "@/app/tools/data";
 
 const navLinks = [
   { name: "About", href: "/#about" },
@@ -22,6 +23,27 @@ export default function Navbar() {
   const [pastHero, setPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const getNavTitle = () => {
+    if (pathname === "/") return "Hadi Ramdhani";
+    if (pathname === "/tools") return "Developer & Creative Tools";
+    if (pathname.startsWith("/tools/")) {
+      const toolId = pathname.replace("/tools/", "");
+      for (const cat of categories) {
+        const tool = cat.tools.find((t) => t.id === toolId);
+        if (tool) return tool.name;
+      }
+      return "Developer & Creative Tools";
+    }
+    return "Hadi Ramdhani";
+  };
+  const navTitle = getNavTitle();
+
+  const getNavTitleWidth = () => {
+    if (navTitle === "Hadi Ramdhani") return "120px";
+    if (navTitle === "Developer & Creative Tools") return "210px";
+    return `${Math.max(120, navTitle.length * 8.5)}px`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,14 +89,14 @@ export default function Navbar() {
 
             {/* Name slides in from below when past hero */}
             <div className="overflow-hidden h-5 relative w-0 transition-all duration-500"
-              style={{ width: pastHero ? (pathname.startsWith("/tools") ? "210px" : "120px") : "0px" }}
+              style={{ width: pastHero ? getNavTitleWidth() : "0px" }}
             >
               <span
                 className={`font-bold text-sm text-foreground whitespace-nowrap absolute transition-all duration-500 ${
                   pastHero ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
               >
-                {pathname.startsWith("/tools") ? "Developer & Creative Tools" : "Hadi Ramdhani"}
+                {navTitle}
               </span>
             </div>
           </Link>
