@@ -19,8 +19,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Hadi Ramdhani - NexoraLabStudio | Nexora",
-  description: "Portfolio of Hadi Ramdhani. Software Engineering student and part of NexoraLabStudio & Nexora.",
+  title: "Hadi Ramdhani - Software Engineering Student",
+  description: "Saya adalah Hadi Ramdhani, siswa jurusan Software Engineering di SMK Bani Ma'sum. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.",
+  applicationName: "Hadi Ramdhani - NexoraLabStudio",
+  openGraph: {
+    siteName: "Hadi Ramdhani - NexoraLabStudio",
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">{children}</body>
     </html>
