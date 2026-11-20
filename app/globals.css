@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0A110F;
+  --foreground: #0a0a0a;
   --muted: #f4f4f5;
   --muted-foreground: #71717a;
   --border: #e4e4e7;
@@ -19,28 +19,31 @@
   --font-sans: var(--font-poppins), var(--font-geist-sans), "Poppins", sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 
-  /* Primary - from color-palette.css */
-  --color-primary-50: #e1f0fd;
-  --color-primary-100: #bce1fb;
-  --color-primary-200: #81cbf8;
-  --color-primary-300: #3eb0f2;
-  --color-primary-400: #23a1eb;
-  --color-primary: #20A0E8;
-  --color-primary-500: #0877c1;
-  --color-primary-600: #085f9c;
-  --color-primary-700: #0a66c2;
+  /* Primary: lime (fills), always paired with black text */
+  --color-primary-50: #f7fee7;
+  --color-primary-100: #ecfccb;
+  --color-primary-200: #d9f99d;
+  --color-primary-300: #bef264;
+  --color-primary-400: #a3e635;
+  --color-primary: #a3e635;
+  --color-primary-500: #84cc16;
+  --color-primary-600: #65a30d;
+  --color-primary-700: #4d7c0f;
 
-  /* Secondary */
-  --color-secondary-100: #4290bb;
-  --color-secondary-200: #299ce9;
-  --color-secondary-300: #1877f2;
-  --color-secondary-400: #5865f2;
+  /* Secondary: lighter lime, used as gradient partner */
+  --color-secondary-100: #ecfccb;
+  --color-secondary-200: #d9f99d;
+  --color-secondary-300: #bef264;
+  --color-secondary-400: #bef264;
+
+  /* Lime that is readable as text on white (WCAG AA) */
+  --color-lime-ink: #3f6212;
 
   /* Palette */
-  --color-bg-blue: #D6E9F8;
+  --color-bg-blue: #f1f8e0;
   --color-bg-warm: #EBE9E3;
   --color-bg-green: #F5FAF4;
-  --color-bg-dark: #0A110F;
+  --color-bg-dark: #0a0a0a;
 }
 
 html {
@@ -57,14 +60,14 @@ body {
 
 ::selection {
   background: var(--color-primary);
-  color: white;
+  color: #0a0a0a;
 }
 
 /* Grid background pattern - like imphnen.dev */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(32, 160, 232, 0.04) 1px, transparent 1px),
-    linear-gradient(to right, rgba(32, 160, 232, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(163, 230, 53, 0.04) 1px, transparent 1px),
+    linear-gradient(to right, rgba(163, 230, 53, 0.04) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -93,15 +96,17 @@ body {
 }
 
 @layer utilities {
+  /* Light surfaces: black text with a lime marker. Dark surfaces: lime text. */
   .text-primary-gradient {
-    background: linear-gradient(100deg, var(--color-primary-300), var(--color-primary) 40%, var(--color-secondary-400));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: linear-gradient(transparent 60%, var(--color-primary) 60% 94%, transparent 94%);
+    padding: 0 0.14em;
+    margin: 0 -0.14em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .box-glow {
-    box-shadow: 0 0 0 1px rgba(32, 160, 232, 0.1), 0 4px 24px rgba(32, 160, 232, 0.08);
+    box-shadow: 0 0 0 1px rgba(163, 230, 53, 0.1), 0 4px 24px rgba(163, 230, 53, 0.08);
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -129,48 +134,13 @@ body {
 
 /* ---------- Design system additions ---------- */
 
-/* Section eyebrow: "01 — About" */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-primary-500);
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(32, 160, 232, 0.07);
-  border: 1px solid rgba(32, 160, 232, 0.2);
-}
-.eyebrow-index {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-.eyebrow-line {
-  width: 1.25rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.45;
-}
-.eyebrow-dark {
-  color: var(--color-primary-200);
-  background: rgba(62, 176, 242, 0.1);
-  border-color: rgba(129, 203, 248, 0.25);
-}
-.eyebrow-dark .eyebrow-index {
-  color: var(--color-primary-300);
-}
-
 /* Cursor-following glow card */
 .spot {
   position: relative;
   isolation: isolate;
   --mx: 50%;
   --my: 50%;
-  --spot: 32, 160, 232;
+  --spot: 163, 230, 53;
 }
 .spot::before {
   content: "";
@@ -194,12 +164,12 @@ body {
 /* Soft aurora wash */
 .aurora {
   background:
-    radial-gradient(60% 50% at 12% 8%, rgba(32, 160, 232, 0.16), transparent 70%),
-    radial-gradient(50% 45% at 92% 18%, rgba(88, 101, 242, 0.12), transparent 70%),
-    radial-gradient(55% 50% at 70% 100%, rgba(62, 176, 242, 0.12), transparent 70%);
+    radial-gradient(60% 50% at 12% 8%, rgba(163, 230, 53, 0.16), transparent 70%),
+    radial-gradient(50% 45% at 92% 18%, rgba(190, 242, 100, 0.12), transparent 70%),
+    radial-gradient(55% 50% at 70% 100%, rgba(190, 242, 100, 0.12), transparent 70%);
 }
 .dot-grid {
-  background-image: radial-gradient(rgba(10, 17, 15, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(10, 10, 10, 0.1) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 .dot-grid-dark {
@@ -222,10 +192,10 @@ body {
   padding: 1px;
   background: linear-gradient(
     140deg,
-    rgba(32, 160, 232, 0.55),
-    rgba(88, 101, 242, 0.25) 45%,
-    rgba(32, 160, 232, 0.08) 75%,
-    rgba(88, 101, 242, 0.45)
+    rgba(163, 230, 53, 0.55),
+    rgba(190, 242, 100, 0.25) 45%,
+    rgba(163, 230, 53, 0.08) 75%,
+    rgba(190, 242, 100, 0.45)
   );
 }
 
@@ -275,7 +245,7 @@ body {
   animation: pulse-ring 2s ease-out infinite;
 }
 .shimmer-text {
-  background: linear-gradient(100deg, currentColor 40%, #81cbf8 50%, currentColor 60%);
+  background: linear-gradient(100deg, currentColor 40%, #d9f99d 50%, currentColor 60%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -304,12 +274,12 @@ body {
   box-shadow: 0 26px 44px -26px var(--hover-shadow);
 }
 .tool-card-link:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-lime-ink);
   outline-offset: 4px;
 }
 
 .tool-body {
-  --accent: 32, 160, 232;
+  --accent: 163, 230, 53;
 }
 .tool-body main {
   min-height: 0;
@@ -340,7 +310,7 @@ body {
   height: 1.25rem;
   border-radius: 50%;
   background: rgb(var(--accent));
-  color: #fff;
+  color: #0a0a0a;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
@@ -365,11 +335,107 @@ body {
   outline: none;
 }
 .tool-body button.bg-primary:not(:disabled) {
-  box-shadow: 0 12px 26px -14px rgba(32, 160, 232, 0.75);
+  box-shadow: 0 12px 26px -14px rgba(163, 230, 53, 0.75);
 }
 .tool-body button.bg-primary:not(:disabled):hover {
   transform: translateY(-1px);
 }
 .tool-body .rounded-2xl.bg-card {
-  box-shadow: 0 16px 36px -24px rgba(10, 17, 15, 0.3);
+  box-shadow: 0 16px 36px -24px rgba(10, 10, 10, 0.3);
 }
+
+/* ---------- Tools hub: motion ---------- */
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.animate-marquee-fast { animation: marquee 46s linear infinite; }
+.animate-marquee-rev { animation: marquee-rev 52s linear infinite; }
+.marquee-pause:hover .animate-marquee-fast,
+.marquee-pause:hover .animate-marquee-rev {
+  animation-play-state: paused;
+}
+
+@keyframes code-line {
+  0% { opacity: 0; transform: translateY(8px); }
+  8%, 82% { opacity: 1; transform: translateY(0); }
+  94%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+.code-line {
+  opacity: 0;
+  animation: code-line 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: calc(var(--i, 0) * 0.28s);
+}
+@keyframes caret {
+  50% { opacity: 0; }
+}
+.caret { animation: caret 1s steps(1) infinite; }
+
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: 0.6; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.ping-soft { animation: ping-soft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0) scale(1); }
+  25% { transform: rotate(-8deg) scale(1.12); }
+  60% { transform: rotate(6deg) scale(1.12); }
+}
+.tool-card-link:hover .icon-wiggle { animation: wiggle 0.7s ease-in-out; }
+
+@keyframes border-spin {
+  to { transform: rotate(360deg); }
+}
+.beam {
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(from 0deg, transparent 0 70%, rgba(var(--spot), 0.9) 85%, transparent 100%);
+  animation: border-spin 5s linear infinite;
+}
+
+/* 3D tilt driven by Spotlight's `tilt` prop */
+.spot-tilt {
+  transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: transform 0.25s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.stage-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(75% 85% at 30% 40%, #000, transparent 100%);
+  mask-image: radial-gradient(75% 85% at 30% 40%, #000, transparent 100%);
+}
+
+.cat-outline-num {
+  -webkit-text-stroke: 1.5px rgba(var(--accent), 0.35);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-fast,
+  .animate-marquee-rev,
+  .code-line,
+  .caret,
+  .ping-soft,
+  .beam,
+  .tool-card-link:hover .icon-wiggle {
+    animation: none;
+  }
+  .code-line { opacity: 1; }
+  .spot-tilt { transform: none !important; }
+}
+
+/* ---------- Black / white / lime overrides ---------- */
+.bg-bg-dark .text-primary-gradient {
+  background: linear-gradient(100deg, #bef264, #a3e635 50%, #ecfccb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+.bg-bg-dark ::selection { background: var(--color-primary); color: #0a0a0a; }

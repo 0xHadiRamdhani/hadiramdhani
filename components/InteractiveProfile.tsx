@@ -41,10 +41,10 @@ type Tile = {
 };
 
 const tiles: Tile[] = [
-  { icon: Radio, label: "Status", value: "Available to Collab", rgb: "34,197,94", iconBg: "bg-green-500/10", iconColor: "text-green-600", dot: true },
-  { icon: Briefcase, label: "Experience", value: "Siswa", rgb: "32,160,232", iconBg: "bg-primary/10", iconColor: "text-primary" },
-  { icon: GraduationCap, label: "Education", value: "Software Engineering", rgb: "168,85,247", iconBg: "bg-purple-500/10", iconColor: "text-purple-500" },
-  { icon: Mail, label: "Email", value: "hadsxdev@icloud.com", rgb: "239,68,68", iconBg: "bg-red-500/10", iconColor: "text-red-500", small: true },
+  { icon: Radio, label: "Status", value: "Available to Collab", rgb: "163,230,53", iconBg: "bg-primary/10", iconColor: "text-lime-ink", dot: true },
+  { icon: Briefcase, label: "Experience", value: "Siswa", rgb: "163,230,53", iconBg: "bg-primary/10", iconColor: "text-lime-ink" },
+  { icon: GraduationCap, label: "Education", value: "Software Engineering", rgb: "163,230,53", iconBg: "bg-primary/10", iconColor: "text-lime-ink" },
+  { icon: Mail, label: "Email", value: "hadsxdev@icloud.com", rgb: "163,230,53", iconBg: "bg-primary/10", iconColor: "text-lime-ink", small: true },
 ];
 
 export default function InteractiveProfile() {
@@ -57,9 +57,9 @@ export default function InteractiveProfile() {
       {/* Interactive Bio, styled as a terminal window */}
       <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-lg shadow-primary/5">
         <div className="flex items-center gap-2 border-b border-border bg-muted/50 px-4 py-2.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
           <span className="ml-3 font-mono text-[11px] text-muted-foreground">~/hadi/bio.ts</span>
         </div>
 
@@ -68,7 +68,7 @@ export default function InteractiveProfile() {
             I love{" "}
             <button
               onClick={() => setCurrentRoleIndex((prev) => (prev + 1) % roleKeys.length)}
-              className="relative text-primary font-bold cursor-pointer rounded-md px-2 py-0.5 -mx-1 bg-primary/10 hover:bg-primary/15 transition-colors"
+              className="relative text-lime-ink font-bold cursor-pointer rounded-md px-2 py-0.5 -mx-1 bg-primary/10 hover:bg-primary/15 transition-colors"
             >
               {currentRole.title}
             </button>
@@ -89,7 +89,7 @@ export default function InteractiveProfile() {
                   transition={{ duration: 0.2, delay: idx * 0.05 }}
                   className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-sm text-foreground/80"
                 >
-                  <Play className="text-primary w-2.5 h-2.5 fill-primary shrink-0" />
+                  <Play className="text-lime-ink w-2.5 h-2.5 fill-primary shrink-0" />
                   {skill}
                 </motion.div>
               ))}
@@ -110,7 +110,7 @@ export default function InteractiveProfile() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * (i + 1) }}
             >
-              <Spotlight
+              <Spotlight tilt={5}
                 color={tile.rgb}
                 className="group h-full overflow-hidden bg-card border border-border rounded-2xl p-4 sm:p-5 flex flex-col gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
@@ -122,7 +122,7 @@ export default function InteractiveProfile() {
                     {tile.label}
                   </div>
                   <div className={`font-bold text-foreground flex items-center gap-1.5 ${tile.small ? "text-xs sm:text-sm break-all" : "text-sm"}`}>
-                    {tile.dot && <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />}
+                    {tile.dot && <span className="w-2 h-2 rounded-full bg-primary-500 shrink-0" />}
                     {tile.value}
                   </div>
                 </div>

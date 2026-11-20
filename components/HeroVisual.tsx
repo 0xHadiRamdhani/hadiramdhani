@@ -7,10 +7,10 @@ import { ArrowRight, Code2, Coffee, GraduationCap, MapPin, Terminal, Zap, type L
 import { ClockWidget } from "./ClockWidget";
 
 const orbit: { icon: LucideIcon; angle: number; color: string }[] = [
-  { icon: Code2, angle: 0, color: "text-primary border-primary/30" },
-  { icon: Terminal, angle: 90, color: "text-purple-500 border-purple-500/30" },
-  { icon: Zap, angle: 180, color: "text-amber-500 border-amber-500/30" },
-  { icon: Coffee, angle: 270, color: "text-green-600 border-green-500/30" },
+  { icon: Code2, angle: 0, color: "text-lime-ink border-primary/30" },
+  { icon: Terminal, angle: 90, color: "text-lime-ink border-primary/30" },
+  { icon: Zap, angle: 180, color: "text-lime-ink border-primary/30" },
+  { icon: Coffee, angle: 270, color: "text-lime-ink border-primary/30" },
 ];
 
 const glass =
@@ -77,7 +77,7 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
         aria-label="Lihat biodata lengkap"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         whileTap={{ scale: 0.98 }}
-        className="group absolute inset-[14%] cursor-pointer rounded-[2.2rem] bg-gradient-to-br from-primary via-secondary-400 to-primary-600 p-[3px] shadow-2xl shadow-primary/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        className="group absolute inset-[14%] cursor-pointer rounded-[2.2rem] bg-gradient-to-br from-primary via-secondary-400 to-primary-600 p-[3px] shadow-2xl shadow-primary/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-ink"
       >
         <span className="relative block h-full w-full overflow-hidden rounded-[calc(2.2rem-3px)] bg-white">
           <Image
@@ -95,7 +95,7 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
             </span>
             <span className="text-[11px] sm:text-xs font-medium text-white/80">Software Engineering Student</span>
           </span>
-          <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100">
+          <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100">
             Biodata
           </span>
         </span>
@@ -108,17 +108,17 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
       >
         <div className={`${glass} overflow-hidden animate-float-y`}>
           <div className="flex items-center gap-1.5 border-b border-border bg-muted/50 px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-red-400/80" />
-            <span className="h-2 w-2 rounded-full bg-amber-400/80" />
-            <span className="h-2 w-2 rounded-full bg-green-400/80" />
+            <span className="h-2 w-2 rounded-full bg-zinc-300" />
+            <span className="h-2 w-2 rounded-full bg-zinc-300" />
+            <span className="h-2 w-2 rounded-full bg-zinc-300" />
             <span className="ml-2 font-mono text-[10px] text-muted-foreground">hadi.ts</span>
           </div>
           <pre className="px-3.5 py-3 font-mono text-[11px] leading-[1.65] text-foreground/70">
-            <span className="text-purple-500">const</span> <span className="text-primary">hadi</span> = {"{"}
-            {"\n"}  role: <span className="text-green-600">&quot;Engineering Student&quot;</span>,
-            {"\n"}  stack: [<span className="text-green-600">&quot;Flutter&quot;</span>,
-            {"\n"}          <span className="text-green-600">&quot;Next.js&quot;</span>],
-            {"\n"}  coffee: <span className="text-amber-500">true</span>,
+            <span className="text-lime-ink">const</span> <span className="text-lime-ink">hadi</span> = {"{"}
+            {"\n"}  role: <span className="text-lime-ink">&quot;Engineering Student&quot;</span>,
+            {"\n"}  stack: [<span className="text-lime-ink">&quot;Flutter&quot;</span>,
+            {"\n"}          <span className="text-lime-ink">&quot;Next.js&quot;</span>],
+            {"\n"}  coffee: <span className="text-lime-ink">true</span>,
             {"\n"}{"}"};<span className="ml-0.5 inline-block h-3 w-[2px] translate-y-0.5 bg-primary animate-pulse" />
           </pre>
         </div>
@@ -127,14 +127,14 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
       {/* Status card */}
       <motion.div style={{ x: farX, y: farY }} className="absolute right-0 top-[1%] z-10 sm:-right-4 sm:top-[30%] xl:-right-10">
         <div className={`${glass} flex items-center gap-3 px-3.5 py-3 animate-float-y [animation-delay:-2s]`}>
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lime-ink">
             <GraduationCap size={17} />
           </span>
           <span className="leading-tight">
-            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-green-700">
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-lime-ink">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inset-0 rounded-full bg-green-500 animate-pulse-ring" />
-                <span className="relative h-1.5 w-1.5 rounded-full bg-green-500" />
+                <span className="absolute inset-0 rounded-full bg-primary-500 animate-pulse-ring" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-primary-500" />
               </span>
               Studying
             </span>
@@ -146,7 +146,7 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
       {/* Location + live time */}
       <motion.div style={{ x: nearX, y: nearY }} className="absolute -bottom-3 left-0 z-10 sm:bottom-[6%] sm:-left-6">
         <div className={`${glass} flex items-center gap-2.5 px-3.5 py-2.5 animate-float-y [animation-delay:-3.5s]`}>
-          <MapPin size={15} className="shrink-0 text-primary" />
+          <MapPin size={15} className="shrink-0 text-lime-ink" />
           <span className="leading-tight">
             <span className="block text-xs font-bold text-foreground">Kota Bandung</span>
             <ClockWidget compact />
@@ -159,7 +159,7 @@ export default function HeroVisual({ onOpen }: { onOpen: () => void }) {
         <button
           type="button"
           onClick={onOpen}
-          className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-primary/35 transition-all hover:-translate-y-0.5 hover:bg-primary-500 sm:px-5 sm:py-3 sm:text-sm"
+          className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-bg-dark shadow-lg shadow-primary/35 transition-all hover:-translate-y-0.5 hover:bg-primary-500 sm:px-5 sm:py-3 sm:text-sm"
         >
           Lihat Biodata
           <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />

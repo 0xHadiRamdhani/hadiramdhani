@@ -94,7 +94,7 @@ export default function ColorPickerPage() {
                     <div key={c} className="flex items-center gap-2 bg-card border border-border rounded-xl px-3 py-2">
                       <div className="w-8 h-8 rounded-lg border border-border shrink-0" style={{ background: c }} />
                       <code className="font-mono text-sm flex-1">{c}</code>
-                      <button onClick={() =>copy(c)} className="text-muted-foreground hover:text-primary">
+                      <button onClick={() =>copy(c)} className="text-muted-foreground hover:text-lime-ink">
                         {copied === c ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
                       </button>
                     </div>

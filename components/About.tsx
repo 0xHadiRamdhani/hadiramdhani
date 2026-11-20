@@ -25,8 +25,6 @@ export default function About() {
           <div className="flex flex-col lg:sticky lg:top-28">
             <SectionHeader
               align="left"
-              index="01"
-              eyebrow="About"
               className="!mb-6"
               title={
                 <>
@@ -45,7 +43,7 @@ export default function About() {
               Saya adalah Hadi Ramdhani, lulusan Software Engineering dari SMK Bani Ma&apos;sum yang kini menempuh Sekolah Profesi Insinyur. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.
             </motion.p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
               {facts.map((fact, i) => {
                 const Icon = fact.icon;
                 return (
@@ -56,13 +54,13 @@ export default function About() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.15 + i * 0.07 }}
                   >
-                    <Spotlight className="flex items-center gap-3.5 rounded-xl bg-card border border-border px-4 py-3.5 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 h-full">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Spotlight tilt={5} className="flex flex-col items-start gap-2.5 sm:flex-row sm:items-center sm:gap-3.5 rounded-xl bg-card border border-border px-3.5 py-3.5 sm:px-4 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 h-full">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lime-ink">
                         <Icon size={18} />
                       </span>
                       <span className="flex flex-col min-w-0">
                         <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{fact.label}</span>
-                        <span className="text-sm font-semibold text-foreground">{fact.value}</span>
+                        <span className="text-[13px] sm:text-sm font-semibold leading-snug text-foreground break-words">{fact.value}</span>
                       </span>
                     </Spotlight>
                   </motion.div>

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { ClockWidget } from "./ClockWidget";
 import { categories } from "@/app/tools/data";
 
@@ -114,7 +114,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={`text-sm font-medium px-3 py-2 rounded-md transition-colors relative group ${
-                    isActive ? "text-primary bg-primary/5" : "text-foreground/70 hover:text-primary hover:bg-muted/50"
+                    isActive ? "text-lime-ink bg-primary/5" : "text-foreground/70 hover:text-lime-ink hover:bg-muted/50"
                   }`}
                 >
                   {link.name}
@@ -146,33 +146,76 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white flex flex-col">
-          <div className="flex flex-col h-full pt-20 pb-8 px-6">
-            <nav className="flex flex-col gap-2 flex-1">
-              {navLinks.map((link, i) => {
-                const isActive = link.href === "/tools" && pathname.startsWith("/tools");
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-4 rounded-xl text-xl font-semibold transition-all ${
-                      isActive ? "text-primary bg-primary/10" : "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                    }`}
-                  >
-                    <span className={`font-mono text-sm ${isActive ? "text-primary" : "text-primary/70"}`}>0{i + 1}.</span>
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </nav>
-            <div className="pt-6 border-t border-border">
-              <ClockWidget compact />
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 2.5rem) 2.5rem)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-white"
+          >
+            <div className="pointer-events-none absolute inset-0 aurora" />
+            <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-y opacity-60" />
+
+            <div className="relative flex min-h-full flex-col px-6 pb-8 pt-24">
+              <nav className="flex flex-1 flex-col gap-1">
+                {navLinks.map((link, i) => {
+                  const isActive = link.href === "/tools" && pathname.startsWith("/tools");
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: -24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.12 + i * 0.045, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`group flex items-center gap-4 rounded-2xl px-4 py-3.5 text-2xl font-bold tracking-tight transition-colors ${
+                          isActive ? "bg-primary/10 text-lime-ink" : "text-foreground/85 active:bg-primary/5"
+                        }`}
+                      >
+                        <span className="w-7 font-mono text-xs font-bold text-primary/70">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="flex-1">{link.name}</span>
+                        <ArrowUpRight
+                          size={18}
+                          className="text-muted-foreground/40 transition-transform group-active:translate-x-0.5 group-active:-translate-y-0.5"
+                        />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="mt-6 space-y-4 border-t border-border pt-6"
+              >
+                <Link
+                  href="/#contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3.5 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/30 active:bg-primary-500"
+                >
+                  Let&apos;s Connect
+                  <ArrowUpRight size={16} />
+                </Link>
+                <div className="flex items-center justify-between">
+                  <ClockWidget compact />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-lime-ink">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
+                    Open to collaborate
+                  </span>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

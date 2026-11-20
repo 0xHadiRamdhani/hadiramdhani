@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Compass, Hammer, MousePointer2, Repeat2 } from "lucide-react";
 import SwarmField, { type SwarmMode, type SwarmPhase } from "./SwarmField";
 import SectionHeader from "./SectionHeader";
+import MobileCarousel from "./MobileCarousel";
 
 const modes: { id: SwarmMode; label: string }[] = [
   { id: "auto", label: "Auto" },
@@ -52,8 +53,6 @@ export default function SwarmRebuild() {
       <div className="container relative">
         <SectionHeader
           tone="dark"
-          index="06"
-          eyebrow="Swarm / Rebuild"
           title={
             <>
               Dari kawanan kecil,{" "}
@@ -80,7 +79,7 @@ export default function SwarmRebuild() {
                 aria-pressed={mode === m.id}
                 className={`rounded-lg px-4 py-1.5 text-sm font-medium transition-all ${
                   mode === m.id
-                    ? "bg-primary text-white shadow-lg shadow-primary/30"
+                    ? "bg-primary text-bg-dark shadow-lg shadow-primary/30"
                     : "text-white/60 hover:text-white"
                 }`}
               >
@@ -131,7 +130,7 @@ export default function SwarmRebuild() {
           {/* HUD */}
           <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-white/70 backdrop-blur">
             <span
-              className={`h-1.5 w-1.5 rounded-full ${phase === "rebuild" ? "bg-green-400" : "bg-primary-300 animate-pulse"}`}
+              className={`h-1.5 w-1.5 rounded-full ${phase === "rebuild" ? "bg-primary" : "bg-primary-300 animate-pulse"}`}
             />
             Phase: {phase}
           </div>
@@ -146,7 +145,7 @@ export default function SwarmRebuild() {
         </motion.div>
 
         {/* Principles */}
-        <div className="mx-auto mt-6 grid max-w-5xl gap-4 sm:mt-8 sm:grid-cols-3">
+        <MobileCarousel desktopClassName="mt-6 sm:mt-8 sm:grid sm:grid-cols-3 sm:max-w-5xl sm:mx-auto" slideClassName="w-[80%]">
           {principles.map((p, i) => {
             const Icon = p.icon;
             return (
@@ -159,7 +158,7 @@ export default function SwarmRebuild() {
                 className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.07] hover:-translate-y-1"
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary-300 transition-colors group-hover:bg-primary group-hover:text-white">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary-300 transition-colors group-hover:bg-primary group-hover:text-bg-dark">
                     <Icon size={18} />
                   </span>
                   <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-white/35">{p.tag}</span>
@@ -169,7 +168,7 @@ export default function SwarmRebuild() {
               </motion.div>
             );
           })}
-        </div>
+        </MobileCarousel>
       </div>
     </section>
   );

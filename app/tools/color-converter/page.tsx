@@ -87,7 +87,7 @@ export default function ColorConverterPage() {
                 <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">{f.label}</div>
                 <code className="text-sm font-mono text-foreground">{f.value}</code>
               </div>
-              <button onClick={() =>copy(f.value, f.id)} className="ml-2 p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-primary shrink-0">
+              <button onClick={() =>copy(f.value, f.id)} className="ml-2 p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-lime-ink shrink-0">
                 {copied === f.id ? <Check size={15} className="text-green-500" /> : <Copy size={15} />}
               </button>
             </div>

@@ -68,7 +68,7 @@ export default function ScreenshotBeautifierPage() {
               <div ref={previewRef} className="w-full flex items-center justify-center overflow-hidden rounded-xl" style={{ background: bg, padding }}>
                 <img src={img} alt="Screenshot" style={{ borderRadius: radius, boxShadow: shadow, maxWidth: "100%", display: "block" }} />
               </div>
-              <button onClick={download} className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
+              <button onClick={download} className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
                 <Download size={16} />Download PNG
               </button>
             </div>
@@ -90,7 +90,7 @@ export default function ScreenshotBeautifierPage() {
                 <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">Padding: {padding}px</label>
                 <div className="flex gap-1">
                   {PADDING_OPTIONS.map((p) => (
-                    <button key={p} onClick={() =>setPadding(p)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${padding === p ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}>{p}</button>
+                    <button key={p} onClick={() =>setPadding(p)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${padding === p ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground"}`}>{p}</button>
                   ))}
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default function ScreenshotBeautifierPage() {
                 <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2">Border Radius: {radius}px</label>
                 <div className="flex gap-1">
                   {RADIUS_OPTIONS.map((r) => (
-                    <button key={r} onClick={() =>setRadius(r)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${radius === r ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}>{r}</button>
+                    <button key={r} onClick={() =>setRadius(r)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${radius === r ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground"}`}>{r}</button>
                   ))}
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function ScreenshotBeautifierPage() {
                 <div className="space-y-1">
                   {SHADOW_OPTIONS.map((s) => (
                     <button key={s.label} onClick={() =>setShadow(s.value)}
-                      className={`w-full py-2 px-3 rounded-lg text-xs font-semibold text-left transition-all ${shadow === s.value ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:text-foreground"}`}>{s.label}</button>
+                      className={`w-full py-2 px-3 rounded-lg text-xs font-semibold text-left transition-all ${shadow === s.value ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground hover:text-foreground"}`}>{s.label}</button>
                   ))}
                 </div>
               </div>

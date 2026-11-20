@@ -13,8 +13,6 @@ export default function LocalTime() {
           <div className="flex-1 flex flex-col items-center lg:items-start">
             <SectionHeader
               align="left"
-              index="09"
-              eyebrow="Status"
               className="!mb-5 items-center text-center lg:items-start lg:text-left"
               title="Current Status"
             />

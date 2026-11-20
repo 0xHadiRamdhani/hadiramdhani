@@ -74,7 +74,7 @@ export default function ImageCompressorPage() {
               </div>
               <div className="flex gap-2 shrink-0">
                 <button onClick={compress} disabled={processing}
-                  className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
+                  className="px-5 py-2.5 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
                   {processing ? "Compressing..." : " Compress"}
                 </button>
                 <button onClick={() => { setOriginal(null); setCompressed(null); inputRef.current!.value = ""; }}
@@ -100,7 +100,7 @@ export default function ImageCompressorPage() {
                 <div className="bg-card border border-border rounded-xl overflow-hidden">
                   <div className="p-3 border-b border-border flex items-center justify-between">
                     <span className="text-sm font-semibold text-muted-foreground">Compressed ({(compressed.size / 1024).toFixed(1)} KB)</span>
-                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline"><Download size={12} />Download</button>
+                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline"><Download size={12} />Download</button>
                   </div>
                   <img src={compressed.src} alt="Compressed" className="w-full object-contain max-h-64" />
                 </div>

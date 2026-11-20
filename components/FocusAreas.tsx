@@ -5,6 +5,7 @@ import { Layers, Code, Smartphone, LayoutTemplate, type LucideIcon } from "lucid
 import SectionHeader from "./SectionHeader";
 import Spotlight from "./Spotlight";
 import { Modal, useModalItem } from "./Modal";
+import MobileCarousel from "./MobileCarousel";
 
 const RING_R = 32;
 const RING_C = 2 * Math.PI * RING_R;
@@ -62,8 +63,6 @@ export default function FocusAreas() {
       <div className="absolute inset-0 grid-bg mask-fade-y pointer-events-none" />
       <div className="container relative">
         <SectionHeader
-          index="05"
-          eyebrow="Focus"
           title={
             <>
               Areas of <span className="text-primary-gradient">Focus</span>
@@ -72,7 +71,7 @@ export default function FocusAreas() {
           subtitle="Bidang yang sedang saya dalami, beserta tingkat progresnya."
         />
 
-        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 max-w-5xl mx-auto">
+        <MobileCarousel desktopClassName="sm:grid sm:grid-cols-2 sm:max-w-5xl sm:mx-auto">
           {areas.map((area, index) => {
             const Icon = area.icon;
             return (
@@ -83,22 +82,22 @@ export default function FocusAreas() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
               >
-                <Spotlight
+                <Spotlight tilt={5}
                   onClick={() => modal.show(area)}
                   className="group h-full bg-card border border-border rounded-3xl overflow-hidden p-6 sm:p-7 flex flex-col gap-5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div className="w-12 h-12 shrink-0 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                    <div className="w-12 h-12 shrink-0 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-lime-ink group-hover:bg-primary group-hover:text-bg-dark group-hover:scale-105 transition-all duration-300">
                       <Icon size={22} />
                     </div>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-primary">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-lime-ink">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                       {area.status}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="font-bold text-foreground text-lg group-hover:text-primary transition-colors">{area.title}</h3>
+                    <h3 className="font-bold text-foreground text-lg group-hover:text-lime-ink transition-colors">{area.title}</h3>
                     <div className="mt-3 flex flex-wrap gap-1.5">
                       {area.techStack.slice(0, 3).map((tech) => (
                         <span key={tech} className="rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-foreground/60">
@@ -126,7 +125,7 @@ export default function FocusAreas() {
                         viewport={{ once: true }}
                         transition={{ duration: 1.4, delay: 0.2 + index * 0.1, ease: "easeOut" }}
                         className="h-full rounded-full bg-gradient-to-r from-primary to-secondary-400"
-                        style={{ boxShadow: "0 0 10px rgba(32, 160, 232, 0.45)" }}
+                        style={{ boxShadow: "0 0 10px rgba(163, 230, 53, 0.55)" }}
                       />
                     </div>
                   </div>
@@ -134,7 +133,7 @@ export default function FocusAreas() {
               </motion.div>
             );
           })}
-        </div>
+        </MobileCarousel>
       </div>
 
       {/* Detail modal */}
@@ -165,8 +164,8 @@ export default function FocusAreas() {
                     />
                     <defs>
                       <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#20A0E8" />
-                        <stop offset="100%" stopColor="#5865f2" />
+                        <stop offset="0%" stopColor="#84cc16" />
+                        <stop offset="100%" stopColor="#d9f99d" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -176,7 +175,7 @@ export default function FocusAreas() {
                 </div>
 
                 <div className="min-w-0 pr-8">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-primary">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-lime-ink">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
                     {selectedArea.status}
                   </span>
@@ -187,7 +186,7 @@ export default function FocusAreas() {
               </div>
 
               <div className="mt-6 flex gap-3.5 rounded-2xl border border-border bg-muted/40 p-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lime-ink">
                   <selectedArea.icon size={20} />
                 </span>
                 <p className="text-sm sm:text-[15px] leading-relaxed text-foreground/75">{selectedArea.description}</p>

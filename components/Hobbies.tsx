@@ -7,10 +7,10 @@ import Spotlight from "./Spotlight";
 import { Modal, useModalItem } from "./Modal";
 
 const HOBBY_RGB: Record<string, string> = {
-  Coding: "32,160,232",
-  Hacking: "168,85,247",
-  Electrical: "245,158,11",
-  Coffee: "34,197,94",
+  Coding: "163,230,53",
+  Hacking: "163,230,53",
+  Electrical: "163,230,53",
+  Coffee: "163,230,53",
 };
 
 type Hobby = {
@@ -34,7 +34,7 @@ const hobbies: Hobby[] = [
       "Mempelajari arsitektur frontend dan performa aplikasi.",
       "Selalu antusias dalam mengikuti perkembangan bahasa pemrograman terbaru."
     ],
-    color: "text-primary",
+    color: "text-lime-ink",
     bg: "bg-primary/5",
     border: "border-primary/20",
     hoverBorder: "hover:border-primary/50",
@@ -48,10 +48,10 @@ const hobbies: Hobby[] = [
       "Suka memecahkan masalah dalam tantangan Capture The Flag (CTF).",
       "Eksperimen dengan penetration testing secara etis."
     ],
-    color: "text-purple-500",
-    bg: "bg-purple-500/5",
-    border: "border-purple-500/20",
-    hoverBorder: "hover:border-purple-500/50",
+    color: "text-lime-ink",
+    bg: "bg-primary/5",
+    border: "border-primary/20",
+    hoverBorder: "hover:border-primary/50",
   },
   {
     icon: Zap,
@@ -62,10 +62,10 @@ const hobbies: Hobby[] = [
       "Membuat prototipe inovatif menggunakan mikrokontroler (Arduino/ESP32).",
       "Menggabungkan software dan hardware (IoT)."
     ],
-    color: "text-amber-500",
-    bg: "bg-amber-500/5",
-    border: "border-amber-500/20",
-    hoverBorder: "hover:border-amber-500/50",
+    color: "text-lime-ink",
+    bg: "bg-primary/5",
+    border: "border-primary/20",
+    hoverBorder: "hover:border-primary/50",
   },
   {
     icon: Coffee,
@@ -76,10 +76,10 @@ const hobbies: Hobby[] = [
       "Mencicipi karakteristik rasa biji kopi dari berbagai roastery lokal.",
       "Membantu menjaga fokus, energi dan produktivitas saat menulis kode."
     ],
-    color: "text-green-500",
-    bg: "bg-green-500/5",
-    border: "border-green-500/20",
-    hoverBorder: "hover:border-green-500/50",
+    color: "text-lime-ink",
+    bg: "bg-primary/5",
+    border: "border-primary/20",
+    hoverBorder: "hover:border-primary/50",
   },
 ];
 
@@ -92,8 +92,6 @@ export default function Hobbies() {
       <div className="absolute inset-0 dot-grid opacity-40 mask-fade-y pointer-events-none" />
       <div className="container relative">
         <SectionHeader
-          index="04"
-          eyebrow="Interests"
           title={
             <>
               Things I <span className="text-primary-gradient">Love</span>
@@ -102,7 +100,7 @@ export default function Hobbies() {
           subtitle="Beberapa hal yang membuat saya terus belajar dan bereksplorasi."
         />
 
-        <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:gap-5 grid-cols-2 lg:grid-cols-4">
           {hobbies.map((hobby, index) => {
             const Icon = hobby.icon;
             return (
@@ -114,26 +112,26 @@ export default function Hobbies() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="h-full"
               >
-                <Spotlight
+                <Spotlight tilt={5}
                   color={HOBBY_RGB[hobby.title]}
                   onClick={() => modal.show(hobby)}
-                  className={`group h-full overflow-hidden p-6 sm:p-7 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-3xl hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
+                  className={`group h-full overflow-hidden p-4 sm:p-7 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-2xl sm:rounded-3xl hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
                 >
                   {/* Big faint index */}
-                  <span className="pointer-events-none absolute -right-2 -top-4 font-mono text-8xl font-black text-foreground/[0.04] select-none">
+                  <span className="pointer-events-none absolute -right-2 -top-4 font-mono text-6xl sm:text-8xl font-black text-foreground/[0.04] select-none">
                     0{index + 1}
                   </span>
 
-                  <div className="relative flex flex-col gap-5">
-                    <div className={`w-14 h-14 rounded-2xl ${hobby.bg} border ${hobby.border} flex items-center justify-center ${hobby.color} transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
-                      <Icon size={26} />
+                  <div className="relative flex flex-col gap-3 sm:gap-5">
+                    <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${hobby.bg} border ${hobby.border} flex items-center justify-center ${hobby.color} transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
+                      <Icon size={22} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-foreground mb-1.5">{hobby.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{hobby.description}</p>
+                      <h3 className="text-base sm:text-xl font-bold text-foreground mb-1">{hobby.title}</h3>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{hobby.description}</p>
                     </div>
                   </div>
-                  <div className={`relative inline-flex items-center gap-1.5 mt-6 text-sm font-semibold ${hobby.color}`}>
+                  <div className={`relative inline-flex items-center gap-1.5 mt-4 sm:mt-6 text-xs sm:text-sm font-semibold ${hobby.color}`}>
                     <span>Explore</span>
                     <ArrowRight size={14} className="transition-transform group-hover:translate-x-1.5" />
                   </div>

@@ -60,8 +60,8 @@ export default function ImageRotatorPage() {
             <div className="flex flex-wrap gap-2 bg-card border border-border rounded-xl p-4">
               <button onClick={() =>setRotation((r) =>r - 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors"> -90°</button>
               <button onClick={() =>setRotation((r) =>r + 90)} className="px-4 py-2 bg-muted rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors"> +90°</button>
-              <button onClick={() =>setFlipH((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipH ? "bg-primary text-white" : "bg-muted"}`}>Flip H</button>
-              <button onClick={() =>setFlipV((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipV ? "bg-primary text-white" : "bg-muted"}`}>Flip V</button>
+              <button onClick={() =>setFlipH((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipH ? "bg-primary text-bg-dark" : "bg-muted"}`}>Flip H</button>
+              <button onClick={() =>setFlipV((v) => !v)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${flipV ? "bg-primary text-bg-dark" : "bg-muted"}`}>Flip V</button>
               <div className="flex items-center gap-2">
                 <label className="text-sm text-muted-foreground">Sudut:</label>
                 <input type="number" value={rotation} onChange={(e) =>setRotation(+e.target.value)} className="w-20 px-2 py-1.5 border border-border rounded-lg font-mono text-sm outline-none" />
@@ -75,7 +75,7 @@ export default function ImageRotatorPage() {
             </div>
 
             <div className="flex gap-2">
-              <button onClick={exportImage} className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
+              <button onClick={exportImage} className="flex items-center gap-2 px-6 py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
                 <Download size={15} />Download Hasil
               </button>
               <button onClick={() => { setImg(null); inputRef.current!.value = ""; }} className="px-4 py-3 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">Ganti Gambar</button>

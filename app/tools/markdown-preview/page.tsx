@@ -17,7 +17,7 @@ function parseMarkdown(md: string) {
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/~~(.+?)~~/g, "<del>$1</del>")
     .replace(/`([^`]+)`/g, "<code class='bg-muted px-1.5 py-0.5 rounded text-sm font-mono'>$1</code>")
-    .replace(/\[(.+?)\]\((.+?)\)/g, "<a href='$2' class='text-primary underline' target='_blank'>$1</a>")
+    .replace(/\[(.+?)\]\((.+?)\)/g, "<a href='$2' class='text-lime-ink underline' target='_blank'>$1</a>")
     .replace(/^>\s(.+)/gm, "<blockquote class='border-l-4 border-primary pl-4 italic text-muted-foreground my-2'>$1</blockquote>")
     .replace(/^- (.+)/gm, "<li class='ml-4 list-disc'>$1</li>")
     .replace(/^(\d+)\. (.+)/gm, "<li class='ml-4 list-decimal'>$2</li>")

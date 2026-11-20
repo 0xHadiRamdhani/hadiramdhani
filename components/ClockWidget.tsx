@@ -42,7 +42,7 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
     return (
       <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-muted-foreground">
         <span className="hidden sm:inline">BANDUNG</span>
-        <span className="text-primary font-bold">{time}</span>
+        <span className="text-lime-ink font-bold">{time}</span>
         <span>WIB</span>
       </div>
     );
@@ -57,7 +57,7 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
         >
           <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl pointer-events-none" />
           <div className="relative flex flex-col gap-1.5">
-            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-lime-ink">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 rounded-full bg-primary animate-pulse-ring" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-primary" />
@@ -72,9 +72,9 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
             <div className="text-sm text-muted-foreground/70">Kota Bandung, Jawa Barat</div>
           </div>
           <div className="relative mt-5 pt-4 border-t border-border group-hover:border-primary/20 transition-colors">
-            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-purple-500 mb-2">Weather</div>
+            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-lime-ink mb-2">Weather</div>
             <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-              <Cloud size={22} className="text-muted-foreground group-hover:text-purple-500 transition-colors" strokeWidth={1.5} />
+              <Cloud size={22} className="text-muted-foreground group-hover:text-lime-ink transition-colors" strokeWidth={1.5} />
               <span>29.0°C</span>
             </div>
           </div>
@@ -82,9 +82,9 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
       </div>
 
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} size="sm" label="Waktu dan cuaca di Kota Bandung" closeTone="light">
-        <div className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary-400 to-primary-600 px-6 pb-8 pt-12 text-white">
+        <div className="relative overflow-hidden bg-bg-dark px-6 pb-8 pt-12 text-white">
           <div className="absolute inset-0 dot-grid-dark opacity-60" />
-          <div className="absolute -top-16 -left-10 h-44 w-44 rounded-full bg-white/25 blur-3xl" />
+          <div className="absolute -top-16 -left-10 h-44 w-44 rounded-full bg-primary/40 blur-3xl" />
           <div className="relative">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest backdrop-blur">
               <MapPin size={12} /> Kota Bandung
@@ -100,10 +100,10 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
 
         <div className="grid grid-cols-2 gap-3 p-5 sm:p-6">
           {[
-            { icon: Clock, label: "Zona Waktu", value: "WIB (UTC+7)", color: "text-primary", bg: "bg-primary/10" },
-            { icon: ThermometerSun, label: "Cuaca", value: "Cerah Berawan, 29.0°C", color: "text-amber-500", bg: "bg-amber-500/10" },
-            { icon: Droplets, label: "Kelembapan", value: "65%", color: "text-blue-500", bg: "bg-blue-500/10" },
-            { icon: Wind, label: "Angin", value: "12 km/h", color: "text-teal-500", bg: "bg-teal-500/10" },
+            { icon: Clock, label: "Zona Waktu", value: "WIB (UTC+7)", color: "text-lime-ink", bg: "bg-primary/10" },
+            { icon: ThermometerSun, label: "Cuaca", value: "Cerah Berawan, 29.0°C", color: "text-lime-ink", bg: "bg-primary/10" },
+            { icon: Droplets, label: "Kelembapan", value: "65%", color: "text-lime-ink", bg: "bg-primary/10" },
+            { icon: Wind, label: "Angin", value: "12 km/h", color: "text-lime-ink", bg: "bg-primary/10" },
           ].map((item, i) => {
             const Icon = item.icon;
             return (

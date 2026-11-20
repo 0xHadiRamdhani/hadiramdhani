@@ -115,7 +115,7 @@ Distributed under the MIT License. See \`LICENSE\` for more information.
               <textarea value={features} onChange={(e) =>setFeatures(e.target.value)} placeholder={"Authentication system\nDark mode support\nResponsive design"}
                 rows={5} className="w-full px-4 py-3 border border-border rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary/20 resize-none bg-card font-mono" />
             </div>
-            <button onClick={generate} className="w-full py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Generate README
+            <button onClick={generate} className="w-full py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Generate README
             </button>
           </div>
 
@@ -124,7 +124,7 @@ Distributed under the MIT License. See \`LICENSE\` for more information.
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Output Markdown</label>
               {result && (
                 <button onClick={() => { navigator.clipboard.writeText(result); setCopied(true); setTimeout(() =>setCopied(false), 2000); }}
-                  className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline">
+                  className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">
                   {copied ? <Check size={12} /> : <Copy size={12} />} {copied ? "Copied!" : "Copy"}
                 </button>
               )}

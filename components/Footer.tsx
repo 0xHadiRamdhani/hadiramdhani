@@ -29,11 +29,11 @@ export default function Footer() {
       <div className="absolute -top-32 left-1/4 h-64 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
       <div className="container relative pt-14 md:pt-20 pb-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
-          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+          <div className="col-span-2 space-y-4 lg:col-span-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
+              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-bg-dark shadow-lg shadow-primary/30">
                 <Code2 size={18} strokeWidth={2.5} />
               </div>
               <span className="font-bold text-lg">Hadi Ramdhani</span>
@@ -68,7 +68,7 @@ export default function Footer() {
             <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Kontak</h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="mailto:hadsxdev@icloud.com" className="text-sm text-white/65 hover:text-white transition-colors">
+                <a href="mailto:hadsxdev@icloud.com" className="break-all text-[13px] sm:text-sm text-white/65 hover:text-white transition-colors">
                   hadsxdev@icloud.com
                 </a>
               </li>
@@ -93,9 +93,9 @@ export default function Footer() {
           </div>
 
           {/* Time */}
-          <div className="space-y-4">
+          <div className="col-span-2 space-y-4 lg:col-span-1">
             <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Local Time</h3>
-            <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 w-fit [&_*]:!text-white/70 [&_.text-primary]:!text-primary-300">
+            <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 w-fit [&_*]:!text-white/70 [&_.text-lime-ink]:!text-primary-300">
               <ClockWidget compact />
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function Footer() {
           HADI RAMDHANI
         </div>
 
-        <div className="mt-6 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-2 sm:flex-row">
           <p className="text-xs text-white/45 text-center sm:text-left">
             © 2026 Hadi Ramdhani. All rights reserved.
           </p>
@@ -118,7 +118,7 @@ export default function Footer() {
             <a
               href="#"
               aria-label="Kembali ke atas"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 hover:bg-primary hover:border-primary hover:text-white transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 hover:bg-primary hover:border-primary hover:text-bg-dark transition-all"
             >
               <ArrowUp size={14} />
             </a>

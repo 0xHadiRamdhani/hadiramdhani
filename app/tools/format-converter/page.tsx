@@ -63,7 +63,7 @@ export default function FormatConverterPage() {
                 <div className="flex gap-2">
                   {FORMATS.map((f) => (
                     <button key={f} onClick={() =>setTargetFormat(f)}
-                      className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${targetFormat === f ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:text-foreground"}`}>
+                      className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${targetFormat === f ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground hover:text-foreground"}`}>
                       {FORMAT_LABELS[f]}
                     </button>
                   ))}
@@ -76,7 +76,7 @@ export default function FormatConverterPage() {
                 </div>
               )}
               <div className="flex gap-2 shrink-0">
-                <button onClick={convert} className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Convert</button>
+                <button onClick={convert} className="px-5 py-2.5 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Convert</button>
                 <button onClick={() => { setImg(null); setResult(null); inputRef.current!.value = ""; }}
                   className="px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">Clear</button>
               </div>
@@ -91,7 +91,7 @@ export default function FormatConverterPage() {
                 <div className="bg-card border border-border rounded-xl overflow-hidden">
                   <div className="p-3 border-b border-border flex items-center justify-between">
                     <span className="text-sm font-semibold text-green-600"> {FORMAT_LABELS[targetFormat]} Result</span>
-                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline"><Download size={12} />Download</button>
+                    <button onClick={download} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline"><Download size={12} />Download</button>
                   </div>
                   <img src={result} alt="Converted" className="w-full object-contain max-h-64" />
                 </div>

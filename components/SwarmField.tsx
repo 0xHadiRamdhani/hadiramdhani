@@ -23,6 +23,8 @@ type SwarmFieldProps = {
   /** Canvas area (px²) per particle when `count` is not set. Lower = more particles */
   density?: number;
   theme?: "light" | "dark";
+  /** rgb triplet ("163,230,53") that tints dots and links instead of the theme palette */
+  accent?: string;
   formation?: SwarmFormation;
   /** Used instead of `formation` below 640px width */
   formationMobile?: SwarmFormation;
@@ -36,13 +38,13 @@ type SwarmFieldProps = {
 
 const PALETTES = {
   light: {
-    dots: ["#20A0E8", "#0877c1", "#5865f2", "#3eb0f2"],
-    line: "32,160,232",
-    lineMax: 0.3,
+    dots: ["#0a0a0a", "#3f6212", "#84cc16", "#a3e635"],
+    line: "63,98,18",
+    lineMax: 0.28,
   },
   dark: {
-    dots: ["#3eb0f2", "#81cbf8", "#a5b4fc", "#e1f0fd"],
-    line: "129,203,248",
+    dots: ["#a3e635", "#bef264", "#d9f99d", "#ffffff"],
+    line: "190,242,100",
     lineMax: 0.38,
   },
 } as const;
@@ -61,6 +63,7 @@ export default function SwarmField({
   count,
   density = 4200,
   theme = "light",
+  accent,
   formation = DEFAULT_FORMATION,
   formationMobile,
   autoSwarmMs = 5200,
@@ -76,6 +79,7 @@ export default function SwarmField({
     count,
     density,
     theme,
+    accent,
     formation,
     formationMobile,
     autoSwarmMs,
@@ -92,6 +96,7 @@ export default function SwarmField({
       count,
       density,
       theme,
+      accent,
       formation,
       formationMobile,
       autoSwarmMs,
@@ -237,7 +242,11 @@ export default function SwarmField({
     };
 
     const draw = () => {
-      const pal = PALETTES[cfg.current.theme];
+      const a = cfg.current.accent;
+      const base = PALETTES[cfg.current.theme];
+      const pal = a
+        ? { dots: [`rgb(${a})`, `rgba(${a},0.75)`, "#ffffff", `rgba(${a},0.5)`], line: a, lineMax: base.lineMax }
+        : base;
       ctx.clearRect(0, 0, w, h);
 
       const link = 64 - 36 * blend;

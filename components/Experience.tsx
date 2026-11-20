@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import { Building2, Users, Award, ExternalLink, Calendar, ArrowUpRight, type LucideIcon } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { Modal, useModalItem } from "./Modal";
+import MobileCarousel from "./MobileCarousel";
 
 const EXP_RGB: Record<string, string> = {
-  "sbm-itb": "32,160,232",
-  imphnen: "59,130,246",
-  "sbm-itb-cert": "245,158,11",
+  "sbm-itb": "163,230,53",
+  imphnen: "163,230,53",
+  "sbm-itb-cert": "163,230,53",
 };
 
 type ExperienceData = {
@@ -38,8 +39,8 @@ const experiences: ExperienceData[] = [
     subtitle: "at SBM ITB",
     image: "/sbm-itb.jpg",
     icon: Building2,
-    colorClass: "text-primary",
-    hoverColorClass: "group-hover:text-primary",
+    colorClass: "text-lime-ink",
+    hoverColorClass: "group-hover:text-lime-ink",
     hoverBorderClass: "hover:border-primary/40",
     hoverBgClass: "bg-primary/[0.02]",
     date: "April 13, 2026 - June 30, 2026",
@@ -56,10 +57,10 @@ const experiences: ExperienceData[] = [
     subtitle: "Active Member",
     image: "/imphnen.png",
     icon: Users,
-    colorClass: "text-blue-500",
-    hoverColorClass: "group-hover:text-blue-500",
-    hoverBorderClass: "hover:border-blue-400/40",
-    hoverBgClass: "bg-blue-500/[0.02]",
+    colorClass: "text-lime-ink",
+    hoverColorClass: "group-hover:text-lime-ink",
+    hoverBorderClass: "hover:border-primary/40",
+    hoverBgClass: "bg-primary/[0.02]",
     date: "2023 - Present",
     details: [
       "Actively participate in community discussions and collaborative initiatives.",
@@ -74,10 +75,10 @@ const experiences: ExperienceData[] = [
     subtitle: "SBM ITB",
     image: "/sbm-itb-certificate.jpg",
     icon: Award,
-    colorClass: "text-amber-500",
-    hoverColorClass: "group-hover:text-amber-500",
-    hoverBorderClass: "hover:border-amber-400/40",
-    hoverBgClass: "bg-amber-500/[0.02]",
+    colorClass: "text-lime-ink",
+    hoverColorClass: "group-hover:text-lime-ink",
+    hoverBorderClass: "hover:border-primary/40",
+    hoverBgClass: "bg-primary/[0.02]",
     date: "June 30, 2026",
     imageFit: "contain",
     imageContainerClass: "bg-slate-50 border-b border-border/50 p-4 sm:p-6",
@@ -99,8 +100,6 @@ export default function Experience() {
       <div className="absolute inset-0 aurora opacity-70 pointer-events-none" />
       <div className="container relative">
         <SectionHeader
-          index="03"
-          eyebrow="Experience"
           title={
             <>
               Experience &amp; <span className="text-primary-gradient">Affiliations</span>
@@ -109,7 +108,7 @@ export default function Experience() {
           subtitle="Pengalaman profesional, komunitas, dan pencapaian yang membentuk perjalanan saya."
         />
 
-        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+        <MobileCarousel desktopClassName="sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 sm:max-w-7xl sm:mx-auto">
           {experiences.map((exp, index) => {
             const IconComponent = exp.icon;
             const isContain = exp.imageFit === "contain";
@@ -178,7 +177,7 @@ export default function Experience() {
               </motion.div>
             );
           })}
-        </div>
+        </MobileCarousel>
       </div>
 
       {/* Detail modal */}
@@ -218,7 +217,7 @@ export default function Experience() {
           <div className="p-5 sm:p-8">
             {selectedExp.imageFit === "contain" && (
               <div className="mb-5">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
                   <selectedExp.icon size={13} className={selectedExp.colorClass} />
                   <span className={selectedExp.colorClass}>{selectedExp.type}</span>
                 </span>
@@ -256,7 +255,7 @@ export default function Experience() {
                 href={selectedExp.image}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:-translate-y-0.5 hover:bg-amber-600 sm:w-auto"
+                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-500 px-6 py-3.5 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500 sm:w-auto"
               >
                 <ExternalLink size={16} />
                 Lihat Gambar Penuh

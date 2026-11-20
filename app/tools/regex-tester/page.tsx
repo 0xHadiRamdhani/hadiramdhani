@@ -40,7 +40,7 @@ export default function RegexTesterPage() {
               <span className="text-muted-foreground font-mono">/</span>
               <input value={pattern} onChange={(e) =>setPattern(e.target.value)} placeholder="[a-z]+" className="flex-1 bg-transparent font-mono text-sm outline-none" />
               <span className="text-muted-foreground font-mono">/</span>
-              <span className="font-mono text-primary text-sm">{flags}</span>
+              <span className="font-mono text-lime-ink text-sm">{flags}</span>
             </div>
           </div>
           <div>
@@ -48,7 +48,7 @@ export default function RegexTesterPage() {
             <div className="flex gap-1">
               {allFlags.map((f) => (
                 <button key={f} onClick={() =>setFlags(prev =>prev.includes(f) ? prev.replace(f, "") : prev + f)}
-                  className={`w-8 h-8 rounded-lg font-mono text-sm font-bold transition-colors ${flags.includes(f) ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}>{f}</button>
+                  className={`w-8 h-8 rounded-lg font-mono text-sm font-bold transition-colors ${flags.includes(f) ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground"}`}>{f}</button>
               ))}
             </div>
           </div>

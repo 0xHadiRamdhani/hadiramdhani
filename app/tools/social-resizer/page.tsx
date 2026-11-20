@@ -82,7 +82,7 @@ export default function SocialResizerPage() {
               </div>
               <div className="flex gap-2">
                 <button onClick={processAll} disabled={processing}
-                  className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 disabled:opacity-50 transition-colors">
+                  className="px-5 py-2.5 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 disabled:opacity-50 transition-colors">
                   {processing ? "Processing..." : " Generate All"}
                 </button>
                 <button onClick={() => { setImg(null); setResults({}); inputRef.current!.value = ""; }}
@@ -101,7 +101,7 @@ export default function SocialResizerPage() {
                       <p className="text-xs font-semibold text-foreground mb-0.5">{preset.label}</p>
                       <p className="text-xs text-muted-foreground mb-2">{preset.w}×{preset.h}px</p>
                       <button onClick={() =>download(preset.id, preset.label)}
-                        className="flex items-center justify-center gap-1.5 w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-xs font-semibold transition-colors">
+                        className="flex items-center justify-center gap-1.5 w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-lime-ink rounded-lg text-xs font-semibold transition-colors">
                         <Download size={12} />Download
                       </button>
                     </div>

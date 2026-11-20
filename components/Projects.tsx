@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import Spotlight from "./Spotlight";
+import MobileCarousel from "./MobileCarousel";
 
 const GithubIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
   <svg
@@ -55,7 +56,7 @@ const projects: Project[] = [
     host: "ppdb-smk-bani-masum.vercel.app",
     tags: ["Website", "PPDB"],
     icon: GraduationCap,
-    accent: "32,160,232",
+    accent: "163,230,53",
   },
   {
     name: "None Cafe",
@@ -65,7 +66,7 @@ const projects: Project[] = [
     host: "nonecafe.site",
     tags: ["Website", "Menu Digital"],
     icon: Coffee,
-    accent: "245,158,11",
+    accent: "163,230,53",
   },
   {
     name: "BrewLogic",
@@ -75,7 +76,7 @@ const projects: Project[] = [
     host: "brewlogicdownload.vercel.app",
     tags: ["Android", "iOS", "Download"],
     icon: Timer,
-    accent: "180,110,60",
+    accent: "163,230,53",
   },
   {
     name: "Nex Downloader",
@@ -85,7 +86,7 @@ const projects: Project[] = [
     host: "nexdownload.vercel.app",
     tags: ["Android", "iOS", "Download"],
     icon: Download,
-    accent: "88,101,242",
+    accent: "163,230,53",
   },
   {
     name: "NexoraLabStudio",
@@ -95,7 +96,7 @@ const projects: Project[] = [
     host: "nexoralabstudios.vercel.app",
     tags: ["Website", "Web App", "Mobile"],
     icon: Code2,
-    accent: "16,185,129",
+    accent: "163,230,53",
   },
   {
     name: "IMPHNEN",
@@ -105,7 +106,7 @@ const projects: Project[] = [
     host: "imphnen.dev",
     tags: ["Komunitas", "Web"],
     icon: Users,
-    accent: "59,130,246",
+    accent: "163,230,53",
   },
 ];
 
@@ -115,8 +116,6 @@ export default function Projects() {
       <div className="absolute inset-0 grid-bg mask-fade-y pointer-events-none" />
       <div className="container relative">
         <SectionHeader
-          index="08"
-          eyebrow="Projects"
           title={
             <>
               Featured <span className="text-primary-gradient">Projects</span>
@@ -125,7 +124,7 @@ export default function Projects() {
           subtitle="Project dan produk yang sudah live. Klik untuk membuka situsnya."
         />
 
-        <div className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        <MobileCarousel desktopClassName="sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:max-w-6xl sm:mx-auto">
           {projects.map((project, index) => {
             const Icon = project.icon;
             return (
@@ -141,9 +140,9 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Buka ${project.name} (${project.host})`}
-                  className="block h-full rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  className="block h-full rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-ink"
                 >
-                  <Spotlight
+                  <Spotlight tilt={5}
                     color={project.accent}
                     className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
                   >
@@ -151,7 +150,7 @@ export default function Projects() {
                     <div
                       className="relative h-44 overflow-hidden border-b border-border/70"
                       style={{
-                        background: `linear-gradient(140deg, rgba(${project.accent},0.18), rgba(${project.accent},0.05) 55%, rgba(88,101,242,0.1))`,
+                        background: `linear-gradient(140deg, rgba(${project.accent},0.18), rgba(${project.accent},0.05) 55%, rgba(190,242,100,0.1))`,
                       }}
                     >
                       <div className="absolute inset-0 dot-grid opacity-50" />
@@ -163,9 +162,9 @@ export default function Projects() {
                       {/* window bar */}
                       <div className="relative mx-4 mt-4 flex items-center gap-3 rounded-xl border border-white/80 bg-white/80 px-3 py-2 shadow-sm backdrop-blur">
                         <span className="flex gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-red-400/80" />
-                          <span className="h-2 w-2 rounded-full bg-amber-400/80" />
-                          <span className="h-2 w-2 rounded-full bg-green-400/80" />
+                          <span className="h-2 w-2 rounded-full bg-zinc-300" />
+                          <span className="h-2 w-2 rounded-full bg-zinc-300" />
+                          <span className="h-2 w-2 rounded-full bg-zinc-300" />
                         </span>
                         <span className="flex min-w-0 flex-1 items-center gap-1.5 rounded-md bg-muted/70 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
                           <Lock size={9} className="shrink-0" />
@@ -186,8 +185,8 @@ export default function Projects() {
                         </span>
                       </div>
 
-                      <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-green-600 shadow-sm">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                      <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink shadow-sm">
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500 animate-pulse" />
                         Live
                       </span>
                     </div>
@@ -197,7 +196,7 @@ export default function Projects() {
                       <div className="mb-2 flex items-center justify-between gap-3">
                         <span
                           className="font-mono text-[11px] font-bold uppercase tracking-[0.15em]"
-                          style={{ color: `rgb(${project.accent})` }}
+                          style={{ color: "var(--color-lime-ink)" }}
                         >
                           {project.category}
                         </span>
@@ -219,9 +218,9 @@ export default function Projects() {
                         ))}
                       </div>
 
-                      <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm font-semibold text-foreground/80 transition-colors group-hover:text-primary">
+                      <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm font-semibold text-foreground/80 transition-colors group-hover:text-lime-ink">
                         Kunjungi situs
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-white">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-bg-dark">
                           <ArrowUpRight
                             size={15}
                             className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -234,7 +233,7 @@ export default function Projects() {
               </motion.div>
             );
           })}
-        </div>
+        </MobileCarousel>
 
         <div className="mt-12 text-center">
           <Link

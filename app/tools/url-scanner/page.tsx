@@ -64,7 +64,7 @@ export default function UrlScannerTool() {
             <button
               type="submit"
               disabled={loading || !query}
-              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="px-6 py-3 bg-primary text-bg-dark rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
               {loading ? "Mencari..." : "Cari Pindaian"}
             </button>
@@ -79,7 +79,7 @@ export default function UrlScannerTool() {
 
           <div className="mt-6 pt-5 border-t border-border/50">
             <details className="group">
-              <summary className="flex items-center gap-2 cursor-pointer text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <summary className="flex items-center gap-2 cursor-pointer text-sm font-medium text-muted-foreground hover:text-lime-ink transition-colors">
                 <Activity size={16} />
                 Apa saja data yang dimunculkan?
               </summary>
@@ -105,7 +105,7 @@ export default function UrlScannerTool() {
         {results && results.length > 0 && (
           <div className="grid gap-4">
             <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
-              <Activity size={20} className="text-primary" />
+              <Activity size={20} className="text-lime-ink" />
               Hasil Pindaian Terbaru
             </h2>
             {results.map((result, idx) => {
@@ -124,7 +124,7 @@ export default function UrlScannerTool() {
                   )}
                   <div className="flex-1 space-y-4">
                     <div>
-                      <h3 className="font-bold text-lg text-primary break-all">
+                      <h3 className="font-bold text-lg text-lime-ink break-all">
                         {result.task?.url || result.page?.url}
                       </h3>
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-sm text-muted-foreground">
@@ -169,7 +169,7 @@ export default function UrlScannerTool() {
                         href={`https://urlscan.io/result/${result._id}/`} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
+                        className="inline-flex items-center gap-1.5 text-sm text-lime-ink hover:underline font-medium"
                       >
                         <LinkIcon size={14} />
                         Lihat Laporan Lengkap di urlscan.io

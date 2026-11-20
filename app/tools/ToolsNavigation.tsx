@@ -7,6 +7,17 @@ import { ArrowLeft, ArrowRight, ChevronRight, Gift, ShieldCheck } from "lucide-r
 import type { ReactNode } from "react";
 import { categories } from "./data";
 import { ToolCard } from "./ToolCard";
+import SwarmField from "@/components/SwarmField";
+
+/** Word the swarm rebuilds into, per category */
+const SHORT: Record<string, string> = {
+  "image-editor": "IMAGE",
+  "social-media": "SOCIAL",
+  screenshot: "SHOT",
+  "ai-text": "AI",
+  "dev-tools": "DEV",
+  "osint-tools": "OSINT",
+};
 
 export function ToolsNavigation({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -29,67 +40,94 @@ export function ToolsNavigation({ children }: { children: ReactNode }) {
   return (
     <div className="tool-body pt-24 sm:pt-28" style={{ "--accent": cat.accent } as React.CSSProperties}>
       {/* ================= TOOL HEADER ================= */}
-      <header className="relative overflow-hidden px-4 pb-8 sm:pb-10">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: `radial-gradient(55% 80% at 50% 0%, rgba(${cat.accent},0.16), transparent 70%)`,
-          }}
-        />
-        <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-y opacity-70" />
+      <header className="px-3 pb-8 sm:px-4 sm:pb-10">
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-bg-dark text-white ring-1 ring-white/10 shadow-xl sm:rounded-[2rem]">
+          <div className="stage-grid pointer-events-none absolute inset-0" />
+          <div
+            className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full blur-3xl animate-drift"
+            style={{ background: `rgba(${cat.accent},0.3)` }}
+          />
+          <SwarmField
+            mode="auto"
+            text={SHORT[cat.id] ?? "TOOLS"}
+            theme="dark"
+            accent={cat.accent}
+            density={1500}
+            burstOnClick
+            autoSwarmMs={3600}
+            autoRebuildMs={6400}
+            formation={{ cx: 0.77, cy: 0.5, width: 0.34 }}
+            formationMobile={{ cx: 0.5, cy: 0.84, width: 0.7 }}
+          />
 
-        <div className="container relative mx-auto max-w-4xl">
-          {/* Breadcrumb */}
-          <motion.nav
-            aria-label="Breadcrumb"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 flex flex-wrap items-center justify-center gap-1.5 text-xs font-medium text-muted-foreground"
-          >
-            <Link
-              href="/tools"
-              className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-white/80 py-1 pl-1.5 pr-3 backdrop-blur transition-all hover:border-primary/40 hover:text-primary"
+          <div className="relative z-10 px-5 pb-48 pt-6 sm:px-10 sm:pb-12 sm:pt-8">
+            {/* Breadcrumb */}
+            <motion.nav
+              aria-label="Breadcrumb"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-8 flex flex-wrap items-center gap-1.5 text-xs font-medium text-white/60"
             >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-muted transition-transform group-hover:-translate-x-0.5">
-                <ArrowLeft size={11} />
-              </span>
-              Semua Tools
-            </Link>
-            <ChevronRight size={13} className="opacity-50" />
-            <span style={{ color: `rgb(${cat.accent})` }}>{cat.label}</span>
-          </motion.nav>
+              <Link
+                href="/tools"
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 py-1 pl-1.5 pr-3 backdrop-blur transition-all hover:border-white/25 hover:text-white"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 transition-transform group-hover:-translate-x-0.5">
+                  <ArrowLeft size={11} />
+                </span>
+                Semua Tools
+              </Link>
+              <ChevronRight size={13} className="opacity-50" />
+              <span style={{ color: `rgb(${cat.accent})`, filter: "brightness(1.35)" }}>{cat.label}</span>
+            </motion.nav>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="flex flex-col items-center text-center"
-          >
-            <span
-              className="mb-5 flex h-16 w-16 items-center justify-center rounded-3xl text-white [&_svg]:h-7 [&_svg]:w-7"
-              style={{
-                background: `linear-gradient(135deg, rgb(${cat.accent}), rgba(${cat.accent},0.72))`,
-                boxShadow: `0 18px 40px -14px rgba(${cat.accent},0.7)`,
-              }}
-            >
-              {tool.icon}
-            </span>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">{tool.name}</h1>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {tool.description}
-            </p>
+            <div className="max-w-xl sm:max-w-[58%]">
+              <motion.span
+                initial={{ opacity: 0, scale: 0.6, rotate: -12 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                className="mb-5 flex h-16 w-16 items-center justify-center rounded-3xl text-white [&_svg]:h-7 [&_svg]:w-7"
+                style={{
+                  background: `linear-gradient(135deg, rgb(${cat.accent}), rgba(${cat.accent},0.72))`,
+                  boxShadow: `0 18px 40px -14px rgba(${cat.accent},0.8)`,
+                }}
+              >
+                {tool.icon}
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="text-3xl font-bold tracking-tight sm:text-5xl"
+              >
+                {tool.name}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className="mt-3 text-sm leading-relaxed text-white/65 sm:text-base"
+              >
+                {tool.description}
+              </motion.p>
 
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-700">
-                <ShieldCheck size={13} />
-                Berjalan di browser
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold text-muted-foreground backdrop-blur">
-                <Gift size={13} />
-                Gratis, tanpa login
-              </span>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="mt-5 flex flex-wrap items-center gap-2"
+              >
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary-300">
+                  <ShieldCheck size={13} />
+                  Berjalan di browser
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70 backdrop-blur">
+                  <Gift size={13} />
+                  Gratis, tanpa login
+                </span>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </header>
 
@@ -109,7 +147,7 @@ export function ToolsNavigation({ children }: { children: ReactNode }) {
               </div>
               <Link
                 href="/tools"
-                className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-primary sm:inline-flex"
+                className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-lime-ink sm:inline-flex"
               >
                 Semua tools
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />

@@ -21,7 +21,8 @@ export function ToolCard({ tool, index, accent }: Props) {
   const body = (
     <Spotlight
       color={accent}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card p-5 transition-all duration-300 ${
+      tilt={isClickable ? 7 : 0}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card p-3.5 transition-all sm:p-5 duration-300 ${
         isClickable
           ? "border-border hover:-translate-y-1 hover:shadow-xl"
           : "border-dashed border-border opacity-70"
@@ -40,41 +41,47 @@ export function ToolCard({ tool, index, accent }: Props) {
         />
       )}
 
-      <div className="mb-4 flex items-start justify-between gap-3">
+      <div className="mb-3 flex items-start justify-between gap-2 sm:mb-4 sm:gap-3">
         <span
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
-          style={{ background: `rgba(${accent},0.12)`, color: `rgb(${accent})` }}
+          className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:h-11 sm:w-11"
+          style={{ background: `rgba(${accent},0.12)`, color: "var(--color-lime-ink)" }}
         >
-          {tool.icon}
+          {isClickable && (
+            <span
+              className="ping-soft absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
+              style={{ boxShadow: `0 0 0 1px rgba(${accent},0.5)` }}
+            />
+          )}
+          <span className="icon-wiggle relative">{tool.icon}</span>
         </span>
 
         {isLive && (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-green-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
             Live
           </span>
         )}
         {isExternal && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-blue-600">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
             <ArrowUpRight size={10} />
             Link
           </span>
         )}
         {!isClickable && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-amber-600">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
             <Clock size={10} />
             Soon
           </span>
         )}
       </div>
 
-      <h3 className="mb-1.5 text-[15px] font-semibold leading-snug text-foreground">{tool.name}</h3>
-      <p className="flex-1 text-xs leading-relaxed text-muted-foreground">{tool.description}</p>
+      <h3 className="mb-1 text-[13px] font-semibold leading-snug text-foreground sm:mb-1.5 sm:text-[15px]">{tool.name}</h3>
+      <p className="line-clamp-2 flex-1 text-[11px] leading-relaxed text-muted-foreground sm:text-xs">{tool.description}</p>
 
       {isClickable && (
         <div
-          className="mt-4 flex items-center gap-1.5 border-t border-border/60 pt-3 text-xs font-semibold"
-          style={{ color: `rgb(${accent})` }}
+          className="mt-3 flex items-center gap-1.5 border-t border-border/60 pt-2.5 text-[11px] font-semibold sm:mt-4 sm:pt-3 sm:text-xs"
+          style={{ color: "var(--color-lime-ink)" }}
         >
           {isLive ? "Buka tool" : "Buka layanan"}
           {isLive ? (
@@ -91,10 +98,10 @@ export function ToolCard({ tool, index, accent }: Props) {
   );
 
   const motionProps = {
-    initial: { opacity: 0, y: 14 },
-    whileInView: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: 26, scale: 0.97 },
+    whileInView: { opacity: 1, y: 0, scale: 1 },
     viewport: { once: true, margin: "-40px" },
-    transition: { duration: 0.35, delay: (index % 8) * 0.04 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: (index % 4) * 0.07 },
     className: "h-full",
   } as const;
 

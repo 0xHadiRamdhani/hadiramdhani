@@ -13,7 +13,7 @@ export default function TextCounterPage() {
   const readTime = Math.max(1, Math.ceil(words / 200));
 
   const stats = [
-    { label: "Words", value: words, color: "text-primary", bg: "bg-primary/5 border-primary/20" },
+    { label: "Words", value: words, color: "text-lime-ink", bg: "bg-primary/5 border-primary/20" },
     { label: "Characters", value: chars, color: "text-blue-500", bg: "bg-blue-500/5 border-blue-500/20" },
     { label: "No Spaces", value: charsNoSpace, color: "text-green-500", bg: "bg-green-500/5 border-green-500/20" },
     { label: "Sentences", value: sentences, color: "text-purple-500", bg: "bg-purple-500/5 border-purple-500/20" },

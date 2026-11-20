@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, SearchX, Search, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowRight, SearchX } from "lucide-react";
 import { categories } from "./data";
 import { ToolCard } from "./ToolCard";
+import ToolsHero from "./ToolsHero";
+import ToolsMarquee from "./ToolsMarquee";
+import ToolsBento from "./ToolsBento";
+import ToolsOutro from "./ToolsOutro";
 
 const POPULAR = [
   "json-formatter",
@@ -18,10 +21,13 @@ const POPULAR = [
   "color-picker",
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function ToolsPage() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const searchRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const allTools = useMemo(
     () => categories.flatMap((c) => c.tools.map((t) => ({ tool: t, cat: c }))),
@@ -69,102 +75,30 @@ export default function ToolsPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const browse = () => listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
   return (
-    <main className="min-h-screen bg-background pb-24">
+    <main className="min-h-screen bg-background">
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden px-4 pb-10 pt-28 sm:pb-14 sm:pt-36">
-        <div className="pointer-events-none absolute inset-0 aurora" />
-        <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-y" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl animate-drift" />
+      <ToolsHero
+        search={search}
+        onSearch={setSearch}
+        searchRef={searchRef}
+        totalTools={totalTools}
+        totalLive={totalLive}
+        totalCategories={categories.length}
+      />
 
-        <div className="container relative max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center"
-          >
-            <span className="eyebrow">
-              <Sparkles size={13} />
-              <i className="eyebrow-line" />
-              Tools
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-              Tools untuk <span className="text-primary-gradient">developer</span>
-              <br className="hidden sm:block" /> dan kreator.
-            </h1>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Gratis, tanpa login, dan berjalan langsung di browser. File dan teks kamu tidak pernah diunggah ke
-              server.
-            </p>
-          </motion.div>
-
-          {/* Search */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mx-auto mt-8 max-w-2xl"
-          >
-            <div className="group relative rounded-2xl bg-gradient-to-r from-primary/40 via-secondary-400/40 to-primary/40 p-px shadow-xl shadow-primary/10 transition-shadow focus-within:shadow-2xl focus-within:shadow-primary/20">
-              <div className="relative flex items-center rounded-[calc(1rem-1px)] bg-white">
-                <Search className="pointer-events-none absolute left-4 text-muted-foreground" size={18} />
-                <input
-                  ref={searchRef}
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Cari tool, misalnya JSON, Base64, Compressor"
-                  aria-label="Cari tool"
-                  className="tool-search w-full rounded-2xl bg-transparent py-4 pl-12 pr-24 text-sm outline-none placeholder:text-muted-foreground/70 sm:text-base"
-                />
-                <div className="absolute right-3 flex items-center gap-2">
-                  {search ? (
-                    <button
-                      type="button"
-                      onClick={() => setSearch("")}
-                      aria-label="Hapus pencarian"
-                      className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-border hover:text-foreground"
-                    >
-                      <X size={14} />
-                    </button>
-                  ) : (
-                    <kbd className="hidden rounded-md border border-border bg-muted/60 px-2 py-0.5 font-mono text-[11px] text-muted-foreground sm:block">
-                      /
-                    </kbd>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="font-mono text-sm font-bold text-foreground">{totalTools}</span> tools
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                <span className="font-mono text-sm font-bold text-foreground">{totalLive}</span> live
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="font-mono text-sm font-bold text-foreground">{categories.length}</span> kategori
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-primary" />
-                100% client-side
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <ToolsMarquee items={allTools} />
 
       {/* ================= CATEGORY BAR ================= */}
-      <div className="sticky top-16 z-30 border-y border-border/70 bg-white/80 backdrop-blur-xl sm:top-20">
+      <div ref={listRef} className="sticky top-16 z-30 mt-6 scroll-mt-16 border-y border-border/70 bg-white/80 backdrop-blur-xl sm:top-20 sm:scroll-mt-20">
         <div className="container mx-auto max-w-7xl px-4">
-          <div className="scrollbar-hide flex gap-2 overflow-x-auto py-3">
+          <div className="scrollbar-hide flex gap-1.5 overflow-x-auto py-2.5" role="tablist" aria-label="Kategori tools">
             <CategoryPill
               active={activeCategory === "all"}
               onClick={() => setActiveCategory("all")}
-              accent="32,160,232"
+              accent="163,230,53"
               count={totalTools}
             >
               Semua
@@ -185,40 +119,9 @@ export default function ToolsPage() {
         </div>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 pt-10 sm:pt-12">
+      <div className="container mx-auto max-w-7xl px-4 pt-10 sm:pt-14">
         {/* ================= POPULAR ================= */}
-        {!q && activeCategory === "all" && (
-          <motion.section
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 sm:mb-16"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                Paling sering dipakai
-              </h2>
-              <div className="h-px flex-1 bg-border" />
-            </div>
-            <div className="scrollbar-hide -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
-              {popular.map(({ tool, cat }) => (
-                <Link
-                  key={tool.id}
-                  href={`/tools/${tool.id}`}
-                  className="group flex shrink-0 items-center gap-2.5 rounded-full border border-border bg-white py-1.5 pl-1.5 pr-4 text-sm font-medium text-foreground/80 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-foreground hover:shadow-md"
-                >
-                  <span
-                    className="flex h-8 w-8 items-center justify-center rounded-full transition-transform group-hover:scale-110"
-                    style={{ background: `rgba(${cat.accent},0.14)`, color: `rgb(${cat.accent})` }}
-                  >
-                    {tool.icon}
-                  </span>
-                  {tool.name}
-                </Link>
-              ))}
-            </div>
-          </motion.section>
-        )}
+        {!q && activeCategory === "all" && <ToolsBento items={popular} total={totalTools} onBrowse={browse} />}
 
         {/* ================= RESULTS ================= */}
         {q && (
@@ -241,48 +144,94 @@ export default function ToolsPage() {
                 setSearch("");
                 setActiveCategory("all");
               }}
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
             >
               Reset pencarian
               <ArrowRight size={15} />
             </button>
           </div>
         ) : (
-          <div className="space-y-14 sm:space-y-20">
+          <div className="space-y-16 sm:space-y-24">
             {filtered.map((cat) => {
               const live = cat.tools.filter((t) => t.status === "live").length;
+              const index = String(categories.findIndex((c) => c.id === cat.id) + 1).padStart(2, "0");
               return (
-                <section key={cat.id} aria-labelledby={`cat-${cat.id}`}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3"
-                  >
-                    <div className="flex items-center gap-4">
+                <section
+                  key={cat.id}
+                  aria-labelledby={`cat-${cat.id}`}
+                  className="relative"
+                  style={{ "--accent": cat.accent } as React.CSSProperties}
+                >
+                  <div
+                    className="pointer-events-none absolute -left-16 -top-10 h-56 w-56 rounded-full opacity-60 blur-3xl"
+                    style={{ background: `rgba(${cat.accent},0.13)` }}
+                  />
+
+                  <div className="relative mb-7">
+                    <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+                      <div className="flex items-center gap-4 sm:gap-5">
+                        <motion.span
+                          initial={{ opacity: 0, x: -16 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, ease }}
+                          className="cat-outline-num hidden font-mono text-5xl font-bold leading-none sm:block sm:text-7xl"
+                        >
+                          {index}
+                        </motion.span>
+                        <motion.div
+                          initial={{ opacity: 0, y: 14 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.55, ease, delay: 0.08 }}
+                          className="flex items-center gap-3.5"
+                        >
+                          <span
+                            className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white sm:h-14 sm:w-14"
+                            style={{
+                              background: `linear-gradient(135deg, rgb(${cat.accent}), rgba(${cat.accent},0.7))`,
+                              boxShadow: `0 14px 30px -10px rgba(${cat.accent},0.65)`,
+                            }}
+                          >
+                            <span
+                              className="ping-soft absolute inset-0 rounded-2xl"
+                              style={{ boxShadow: `0 0 0 1.5px rgba(${cat.accent},0.5)` }}
+                            />
+                            {cat.icon}
+                          </span>
+                          <div>
+                            <h2 id={`cat-${cat.id}`} className="text-xl font-bold tracking-tight sm:text-3xl">
+                              {cat.label}
+                            </h2>
+                            <p className="mt-0.5 max-w-md text-xs text-muted-foreground sm:text-sm">{cat.blurb}</p>
+                          </div>
+                        </motion.div>
+                      </div>
                       <span
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-lg"
+                        className="rounded-full border px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-widest"
                         style={{
-                          background: `linear-gradient(135deg, rgba(${cat.accent},1), rgba(${cat.accent},0.7))`,
-                          color: "#fff",
-                          boxShadow: `0 12px 28px -10px rgba(${cat.accent},0.6)`,
+                          color: "var(--color-lime-ink)",
+                          borderColor: `rgba(${cat.accent},0.55)`,
+                          background: `rgba(${cat.accent},0.18)`,
                         }}
                       >
-                        {cat.icon}
+                        {cat.tools.length} tools · {live} live
                       </span>
-                      <div>
-                        <h2 id={`cat-${cat.id}`} className="text-xl font-bold tracking-tight sm:text-2xl">
-                          {cat.label}
-                        </h2>
-                        <p className="text-xs text-muted-foreground sm:text-sm">{cat.blurb}</p>
-                      </div>
                     </div>
-                    <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                      {cat.tools.length} tools · {live} live
-                    </span>
-                  </motion.div>
 
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease, delay: 0.15 }}
+                      className="mt-6 h-px origin-left"
+                      style={{
+                        background: `linear-gradient(90deg, rgb(${cat.accent}), rgba(${cat.accent},0.15) 60%, transparent)`,
+                      }}
+                    />
+                  </div>
+
+                  <div className="relative grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
                     {cat.tools.map((tool, i) => (
                       <ToolCard key={tool.id} tool={tool} index={i} accent={cat.accent} />
                     ))}
@@ -293,6 +242,8 @@ export default function ToolsPage() {
           </div>
         )}
       </div>
+
+      <ToolsOutro />
     </main>
   );
 }
@@ -315,25 +266,25 @@ function CategoryPill({
   return (
     <button
       type="button"
+      role="tab"
       onClick={onClick}
-      aria-pressed={active}
-      className={`flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all ${
-        active ? "text-white shadow-md" : "border-border bg-white text-muted-foreground hover:text-foreground"
+      aria-selected={active}
+      className={`relative flex shrink-0 items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
+        active ? "text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground"
       }`}
-      style={
-        active
-          ? {
-              background: `rgb(${accent})`,
-              borderColor: `rgb(${accent})`,
-              boxShadow: `0 8px 20px -8px rgba(${accent},0.7)`,
-            }
-          : undefined
-      }
     >
-      {icon && <span className="[&_svg]:h-4 [&_svg]:w-4">{icon}</span>}
-      {children}
+      {active && (
+        <motion.span
+          layoutId="cat-pill"
+          className="absolute inset-0 rounded-full"
+          style={{ background: `rgb(${accent})`, boxShadow: `0 8px 20px -8px rgba(${accent},0.7)` }}
+          transition={{ type: "spring", stiffness: 420, damping: 34 }}
+        />
+      )}
+      {icon && <span className="relative [&_svg]:h-4 [&_svg]:w-4">{icon}</span>}
+      <span className="relative">{children}</span>
       <span
-        className={`rounded-full px-1.5 font-mono text-[10px] font-bold ${
+        className={`relative rounded-full px-1.5 font-mono text-[10px] font-bold ${
           active ? "bg-white/25 text-white" : "bg-muted text-muted-foreground"
         }`}
       >

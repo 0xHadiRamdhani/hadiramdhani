@@ -59,8 +59,6 @@ export default function Contact() {
 
       <div className="container relative">
         <SectionHeader
-          index="10"
-          eyebrow="Contact"
           title={
             <>
               Let&apos;s build something <span className="text-primary-gradient">together.</span>
@@ -83,19 +81,19 @@ export default function Contact() {
             ].map((c) => {
               const Icon = c.icon;
               return (
-                <Spotlight
+                <Spotlight tilt={5}
                   key={c.label}
                   className="rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <a href={c.href} className="flex items-center gap-4 p-4 sm:p-5 group">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
-                      <Icon size={20} className="text-primary group-hover:text-white transition-colors" />
+                      <Icon size={20} className="text-lime-ink group-hover:text-white transition-colors" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mb-0.5">{c.label}</div>
                       <div className="text-sm font-semibold text-foreground truncate">{c.value}</div>
                     </div>
-                    <ArrowRight size={16} className="text-muted-foreground shrink-0 group-hover:translate-x-1 group-hover:text-primary transition-all" />
+                    <ArrowRight size={16} className="text-muted-foreground shrink-0 group-hover:translate-x-1 group-hover:text-lime-ink transition-all" />
                   </a>
                 </Spotlight>
               );
@@ -103,7 +101,7 @@ export default function Contact() {
 
             {/* Socials */}
             <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
-              <div className="text-[11px] font-mono font-bold text-primary tracking-widest uppercase mb-3">Find me on</div>
+              <div className="text-[11px] font-mono font-bold text-lime-ink tracking-widest uppercase mb-3">Find me on</div>
               <div className="flex flex-wrap gap-2">
                 {socials.map((s) => (
                   <a
@@ -111,7 +109,7 @@ export default function Contact() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-xs font-medium text-foreground/70 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-all"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-xs font-medium text-foreground/70 hover:border-primary/40 hover:text-lime-ink hover:bg-primary/5 transition-all"
                   >
                     {s.name}
                     <ArrowUpRight size={12} />
@@ -122,9 +120,9 @@ export default function Contact() {
 
             {/* Local time card */}
             <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
-              <div className="text-[11px] font-mono font-bold text-primary tracking-widest uppercase mb-3">My Local Time</div>
+              <div className="text-[11px] font-mono font-bold text-lime-ink tracking-widest uppercase mb-3">My Local Time</div>
               <div className="flex items-center gap-2 text-foreground/80 text-sm font-medium">
-                <MapPin size={15} className="text-primary shrink-0" />
+                <MapPin size={15} className="text-lime-ink shrink-0" />
                 Kota Bandung, Jawa Barat (WIB / UTC+7)
               </div>
               <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
@@ -145,7 +143,7 @@ export default function Contact() {
                 <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-6">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-md shadow-primary/30">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-bg-dark shadow-md shadow-primary/30">
                       <Send size={17} />
                     </span>
                     <h3 className="text-lg font-bold">Send a Message</h3>
@@ -191,7 +189,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-white px-6 py-3.5 text-sm font-semibold hover:bg-primary-500 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 group shadow-lg shadow-primary/25"
+                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-bg-dark px-6 py-3.5 text-sm font-semibold hover:bg-primary-500 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 group shadow-lg shadow-primary/25"
                     >
                       {status === "loading" ? (
                         <Loader2 size={16} className="animate-spin" />

@@ -87,8 +87,8 @@ export default function Stats() {
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-[11px] font-bold tracking-widest text-primary">{stat.id}</span>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span className="font-mono text-[11px] font-bold tracking-widest text-lime-ink">{stat.id}</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lime-ink group-hover:bg-primary group-hover:text-bg-dark transition-colors">
                     <Icon size={15} />
                   </span>
                 </div>

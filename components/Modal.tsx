@@ -11,17 +11,18 @@ type ModalProps = {
   children: ReactNode;
   /** Accessible name of the dialog */
   label: string;
-  size?: "sm" | "md" | "lg";
-  /** rgb triplet used for the top bar and the backdrop glow, e.g. "32,160,232" */
+  size?: "sm" | "md" | "lg" | "xl";
+  /** rgb triplet used for the top bar and the backdrop glow, e.g. "163,230,53" */
   accent?: string;
   /** Use "light" when the close button sits on a dark or image header */
-  closeTone?: "light" | "dark";
+  closeTone?: "light" | "dark" | "responsive";
 };
 
 const SIZES = {
   sm: "sm:max-w-sm",
   md: "sm:max-w-lg",
   lg: "sm:max-w-2xl",
+  xl: "sm:max-w-4xl",
 } as const;
 
 /**
@@ -45,7 +46,7 @@ export function Modal({
   children,
   label,
   size = "md",
-  accent = "32,160,232",
+  accent = "163,230,53",
   closeTone = "dark",
 }: ModalProps) {
   useEffect(() => {
@@ -74,7 +75,7 @@ export function Modal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-[#0A110F]/60 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-[#0a0a0a]/60 backdrop-blur-md"
           style={{
             backgroundImage: `radial-gradient(60% 50% at 50% 40%, rgba(${accent},0.22), transparent 70%)`,
           }}
@@ -94,7 +95,7 @@ export function Modal({
             {/* Accent bar */}
             <div
               className="pointer-events-none absolute inset-x-0 top-0 z-40 h-1.5"
-              style={{ background: `linear-gradient(90deg, rgb(${accent}), #5865f2, rgb(${accent}))` }}
+              style={{ background: `linear-gradient(90deg, rgb(${accent}), #bef264, rgb(${accent}))` }}
             />
             {/* Sheet handle (mobile) */}
             <div className="pointer-events-none absolute left-1/2 top-2.5 z-40 h-1 w-10 -translate-x-1/2 rounded-full bg-white/70 sm:hidden mix-blend-difference" />
@@ -103,10 +104,12 @@ export function Modal({
               type="button"
               onClick={onClose}
               aria-label="Tutup"
-              className={`group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:rotate-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+              className={`group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:rotate-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-ink ${
                 closeTone === "light"
                   ? "bg-black/25 text-white backdrop-blur-md hover:bg-black/45"
-                  : "bg-muted text-muted-foreground hover:bg-border hover:text-foreground"
+                  : closeTone === "responsive"
+                    ? "bg-black/30 text-white backdrop-blur-md hover:bg-black/50 md:bg-muted md:text-muted-foreground md:backdrop-blur-none md:hover:bg-border md:hover:text-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-border hover:text-foreground"
               }`}
             >
               <X size={18} />

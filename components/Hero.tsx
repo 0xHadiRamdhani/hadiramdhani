@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Briefcase, Cake, Camera, GraduationCap, Heart, MapPin, MessageCircle, Music2 } from "lucide-react";
-import { Modal } from "./Modal";
+import { ArrowRight } from "lucide-react";
+import BiodataModal from "./BiodataModal";
 import HeroVisual from "./HeroVisual";
 import SwarmField from "./SwarmField";
 
@@ -41,8 +40,8 @@ export default function Hero() {
             {/* Status pill */}
             {/* <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary/20 bg-white/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inset-0 rounded-full bg-green-500 animate-pulse-ring" />
-                <span className="relative h-2 w-2 rounded-full bg-green-500" />
+                <span className="absolute inset-0 rounded-full bg-primary-500 animate-pulse-ring" />
+                <span className="relative h-2 w-2 rounded-full bg-primary-500" />
               </span>
               Open to collaborate · Kota Bandung
             </div> */}
@@ -54,7 +53,7 @@ export default function Hero() {
                 <span className="block text-primary-gradient pb-1">Ramdhani</span>
               </h1>
               <p className="font-mono text-base sm:text-lg lg:text-xl font-medium text-foreground/70 tracking-tight">
-                <span className="text-primary">&gt;</span> Code. Create. Explore.
+                <span className="text-lime-ink">&gt;</span> Code. Create. Explore.
                 <span className="ml-1 inline-block h-5 w-[2px] translate-y-1 bg-primary animate-pulse" />
               </p>
               <p className="max-w-lg text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -66,7 +65,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="#journey"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white px-6 py-3.5 text-sm sm:text-base font-semibold hover:bg-primary-500 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 group"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-bg-dark px-6 py-3.5 text-sm sm:text-base font-semibold hover:bg-primary-500 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 group"
               >
                 Explore My Journey
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -87,7 +86,7 @@ export default function Hero() {
                 { value: "∞", label: "Things To Learn" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col px-4 sm:px-6 py-3">
-                  <div className="text-2xl sm:text-3xl font-bold text-primary leading-none">{stat.value}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-lime-ink leading-none">{stat.value}</div>
                   <div className="text-[11px] sm:text-xs text-muted-foreground mt-1.5">{stat.label}</div>
                 </div>
               ))}
@@ -110,7 +109,7 @@ export default function Hero() {
       <Link
         href="#about"
         aria-label="Scroll ke bawah"
-        className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground hover:text-primary transition-colors"
+        className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground hover:text-lime-ink transition-colors"
       >
         Scroll
         <span className="relative h-8 w-px bg-border overflow-hidden">
@@ -118,108 +117,7 @@ export default function Hero() {
         </span>
       </Link>
 
-      {/* Biodata modal */}
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} label="Biodata Hadi Ramdhani" closeTone="light">
-        {/* Banner */}
-        <div className="relative h-32 sm:h-40 overflow-hidden bg-gradient-to-br from-primary via-secondary-400 to-primary-600">
-          <div className="absolute inset-0 dot-grid-dark opacity-70" />
-          <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/25 blur-3xl" />
-          <div className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-primary-200/40 blur-3xl" />
-          <span className="absolute bottom-4 right-5 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
-            {"// biodata"}
-          </span>
-        </div>
-
-        <div className="relative px-5 pb-6 sm:px-8 sm:pb-8">
-          {/* Identity */}
-          <div className="-mt-12 sm:-mt-14 flex items-end justify-between gap-3">
-            <div className="h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-3xl ring-4 ring-white shadow-xl">
-              <Image
-                src="/avatar.jpg"
-                alt="Hadi Ramdhani"
-                width={112}
-                height={112}
-                className="h-full w-full object-cover object-top"
-                priority
-              />
-            </div>
-            <span className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-[11px] font-semibold text-green-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-              Open to collaborate
-            </span>
-          </div>
-
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight">Hadi Ramdhani</h2>
-          <p className="text-primary font-medium text-sm sm:text-base">Software Engineering Student</p>
-
-          {/* Details */}
-          <dl className="mt-6 divide-y divide-border/70 overflow-hidden rounded-2xl border border-border bg-muted/30">
-            {[
-              { icon: Cake, label: "Umur", value: "19 Tahun" },
-              { icon: MapPin, label: "Alamat", value: "Komp. Puri Cipageran Indah 1, Kota Cimahi" },
-              { icon: GraduationCap, label: "Sekolah", value: "SEKOLAH PROFESI INSINYUR" },
-              { icon: Briefcase, label: "Pekerjaan", value: "Software Engineer di SBM ITB" },
-            ].map((row) => {
-              const Icon = row.icon;
-              return (
-                <div key={row.label} className="flex items-start gap-3.5 px-4 py-3.5">
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon size={16} />
-                  </span>
-                  <div className="min-w-0">
-                    <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{row.label}</dt>
-                    <dd className="text-sm font-semibold text-foreground leading-snug">{row.value}</dd>
-                  </div>
-                </div>
-              );
-            })}
-            <div className="flex items-start gap-3.5 px-4 py-3.5">
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <Heart size={16} />
-              </span>
-              <div className="min-w-0">
-                <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Hobi</dt>
-                <dd className="mt-1.5 flex flex-wrap gap-1.5">
-                  {["Coding", "Hacking", "Electrical", "Coffee"].map((h) => (
-                    <span key={h} className="rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-xs font-medium text-primary">
-                      {h}
-                    </span>
-                  ))}
-                </dd>
-              </div>
-            </div>
-          </dl>
-
-          {/* Socials */}
-          <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-            {[
-              { icon: Camera, name: "Instagram", handle: "@hadiramdhani.tsx", href: "https://instagram.com/hadiramdhani.tsx" },
-              { icon: Music2, name: "TikTok", handle: "@hadimobileengineer", href: "https://tiktok.com/@hadimobileengineer" },
-              { icon: MessageCircle, name: "WhatsApp", handle: "083199456915", href: "https://wa.me/6283199456915" },
-            ].map((s) => {
-              const Icon = s.icon;
-              return (
-                <Link
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-2xl border border-border bg-white px-3.5 py-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10"
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                    <Icon size={16} />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-xs font-bold text-foreground">{s.name}</span>
-                    <span className="block truncate text-[11px] text-muted-foreground">{s.handle}</span>
-                  </span>
-                  <ArrowUpRight size={14} className="shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </Modal>
+      <BiodataModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

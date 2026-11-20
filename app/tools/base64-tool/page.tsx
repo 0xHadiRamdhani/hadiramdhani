@@ -33,7 +33,7 @@ export default function Base64ToolPage() {
           <div className="flex bg-muted p-1 rounded-xl w-full sm:w-auto">
             {(["encode", "decode"] as const).map((m) => (
               <button key={m} onClick={() => { setMode(m); process(input, m); }}
-                className={`flex-1 sm:flex-none px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${mode === m ? "bg-white shadow text-primary" : "text-muted-foreground"}`}>
+                className={`flex-1 sm:flex-none px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${mode === m ? "bg-white shadow text-lime-ink" : "text-muted-foreground"}`}>
                 {m}
               </button>
             ))}
@@ -61,7 +61,7 @@ export default function Base64ToolPage() {
               </label>
               {output && (
                 <button onClick={() => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(() =>setCopied(false), 2000); }}
-                  className="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline">
+                  className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">
                   {copied ? <Check size={12} /> : <Copy size={12} />} {copied ? "Copied!" : "Copy"}
                 </button>
               )}

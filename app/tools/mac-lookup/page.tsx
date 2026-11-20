@@ -60,7 +60,7 @@ export default function MacLookupTool() {
             <button
               type="submit"
               disabled={loading || !mac}
-              className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="w-full sm:w-auto px-6 py-3 bg-primary text-bg-dark rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
               {loading ? "Mencari..." : "Cari Vendor"}
             </button>
@@ -76,7 +76,7 @@ export default function MacLookupTool() {
 
         {result && (
           <div className="bg-card border border-border rounded-xl p-6">
-            <div className="flex items-center gap-2 text-primary font-semibold mb-4 pb-3 border-b border-border/50">
+            <div className="flex items-center gap-2 text-lime-ink font-semibold mb-4 pb-3 border-b border-border/50">
               <Cpu size={18} />
               Vendor Information
             </div>
