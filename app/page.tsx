@@ -6,6 +6,7 @@ import Journey from "@/components/Journey";
 import Experience from "@/components/Experience";
 import Hobbies from "@/components/Hobbies";
 import FocusAreas from "@/components/FocusAreas";
+import SwarmRebuild from "@/components/SwarmRebuild";
 import Featured from "@/components/Featured";
 import Projects from "@/components/Projects";
 import LocalTime from "@/components/LocalTime";
@@ -24,6 +25,7 @@ export default function Home() {
         <Experience />
         <Hobbies />
         <FocusAreas />
+        <SwarmRebuild />
         <Featured />
         <Projects />
         <LocalTime />

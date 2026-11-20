@@ -1,5 +1,7 @@
-import { Star, GitFork, ExternalLink, Code } from "lucide-react";
+import { Star, GitFork, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import SectionHeader from "./SectionHeader";
+import Spotlight from "./Spotlight";
 
 const GithubIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
   <svg
@@ -123,62 +125,67 @@ export default async function Projects() {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <section id="projects" className="w-full py-16 sm:py-24 bg-muted/30 border-t border-border">
-      <div className="container">
-        <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-            Featured <span className="text-primary-gradient">Projects</span>
-          </h2>
-          <p className="max-w-xl text-muted-foreground text-sm sm:text-base">
-            Beberapa project pilihan yang disematkan dari GitHub.
-          </p>
-        </div>
+    <section id="projects" className="relative w-full py-20 sm:py-28 bg-muted/30 border-t border-border overflow-hidden scroll-mt-16">
+      <div className="absolute inset-0 grid-bg mask-fade-y pointer-events-none" />
+      <div className="container relative">
+        <SectionHeader
+          index="08"
+          eyebrow="Projects"
+          title={
+            <>
+              Featured <span className="text-primary-gradient">Projects</span>
+            </>
+          }
+          subtitle="Beberapa project pilihan yang disematkan dari GitHub."
+        />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        <div className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           {projects.map((project, index) => (
-            <div
+            <Spotlight
               key={project.repo || index}
-              className="relative overflow-hidden flex flex-col justify-between bg-card border border-border rounded-xl p-6 hover:shadow-md hover:border-primary/30 transition-all group"
+              className="group overflow-hidden flex flex-col justify-between bg-card border border-border rounded-3xl p-6 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300"
             >
-              {/* Hover swipe effect */}
-              <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-              
-              <div className="relative z-10 flex-1 flex flex-col">
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-primary via-secondary-400 to-primary-600 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
+
+              <div className="relative flex-1 flex flex-col">
                 {/* Card Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
                     <GithubIcon size={20} />
                   </div>
-                  <Link
-                    href={project.link || `https://github.com/0xHadiRamdhani/${project.repo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] font-bold tracking-widest text-muted-foreground/60">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <Link
+                      href={project.link || `https://github.com/0xHadiRamdhani/${project.repo}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Buka ${project.repo} di GitHub`}
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-white hover:bg-primary hover:border-primary transition-all"
+                    >
+                      <ExternalLink size={14} />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Repo name */}
-                <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors break-words">
                   {project.repo}
                 </h3>
 
-                {/* Description (optional) */}
                 {project.description && (
-                  <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-4">
                     {project.description}
                   </p>
                 )}
 
-                {/* Tech Stack badges */}
                 {project.stack && project.stack.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center gap-1 rounded-full bg-secondary/60 border border-border/60 px-2.5 py-0.5 text-[10px] font-semibold text-foreground/70 uppercase tracking-wider"
+                        className="inline-flex items-center rounded-full bg-muted border border-border/60 px-2.5 py-0.5 text-[10px] font-semibold text-foreground/70 uppercase tracking-wider"
                       >
                         {tech}
                       </span>
@@ -188,7 +195,7 @@ export default async function Projects() {
               </div>
 
               {/* Card Footer */}
-              <div className="relative z-10 flex items-center gap-4 text-xs font-medium text-muted-foreground mt-5 pt-4 border-t border-border">
+              <div className="relative flex items-center gap-4 text-xs font-medium text-muted-foreground mt-5 pt-4 border-t border-border">
                 {project.language && (
                   <div className="flex items-center gap-1.5">
                     <span
@@ -213,7 +220,7 @@ export default async function Projects() {
                   </div>
                 )}
               </div>
-            </div>
+            </Spotlight>
           ))}
         </div>
 
@@ -222,7 +229,7 @@ export default async function Projects() {
             href="https://github.com/0xHadiRamdhani"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-medium hover:bg-muted hover:border-primary/30 transition-all shadow-sm"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-medium hover:border-primary/40 hover:-translate-y-0.5 hover:shadow-md transition-all shadow-sm"
           >
             <GithubIcon size={16} />
             View all on GitHub

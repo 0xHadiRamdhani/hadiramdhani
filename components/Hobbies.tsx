@@ -2,10 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Terminal, Zap, Coffee, ArrowRight, X, CheckCircle2 } from "lucide-react";
+import { Code2, Terminal, Zap, Coffee, ArrowRight, X, CheckCircle2, type LucideIcon } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import Spotlight from "./Spotlight";
+
+const HOBBY_RGB: Record<string, string> = {
+  Coding: "32,160,232",
+  Hacking: "168,85,247",
+  Electrical: "245,158,11",
+  Coffee: "34,197,94",
+};
 
 type Hobby = {
-  icon: any;
+  icon: LucideIcon;
   title: string;
   description: string;
   details: string[];
@@ -78,47 +87,56 @@ export default function Hobbies() {
   const [selectedHobby, setSelectedHobby] = useState<Hobby | null>(null);
 
   return (
-    <section id="hobbies" className="w-full py-16 sm:py-24 bg-white relative">
-      <div className="container">
-        <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-            Things I <span className="text-primary-gradient">Love</span>
-          </h2>
-          <p className="max-w-xl text-muted-foreground text-sm sm:text-base">
-            Beberapa hal yang membuat saya terus belajar dan bereksplorasi.
-          </p>
-        </div>
+    <section id="hobbies" className="relative w-full py-20 sm:py-28 bg-white overflow-hidden scroll-mt-16">
+      <div className="absolute inset-0 dot-grid opacity-40 mask-fade-y pointer-events-none" />
+      <div className="container relative">
+        <SectionHeader
+          index="04"
+          eyebrow="Interests"
+          title={
+            <>
+              Things I <span className="text-primary-gradient">Love</span>
+            </>
+          }
+          subtitle="Beberapa hal yang membuat saya terus belajar dan bereksplorasi."
+        />
 
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {hobbies.map((hobby, index) => {
             const Icon = hobby.icon;
             return (
               <motion.div
                 key={hobby.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                onClick={() => setSelectedHobby(hobby)}
-                className={`group overflow-hidden relative p-6 sm:p-8 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-xl hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer`}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="h-full"
               >
-                {/* Hover swipe effect */}
-                <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-                
-                <div className="relative z-10 flex flex-col gap-4">
-                  <div className={`w-12 h-12 rounded-xl ${hobby.bg} border ${hobby.border} flex items-center justify-center ${hobby.color} transition-all group-hover:scale-110`}>
-                    <Icon size={22} />
+                <Spotlight
+                  color={HOBBY_RGB[hobby.title]}
+                  onClick={() => setSelectedHobby(hobby)}
+                  className={`group h-full overflow-hidden p-6 sm:p-7 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-3xl hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
+                >
+                  {/* Big faint index */}
+                  <span className="pointer-events-none absolute -right-2 -top-4 font-mono text-8xl font-black text-foreground/[0.04] select-none">
+                    0{index + 1}
+                  </span>
+
+                  <div className="relative flex flex-col gap-5">
+                    <div className={`w-14 h-14 rounded-2xl ${hobby.bg} border ${hobby.border} flex items-center justify-center ${hobby.color} transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3`}>
+                      <Icon size={26} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground mb-1.5">{hobby.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{hobby.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-1">{hobby.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{hobby.description}</p>
+                  <div className={`relative inline-flex items-center gap-1.5 mt-6 text-sm font-semibold ${hobby.color}`}>
+                    <span>Explore</span>
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1.5" />
                   </div>
-                </div>
-                <div className={`relative z-10 inline-flex items-center gap-1.5 mt-5 text-sm font-medium ${hobby.color} transition-colors`}>
-                  <span>Explore</span>
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                </div>
+                </Spotlight>
               </motion.div>
             );
           })}

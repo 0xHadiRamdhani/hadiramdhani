@@ -2,26 +2,32 @@
 
 import { motion } from "framer-motion";
 import { ClockWidget } from "./ClockWidget";
+import SectionHeader from "./SectionHeader";
 
 export default function LocalTime() {
   return (
-    <section className="w-full py-16 sm:py-24 bg-muted/20 border-b border-border">
-      <div className="container">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex-1 text-center lg:text-left"
-          >
-            
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-              Current Status
-            </h2>
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0">
+    <section className="relative w-full py-20 sm:py-28 bg-white border-b border-border overflow-hidden">
+      <div className="absolute inset-0 aurora opacity-80 pointer-events-none" />
+      <div className="container relative">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20 max-w-4xl mx-auto">
+          <div className="flex-1 flex flex-col items-center lg:items-start">
+            <SectionHeader
+              align="left"
+              index="09"
+              eyebrow="Status"
+              className="!mb-5 items-center text-center lg:items-start lg:text-left"
+              title="Current Status"
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-md text-center lg:text-left"
+            >
               Walaupun pengunjung berasal dari berbagai zona waktu, saya berada di Kota Bandung. Widget ini menunjukkan waktu lokal saya secara real-time.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Radio, Briefcase, GraduationCap, Mail, Play } from "lucide-react";
+import { Radio, Briefcase, GraduationCap, Mail, Play, type LucideIcon } from "lucide-react";
+import Spotlight from "./Spotlight";
 
 type RoleData = {
   title: string;
@@ -10,23 +11,41 @@ type RoleData = {
 };
 
 const roles: Record<string, RoleData> = {
-  "Coding": {
+  Coding: {
     title: "Coding",
     skills: ["Software Engineering", "Mobile Development", "Dart / Flutter", "TypeScript"],
   },
-  "Hacking": {
+  Hacking: {
     title: "Hacking",
     skills: ["Cybersecurity", "Penetration Testing", "Linux / Terminal", "Networking"],
   },
-  "Electrical": {
+  Electrical: {
     title: "Electrical",
     skills: ["Hardware & Circuits", "Microcontrollers", "IoT Devices", "Soldering"],
   },
-  "Coffee": {
+  Coffee: {
     title: "Coffee",
     skills: ["Caffeine Fuel", "Espresso", "Manual Brew", "Late Night Coding"],
   },
 };
+
+type Tile = {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  rgb: string;
+  iconBg: string;
+  iconColor: string;
+  dot?: boolean;
+  small?: boolean;
+};
+
+const tiles: Tile[] = [
+  { icon: Radio, label: "Status", value: "Available to Collab", rgb: "34,197,94", iconBg: "bg-green-500/10", iconColor: "text-green-600", dot: true },
+  { icon: Briefcase, label: "Experience", value: "Siswa", rgb: "32,160,232", iconBg: "bg-primary/10", iconColor: "text-primary" },
+  { icon: GraduationCap, label: "Education", value: "Software Engineering", rgb: "168,85,247", iconBg: "bg-purple-500/10", iconColor: "text-purple-500" },
+  { icon: Mail, label: "Email", value: "hadsxdev@icloud.com", rgb: "239,68,68", iconBg: "bg-red-500/10", iconColor: "text-red-500", small: true },
+];
 
 export default function InteractiveProfile() {
   const roleKeys = Object.keys(roles);
@@ -34,126 +53,83 @@ export default function InteractiveProfile() {
   const currentRole = roles[roleKeys[currentRoleIndex]];
 
   return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* Interactive Bio */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="rounded-xl border border-border bg-card p-5 sm:p-6 flex flex-col gap-4 relative overflow-hidden group"
-      >
-        <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-        
-        <div className="relative z-10 text-lg sm:text-xl font-semibold text-foreground">
-          I love{" "}
-          <button
-            onClick={() => setCurrentRoleIndex((prev) => (prev + 1) % roleKeys.length)}
-            className="text-primary font-bold underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all cursor-pointer relative z-20"
-          >
-            {currentRole.title}
-          </button>
-          .
+    <div className="flex flex-col gap-4 sm:gap-5 w-full">
+      {/* Interactive Bio, styled as a terminal window */}
+      <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-lg shadow-primary/5">
+        <div className="flex items-center gap-2 border-b border-border bg-muted/50 px-4 py-2.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+          <span className="ml-3 font-mono text-[11px] text-muted-foreground">~/hadi/bio.ts</span>
         </div>
-        <p className="relative z-10 text-xs text-muted-foreground italic">
-          (Klik kata biru untuk mengubah bio)
-        </p>
 
-        <div className="relative z-10 grid grid-cols-2 gap-x-4 gap-y-3 min-h-[80px]">
-          <AnimatePresence mode="popLayout">
-            {currentRole.skills.map((skill, idx) => (
-              <motion.div
-                key={`${currentRole.title}-${skill}`}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 8 }}
-                transition={{ duration: 0.2, delay: idx * 0.04 }}
-                className="flex items-center gap-2 text-sm text-foreground/80"
-              >
-                <Play className="text-primary w-3 h-3 fill-primary shrink-0" />
-                {skill}
-              </motion.div>
-            ))}
-          </AnimatePresence>
+        <div className="p-5 sm:p-6 flex flex-col gap-4">
+          <div className="text-xl sm:text-2xl font-semibold text-foreground">
+            I love{" "}
+            <button
+              onClick={() => setCurrentRoleIndex((prev) => (prev + 1) % roleKeys.length)}
+              className="relative text-primary font-bold cursor-pointer rounded-md px-2 py-0.5 -mx-1 bg-primary/10 hover:bg-primary/15 transition-colors"
+            >
+              {currentRole.title}
+            </button>
+            .
+          </div>
+          <p className="text-xs text-muted-foreground font-mono">
+            {"// klik kata biru untuk mengubah bio"}
+          </p>
+
+          <div className="flex flex-wrap gap-2 min-h-[84px] content-start">
+            <AnimatePresence mode="popLayout">
+              {currentRole.skills.map((skill, idx) => (
+                <motion.div
+                  key={`${currentRole.title}-${skill}`}
+                  initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2, delay: idx * 0.05 }}
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-sm text-foreground/80"
+                >
+                  <Play className="text-primary w-2.5 h-2.5 fill-primary shrink-0" />
+                  {skill}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* 2x2 Bento Grid */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4">
-        {/* Status */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="group relative overflow-hidden bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-4 hover:border-green-500/30 hover:shadow-sm transition-all"
-        >
-          <div className="absolute inset-0 bg-green-500/[0.03] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-          <div className="relative z-10 w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-            <Radio className="text-green-600" size={20} />
-          </div>
-          <div className="relative z-10">
-            <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">STATUS</div>
-            <div className="font-bold text-foreground flex items-center gap-1.5 text-sm">
-              <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-              Available to Collab
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Experience */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="group relative overflow-hidden bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-4 hover:border-primary/30 hover:shadow-sm transition-all"
-        >
-          <div className="absolute inset-0 bg-primary/[0.03] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-          <div className="relative z-10 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-            <Briefcase className="text-primary" size={20} />
-          </div>
-          <div className="relative z-10">
-            <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EXPERIENCE</div>
-            <div className="font-bold text-foreground text-sm">Siswa</div>
-          </div>
-        </motion.div>
-
-        {/* Education */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="group relative overflow-hidden bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-4 hover:border-purple-500/30 hover:shadow-sm transition-all"
-        >
-          <div className="absolute inset-0 bg-purple-500/[0.03] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-          <div className="relative z-10 w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-            <GraduationCap className="text-purple-500" size={20} />
-          </div>
-          <div className="relative z-10">
-            <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EDUCATION</div>
-            <div className="font-bold text-foreground text-sm">Software Engineering</div>
-          </div>
-        </motion.div>
-
-        {/* Email */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="group relative overflow-hidden bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-4 hover:border-red-500/30 hover:shadow-sm transition-all"
-        >
-          <div className="absolute inset-0 bg-red-500/[0.03] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-          <div className="relative z-10 w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-            <Mail className="text-red-500" size={20} />
-          </div>
-          <div className="relative z-10">
-            <div className="text-[10px] sm:text-xs font-bold text-muted-foreground tracking-wider uppercase mb-1">EMAIL</div>
-            <div className="font-bold text-foreground text-xs sm:text-sm break-all">hadsxdev@icloud.com</div>
-          </div>
-        </motion.div>
+        {tiles.map((tile, i) => {
+          const Icon = tile.icon;
+          return (
+            <motion.div
+              key={tile.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 * (i + 1) }}
+            >
+              <Spotlight
+                color={tile.rgb}
+                className="group h-full overflow-hidden bg-card border border-border rounded-2xl p-4 sm:p-5 flex flex-col gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <div className={`w-10 h-10 rounded-xl ${tile.iconBg} flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+                  <Icon className={tile.iconColor} size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] sm:text-[11px] font-mono font-bold text-muted-foreground tracking-widest uppercase mb-1">
+                    {tile.label}
+                  </div>
+                  <div className={`font-bold text-foreground flex items-center gap-1.5 ${tile.small ? "text-xs sm:text-sm break-all" : "text-sm"}`}>
+                    {tile.dot && <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />}
+                    {tile.value}
+                  </div>
+                </div>
+              </Spotlight>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

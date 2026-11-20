@@ -49,24 +49,33 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
 
   return (
     <>
-      <div 
-        className="bg-white border border-border rounded-2xl p-6 flex flex-col w-full max-w-xs shadow-sm cursor-pointer hover:shadow-md hover:border-primary/30 transition-all group"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <div className="flex flex-col gap-1.5">
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">Local Time</div>
-          <div className="text-3xl font-bold tracking-tight text-foreground">
-            {time.split(" ")[0]}{" "}
-            <span className="text-lg font-medium text-muted-foreground">{time.split(" ")[1]}</span>
+      <div className="gradient-border w-full max-w-xs shadow-xl shadow-primary/10 hover:-translate-y-1 transition-transform duration-300">
+        <div
+          className="relative bg-white rounded-[calc(1.25rem-1px)] p-6 flex flex-col w-full cursor-pointer group overflow-hidden"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl pointer-events-none" />
+          <div className="relative flex flex-col gap-1.5">
+            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inset-0 rounded-full bg-primary animate-pulse-ring" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              Local Time
+            </div>
+            <div className="text-4xl font-bold tracking-tight text-foreground tabular-nums">
+              {time.split(" ")[0]}{" "}
+              <span className="text-lg font-medium text-muted-foreground">{time.split(" ")[1]}</span>
+            </div>
+            <div className="text-sm text-muted-foreground">{dateStr}</div>
+            <div className="text-sm text-muted-foreground/70">Kota Bandung, Jawa Barat</div>
           </div>
-          <div className="text-sm text-muted-foreground">{dateStr}</div>
-          <div className="text-sm text-muted-foreground/70">Kota Bandung, Jawa Barat</div>
-        </div>
-        <div className="mt-5 pt-4 border-t border-border group-hover:border-primary/20 transition-colors">
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-purple-500 mb-2">Weather</div>
-          <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-            <Cloud size={22} className="text-muted-foreground group-hover:text-purple-500 transition-colors" strokeWidth={1.5} />
-            <span>29.0°C</span>
+          <div className="relative mt-5 pt-4 border-t border-border group-hover:border-primary/20 transition-colors">
+            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-purple-500 mb-2">Weather</div>
+            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Cloud size={22} className="text-muted-foreground group-hover:text-purple-500 transition-colors" strokeWidth={1.5} />
+              <span>29.0°C</span>
+            </div>
           </div>
         </div>
       </div>

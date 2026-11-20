@@ -8,6 +8,9 @@ import { ArrowUpRight } from "lucide-react";
 export default function Featured() {
   return (
     <section className="w-full py-0 bg-[#D6E9F8] relative overflow-hidden">
+      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
+      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-white/60 blur-3xl pointer-events-none" />
+      <div className="absolute left-[38%] top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent lg:block pointer-events-none" />
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] sm:min-h-[580px]">
 
         {/* LEFT — Text column */}
@@ -20,8 +23,13 @@ export default function Featured() {
         >
           {/* Big quote mark */}
           <div>
+            <span className="eyebrow mb-6 inline-flex">
+              <span className="eyebrow-index">07</span>
+              <span className="eyebrow-line" />
+              Manifesto
+            </span>
             <div className="text-primary/30 font-serif text-7xl sm:text-8xl leading-none mb-1 select-none">&ldquo;</div>
-            <p className="text-foreground text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight -mt-4">
+            <p className="text-foreground text-2xl sm:text-3xl lg:text-4xl font-light leading-snug tracking-tight -mt-4">
               I don&apos;t just write code.{" "}
               <span className="text-primary font-semibold italic">I build things</span>{" "}
               that mean something.
@@ -44,7 +52,7 @@ export default function Featured() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Link
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 transition-all shadow-sm"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 hover:-translate-y-0.5 transition-all shadow-lg shadow-primary/25"
             >
               Let&apos;s talk
               <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -97,6 +105,12 @@ export default function Featured() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#D6E9F8] via-[#D6E9F8]/20 to-transparent" />
           {/* Bottom gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#D6E9F8]/70 via-transparent to-transparent lg:hidden" />
+
+          {/* Glass badge */}
+          <div className="absolute top-5 right-5 sm:top-8 sm:right-8 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+            Open to collaborate
+          </div>
 
           {/* Floating label bottom-left */}
           <div className="absolute bottom-5 right-5 sm:bottom-8 sm:right-8 text-right">

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Users, Award, ExternalLink, X, Calendar, CheckCircle2 } from "lucide-react";
+import { Building2, Users, Award, ExternalLink, X, Calendar, CheckCircle2, ArrowUpRight, type LucideIcon } from "lucide-react";
+import SectionHeader from "./SectionHeader";
 
 type ExperienceData = {
   id: string;
@@ -11,7 +12,7 @@ type ExperienceData = {
   title: string;
   subtitle: string;
   image: string;
-  icon: any;
+  icon: LucideIcon;
   colorClass: string;
   hoverColorClass: string;
   hoverBorderClass: string;
@@ -87,36 +88,35 @@ export default function Experience() {
   const [selectedExp, setSelectedExp] = useState<ExperienceData | null>(null);
 
   return (
-    <section id="experience" className="w-full py-16 sm:py-24 bg-white border-t border-border">
-      <div className="container">
-        
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-10 sm:mb-16"
-        >
-          Experience & <span className="text-primary-gradient">Affiliations</span>
-        </motion.h2>
+    <section id="experience" className="relative w-full py-20 sm:py-28 bg-white border-t border-border overflow-hidden scroll-mt-16">
+      <div className="absolute inset-0 aurora opacity-70 pointer-events-none" />
+      <div className="container relative">
+        <SectionHeader
+          index="03"
+          eyebrow="Experience"
+          title={
+            <>
+              Experience &amp; <span className="text-primary-gradient">Affiliations</span>
+            </>
+          }
+          subtitle="Pengalaman profesional, komunitas, dan pencapaian yang membentuk perjalanan saya."
+        />
 
         <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           {experiences.map((exp, index) => {
             const IconComponent = exp.icon;
             const isContain = exp.imageFit === "contain";
-            
+
             return (
-              <motion.div 
+              <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
                 onClick={() => setSelectedExp(exp)}
-                className={`relative group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg ${exp.hoverBorderClass} transition-all duration-300 cursor-pointer ${exp.colSpanClass || ""}`}
+                className={`relative group flex flex-col bg-card border border-border rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 ${exp.hoverBorderClass} transition-all duration-500 cursor-pointer ${exp.colSpanClass || ""}`}
               >
-                <div className={`absolute inset-0 ${exp.hoverBgClass} translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out z-10 pointer-events-none`} />
-                
                 <div className={`relative h-64 sm:h-72 w-full overflow-hidden ${exp.imageContainerClass || "bg-muted"}`}>
                   {isContain ? (
                     <div className="relative w-full h-full">
@@ -125,7 +125,7 @@ export default function Experience() {
                         alt={exp.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-contain drop-shadow-sm group-hover:scale-[1.03] transition-transform duration-700"
+                        className="object-contain drop-shadow-sm group-hover:scale-[1.04] transition-transform duration-700"
                       />
                     </div>
                   ) : (
@@ -137,22 +137,34 @@ export default function Experience() {
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
                   )}
-                  
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10 flex items-center justify-center">
-                    <span className="bg-white/90 text-foreground text-sm font-semibold py-2 px-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-300 shadow-sm">
+
+                  {!isContain && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
+                  )}
+
+                  {/* Type badge */}
+                  <div className={`absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 shadow-sm ${exp.colorClass}`}>
+                    <IconComponent size={14} />
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider">{exp.type}</span>
+                  </div>
+
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors z-10 flex items-center justify-center">
+                    <span className="bg-white/95 text-foreground text-sm font-semibold py-2 px-4 rounded-full opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-300 shadow-md inline-flex items-center gap-1.5">
                       View Details
+                      <ArrowUpRight size={14} />
                     </span>
                   </div>
                 </div>
-                <div className="relative z-20 p-6 sm:p-8 flex flex-col justify-center flex-1">
-                  <div className={`flex items-center gap-2 ${exp.colorClass} mb-3`}>
-                    <IconComponent size={20} />
-                    <span className="font-mono text-sm font-semibold uppercase tracking-wider">{exp.type}</span>
+
+                <div className="relative z-20 p-6 sm:p-7 flex flex-col justify-center flex-1">
+                  <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground mb-3">
+                    <Calendar size={13} />
+                    {exp.date}
                   </div>
                   <h3 className={`text-xl sm:text-2xl font-bold text-foreground mb-1 ${exp.hoverColorClass} transition-colors`}>
                     {exp.title}
                   </h3>
-                  <p className="text-muted-foreground font-medium text-lg">
+                  <p className="text-muted-foreground font-medium text-base">
                     {exp.subtitle}
                   </p>
                 </div>
@@ -160,7 +172,6 @@ export default function Experience() {
             );
           })}
         </div>
-        
       </div>
 
       {/* Detail Modal Overlay */}

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Layers, Code, Smartphone, LayoutTemplate } from "lucide-react";
+import { X, Layers, Code, Smartphone, LayoutTemplate, type LucideIcon } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import Spotlight from "./Spotlight";
 
 type Area = {
   title: string;
@@ -10,7 +12,7 @@ type Area = {
   percentage: number;
   description: string;
   techStack: string[];
-  icon: any;
+  icon: LucideIcon;
 };
 
 const areas: Area[] = [
@@ -52,53 +54,82 @@ export default function FocusAreas() {
   const [selectedArea, setSelectedArea] = useState<Area | null>(null);
 
   return (
-    <section className="w-full py-16 sm:py-24 bg-white border-b border-border relative">
-      <div className="container">
-        <div className="flex flex-col items-center justify-center space-y-3 text-center mb-10 sm:mb-16">
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-            Areas of <span className="text-primary-gradient">Focus</span>
-          </h2>
-        </div>
+    <section className="relative w-full py-20 sm:py-28 bg-muted/30 border-y border-border overflow-hidden">
+      <div className="absolute inset-0 grid-bg mask-fade-y pointer-events-none" />
+      <div className="container relative">
+        <SectionHeader
+          index="05"
+          eyebrow="Focus"
+          title={
+            <>
+              Areas of <span className="text-primary-gradient">Focus</span>
+            </>
+          }
+          subtitle="Bidang yang sedang saya dalami, beserta tingkat progresnya."
+        />
 
-        <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl mx-auto">
-          {areas.map((area, index) => (
-            <motion.div
-              key={area.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              onClick={() => setSelectedArea(area)}
-              className="relative bg-card border border-border rounded-xl overflow-hidden p-5 sm:p-6 flex items-center justify-between group hover:border-primary/30 hover:shadow-sm transition-all cursor-pointer"
-            >
-              {/* Hover swipe effect */}
-              <div className="absolute inset-0 bg-foreground/[0.02] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-              
-              <div className="relative z-10 flex flex-col gap-1">
-                <h3 className="font-semibold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">{area.title}</h3>
-                <div className="flex items-center gap-1.5 text-xs font-mono">
-                  <span className="text-muted-foreground">STATUS:</span>
-                  <span className="text-primary font-bold">{area.status}</span>
-                </div>
-              </div>
-              <div className="relative z-10 text-lg sm:text-2xl font-mono font-bold text-muted-foreground/60 ml-4 shrink-0">
-                [{area.percentage}%]
-              </div>
+        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 max-w-5xl mx-auto">
+          {areas.map((area, index) => {
+            const Icon = area.icon;
+            return (
+              <motion.div
+                key={area.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+              >
+                <Spotlight
+                  onClick={() => setSelectedArea(area)}
+                  className="group h-full bg-card border border-border rounded-3xl overflow-hidden p-6 sm:p-7 flex flex-col gap-5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="w-12 h-12 shrink-0 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                      <Icon size={22} />
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-primary">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                      {area.status}
+                    </span>
+                  </div>
 
-              {/* Progress bar bottom */}
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-border">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${area.percentage}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, delay: 0.2 + index * 0.1, ease: "easeOut" }}
-                  className="h-full bg-primary"
-                  style={{ boxShadow: "0 0 8px rgba(32, 160, 232, 0.5)" }}
-                />
-              </div>
-            </motion.div>
-          ))}
+                  <div>
+                    <h3 className="font-bold text-foreground text-lg group-hover:text-primary transition-colors">{area.title}</h3>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {area.techStack.slice(0, 3).map((tech) => (
+                        <span key={tech} className="rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-foreground/60">
+                          {tech}
+                        </span>
+                      ))}
+                      {area.techStack.length > 3 && (
+                        <span className="rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                          +{area.techStack.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Progress */}
+                  <div className="mt-auto">
+                    <div className="flex items-center justify-between font-mono text-xs mb-2">
+                      <span className="text-muted-foreground">PROGRESS</span>
+                      <span className="font-bold text-foreground">{area.percentage}%</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-border/70 overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${area.percentage}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.4, delay: 0.2 + index * 0.1, ease: "easeOut" }}
+                        className="h-full rounded-full bg-gradient-to-r from-primary to-secondary-400"
+                        style={{ boxShadow: "0 0 10px rgba(32, 160, 232, 0.45)" }}
+                      />
+                    </div>
+                  </div>
+                </Spotlight>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 

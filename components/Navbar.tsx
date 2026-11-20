@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { ClockWidget } from "./ClockWidget";
 import { categories } from "@/app/tools/data";
 
@@ -13,6 +14,7 @@ const navLinks = [
   { name: "Journey", href: "/#journey" },
   { name: "Experience", href: "/#experience" },
   { name: "Interests", href: "/#hobbies" },
+  { name: "Swarm", href: "/#swarm" },
   { name: "Projects", href: "/#projects" },
   { name: "Tools", href: "/tools" },
   { name: "Contact", href: "/#contact" },
@@ -23,6 +25,8 @@ export default function Navbar() {
   const [pastHero, setPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.3 });
 
   const getNavTitle = () => {
     if (pathname === "/") return "Hadi Ramdhani";
@@ -134,6 +138,11 @@ export default function Navbar() {
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
+        <motion.div
+          aria-hidden="true"
+          style={{ scaleX: progress }}
+          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-primary via-secondary-400 to-primary-600"
+        />
       </header>
 
       {/* Mobile Menu Overlay */}

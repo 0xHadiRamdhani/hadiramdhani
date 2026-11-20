@@ -94,7 +94,7 @@ body {
 
 @layer utilities {
   .text-primary-gradient {
-    background: linear-gradient(to right, var(--color-primary), var(--color-primary-500));
+    background: linear-gradient(100deg, var(--color-primary-300), var(--color-primary) 40%, var(--color-secondary-400));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -123,5 +123,164 @@ body {
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+
+/* ---------- Design system additions ---------- */
+
+/* Section eyebrow: "01 — About" */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-500);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(32, 160, 232, 0.07);
+  border: 1px solid rgba(32, 160, 232, 0.2);
+}
+.eyebrow-index {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+.eyebrow-line {
+  width: 1.25rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+.eyebrow-dark {
+  color: var(--color-primary-200);
+  background: rgba(62, 176, 242, 0.1);
+  border-color: rgba(129, 203, 248, 0.25);
+}
+.eyebrow-dark .eyebrow-index {
+  color: var(--color-primary-300);
+}
+
+/* Cursor-following glow card */
+.spot {
+  position: relative;
+  isolation: isolate;
+  --mx: 50%;
+  --my: 50%;
+  --spot: 32, 160, 232;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mx) var(--my),
+    rgba(var(--spot), 0.12),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* Soft aurora wash */
+.aurora {
+  background:
+    radial-gradient(60% 50% at 12% 8%, rgba(32, 160, 232, 0.16), transparent 70%),
+    radial-gradient(50% 45% at 92% 18%, rgba(88, 101, 242, 0.12), transparent 70%),
+    radial-gradient(55% 50% at 70% 100%, rgba(62, 176, 242, 0.12), transparent 70%);
+}
+.dot-grid {
+  background-image: radial-gradient(rgba(10, 17, 15, 0.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.dot-grid-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.mask-fade-y {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Gradient border wrapper */
+.gradient-border {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(32, 160, 232, 0.55),
+    rgba(88, 101, 242, 0.25) 45%,
+    rgba(32, 160, 232, 0.08) 75%,
+    rgba(88, 101, 242, 0.45)
+  );
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(24px, -18px, 0) scale(1.08); }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 14s ease-in-out infinite;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+.shimmer-text {
+  background: linear-gradient(100deg, currentColor 40%, #81cbf8 50%, currentColor 60%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float-y,
+  .animate-drift,
+  .animate-pulse-ring,
+  .shimmer-text {
+    animation: none;
   }
 }
