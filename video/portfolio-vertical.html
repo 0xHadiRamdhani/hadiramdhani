@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Hadi Ramdhani - Motion Portfolio (9:16)</title>
+<meta name="viewport" content="width=1080" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-dark: #0A110F;
+    --fg: #0A110F;
+    --muted: #71717a;
+    --border: #e4e4e7;
+    --p: #20A0E8;
+    --p300: #3eb0f2;
+    --p200: #81cbf8;
+    --p500: #0877c1;
+    --p600: #085f9c;
+    --violet: #5865f2;
+    --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg-dark); }
+  body { font-family: "Poppins", system-ui, sans-serif; color: var(--fg); -webkit-font-smoothing: antialiased; }
+  .mono { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #cv { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 0; }
+
+  /* ---- scene plumbing ---- */
+  .scene { position: absolute; inset: 0; visibility: hidden; z-index: 1;
+    animation: show var(--len) steps(1, end) var(--s) 1 both; animation-fill-mode: none; }
+  @keyframes show { from, to { visibility: visible; } }
+  .light { background: #fff; }
+  .a { animation-duration: .9s; animation-fill-mode: both; animation-timing-function: var(--ease);
+    animation-delay: calc(var(--s) + var(--d, 0s)); }
+  .up    { animation-name: up; }
+  .pop   { animation-name: pop; animation-timing-function: cubic-bezier(.34,1.56,.64,1); }
+  .fade  { animation-name: fade; }
+  .left  { animation-name: left; }
+  .right { animation-name: right; }
+  .mask > span { display: block; animation: maskup 1s var(--ease) both; animation-delay: calc(var(--s) + var(--d, 0s)); }
+  .mask { overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+  @keyframes up    { from { opacity: 0; transform: translateY(70px); } to { opacity: 1; transform: none; } }
+  @keyframes pop   { from { opacity: 0; transform: scale(.55); } to { opacity: 1; transform: none; } }
+  @keyframes fade  { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes left  { from { opacity: 0; transform: translateX(-120px); } to { opacity: 1; transform: none; } }
+  @keyframes right { from { opacity: 0; transform: translateX(120px); } to { opacity: 1; transform: none; } }
+  @keyframes maskup{ from { transform: translateY(110%); } to { transform: none; } }
+  @keyframes drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(60px,-40px,0) scale(1.1); } }
+  @keyframes floaty{ 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+  @keyframes grow  { from { width: 0; } to { width: var(--w); } }
+  @keyframes draw  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes drawY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes marq  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes ring  { 0% { transform: scale(.8); opacity: .7; } 100% { transform: scale(2.2); opacity: 0; } }
+  @keyframes zoomslow { from { transform: scale(1.06); } to { transform: scale(1); } }
+
+  /* ---- transition wipes ---- */
+  .wipe { position: absolute; inset: -4% -10%; z-index: 10; pointer-events: none; transform: translateX(-120%) skewX(-12deg);
+    animation: wipe 1s cubic-bezier(.7,0,.3,1) var(--at) both; }
+  .wipe.a1 { background: var(--p); }
+  .wipe.a2 { background: var(--bg-dark); animation-delay: calc(var(--at) + .1s); z-index: 11; }
+  @keyframes wipe { 0% { transform: translateX(-120%) skewX(-12deg); } 100% { transform: translateX(120%) skewX(-12deg); } }
+
+  /* ---- shared design tokens ---- */
+  .gridbg { position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(32,160,232,.07) 1px, transparent 1px), linear-gradient(to right, rgba(32,160,232,.07) 1px, transparent 1px);
+    background-size: 64px 64px; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); animation: drift 9s ease-in-out infinite; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: "Geist Mono", monospace; font-weight: 600;
+    font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: var(--p500);
+    padding: 12px 26px; border-radius: 999px; background: rgba(32,160,232,.08); border: 2px solid rgba(32,160,232,.25); }
+  .eyebrow b { color: var(--p); }
+  .eyebrow i { width: 36px; height: 2px; background: currentColor; opacity: .45; }
+  .grad { background: linear-gradient(100deg, var(--p300), var(--p) 40%, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2.title { font-size: 104px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+  .center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .card { background: #fff; border: 2px solid var(--border); border-radius: 36px; box-shadow: 0 30px 80px rgba(32,160,232,.12); }
+
+  /* ================= SCENE 1: swarm intro ================= */
+  #s1 .brand { position: absolute; left: 90px; top: 70px; font-size: 26px; letter-spacing: .3em; color: rgba(255,255,255,.55); }
+  #s1 .brand b { color: var(--p300); }
+  #s1 .term { position: absolute; left: 90px; bottom: 80px; font-size: 32px; line-height: 1.7; color: rgba(255,255,255,.7); }
+  #s1 .term .pr { color: var(--p300); }
+  #s1 .tag { position: absolute; right: 90px; bottom: 80px; font-size: 26px; letter-spacing: .25em; color: rgba(255,255,255,.4); text-transform: uppercase; }
+  #s1 .cap { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 36px; color: rgba(255,255,255,.8); letter-spacing: .02em; font-weight: 500; }
+
+  /* ================= SCENE 2: hero ================= */
+  #s2 .wrap { position: absolute; inset: 0; padding: 0 130px; display: grid; grid-template-columns: minmax(0,1.22fr) minmax(0,.78fr); align-items: center; gap: 70px; }
+  #s2 .pill { display: inline-flex; align-items: center; gap: 16px; padding: 14px 30px; border-radius: 999px; border: 2px solid rgba(32,160,232,.25);
+    background: rgba(255,255,255,.8); font-size: 26px; color: rgba(10,17,15,.7); font-weight: 500; box-shadow: 0 10px 30px rgba(32,160,232,.12); }
+  .live { position: relative; width: 16px; height: 16px; }
+  .live::before, .live::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #22c55e; }
+  .live::before { animation: ring 1.8s ease-out infinite; }
+  #s2 h1 { font-size: 184px; font-weight: 700; letter-spacing: -.04em; line-height: .98; margin: 34px 0 20px; }
+  #s2 .tl { font-size: 50px; font-weight: 500; color: rgba(10,17,15,.7); }
+  #s2 .tl .gt { color: var(--p); }
+  #s2 .tl .cur { display: inline-block; width: 4px; height: 54px; background: var(--p); vertical-align: -8px; margin-left: 6px; }
+  #s2 .tags { display: flex; gap: 16px; margin-top: 44px; }
+  #s2 .tags span { padding: 14px 32px; border-radius: 999px; font-size: 28px; font-weight: 500; color: var(--p500); background: rgba(32,160,232,.07); border: 2px solid rgba(32,160,232,.25); }
+  #s2 .pc { position: relative; padding: 52px 46px 44px; overflow: hidden; }
+  #s2 .pc::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: linear-gradient(90deg, var(--p), var(--violet), var(--p600)); }
+  #s2 .av { width: 190px; height: 190px; border-radius: 44px; overflow: hidden; border: 4px solid rgba(32,160,232,.3); }
+  #s2 .av img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  #s2 .pc h3 { font-size: 54px; font-weight: 700; letter-spacing: -.02em; margin-top: 30px; }
+  #s2 .pc .role { font-size: 30px; font-weight: 500; color: var(--p); margin-top: 6px; }
+  #s2 .pc .row { font-size: 26px; color: var(--muted); margin-top: 18px; display: flex; gap: 14px; align-items: center; }
+  #s2 .pc .row i { width: 14px; height: 14px; border-radius: 50%; background: var(--p); display: inline-block; }
+  #s2 .badge { position: absolute; width: 100px; height: 100px; border-radius: 26px; background: #fff; border: 2px solid rgba(32,160,232,.25);
+    box-shadow: 0 20px 50px rgba(32,160,232,.18); display: flex; align-items: center; justify-content: center; font-family: "Geist Mono", monospace; font-weight: 700; font-size: 34px; color: var(--p); }
+
+  /* ================= SCENE 3: stats ================= */
+  #s3 .wrap { position: absolute; inset: 0; padding: 120px 130px 0; }
+  #s3 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; margin-top: 90px; }
+  #s3 .st { padding: 48px 44px; position: relative; overflow: hidden; }
+  #s3 .st .id { font-family: "Geist Mono", monospace; font-weight: 700; letter-spacing: .15em; font-size: 26px; color: var(--p); }
+  #s3 .st .n { font-size: 190px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 34px 0 18px; }
+  #s3 .st .l { font-size: 30px; color: var(--muted); }
+  #s3 .st .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: linear-gradient(90deg, var(--p), var(--violet)); transform-origin: left; }
+  #s3 .marq { position: absolute; left: 0; right: 0; bottom: 70px; overflow: hidden; }
+  #s3 .marq .tr { display: flex; gap: 20px; width: max-content; animation: marq 18s linear infinite; padding-right: 20px; }
+  #s3 .marq span { padding: 16px 38px; border-radius: 999px; background: #fff; border: 2px solid var(--border); font-size: 30px; font-weight: 500; color: rgba(10,17,15,.7); white-space: nowrap; }
+
+  /* ================= SCENE 4: journey ================= */
+  #s4 .wrap { position: absolute; inset: 0; padding: 120px 130px 0; }
+  #s4 .tl { position: relative; margin: 110px auto 0; width: 1500px; }
+  #s4 .line { position: absolute; top: 70px; left: 250px; right: 250px; height: 6px; background: var(--border); border-radius: 6px; overflow: hidden; }
+  #s4 .line b { position: absolute; inset: 0; background: linear-gradient(90deg, var(--p300), var(--violet)); transform-origin: left; animation: draw 2.2s cubic-bezier(.6,0,.3,1) both; animation-delay: calc(var(--s) + 1.1s); }
+  #s4 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; position: relative; }
+  #s4 .col { display: flex; flex-direction: column; align-items: center; }
+  #s4 .node { position: relative; width: 148px; height: 148px; border-radius: 40px; background: #fff; border: 4px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: "Geist Mono", monospace; font-weight: 700; font-size: 44px; color: var(--muted); }
+  #s4 .node.act { background: var(--p); border-color: var(--p); color: #fff; box-shadow: 0 30px 70px rgba(32,160,232,.45); }
+  #s4 .node.act::after { content: ""; position: absolute; inset: 0; border-radius: 40px; background: rgba(32,160,232,.4); animation: ring 2s ease-out infinite; }
+  #s4 .jc { margin-top: 44px; width: 100%; padding: 40px 30px; text-align: center; }
+  #s4 .jc.act { border-color: rgba(32,160,232,.4); }
+  #s4 .jc .st { font-family: "Geist Mono", monospace; font-size: 22px; font-weight: 700; letter-spacing: .2em; color: var(--p); }
+  #s4 .jc h3 { font-size: 40px; font-weight: 700; margin: 12px 0 8px; line-height: 1.15; }
+  #s4 .jc.act h3 { color: var(--p); }
+  #s4 .jc p { font-size: 28px; color: var(--muted); }
+  #s4 .jc .pl { display: inline-block; margin-top: 22px; padding: 10px 26px; border-radius: 999px; font-size: 24px; font-weight: 500; background: #f4f4f5; color: var(--muted); border: 2px solid var(--border); }
+  #s4 .jc.act .pl { background: rgba(32,160,232,.1); color: var(--p); border-color: rgba(32,160,232,.3); }
+
+  /* ================= SCENE 5: experience ================= */
+  #s5 .wrap { position: absolute; inset: 0; padding: 90px 110px 0; }
+  #s5 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; margin-top: 60px; }
+  #s5 .ex { overflow: hidden; border-radius: 44px; }
+  #s5 .ex .im { position: relative; height: 380px; background: #f4f4f5; overflow: hidden; }
+  #s5 .ex .im img { width: 100%; height: 100%; object-fit: cover; display: block; animation: zoomslow 5s ease-out both; animation-delay: var(--s); }
+  #s5 .ex .im.ct { background: #f8fafc; padding: 20px; }
+  #s5 .ex .im.ct img { object-fit: contain; }
+  #s5 .ex .ty { position: absolute; left: 24px; top: 24px; padding: 10px 24px; border-radius: 999px; background: rgba(255,255,255,.92); font-family: "Geist Mono", monospace; font-weight: 700; font-size: 22px; letter-spacing: .1em; text-transform: uppercase; }
+  #s5 .ex .bd { padding: 34px 38px 40px; }
+  #s5 .ex .dt { font-family: "Geist Mono", monospace; font-size: 22px; color: var(--muted); }
+  #s5 .ex h3 { font-size: 46px; font-weight: 700; margin: 12px 0 4px; letter-spacing: -.02em; }
+  #s5 .ex p { font-size: 30px; color: var(--muted); font-weight: 500; }
+
+  /* ================= SCENE 6: focus ================= */
+  #s6 { background: #f8fafc; }
+  #s6 .wrap { position: absolute; inset: 0; padding: 80px 150px 0; }
+  #s6 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 44px; }
+  #s6 .fa { padding: 30px 40px 34px; }
+  #s6 .fa .top { display: flex; justify-content: space-between; align-items: center; }
+  #s6 .fa .ic { width: 66px; height: 66px; border-radius: 20px; background: rgba(32,160,232,.1); border: 2px solid rgba(32,160,232,.25); display: flex; align-items: center; justify-content: center; font-family: "Geist Mono", monospace; font-weight: 700; font-size: 28px; color: var(--p); }
+  #s6 .fa .stt { padding: 10px 24px; border-radius: 999px; font-family: "Geist Mono", monospace; font-weight: 700; font-size: 22px; letter-spacing: .12em; color: var(--p); background: rgba(32,160,232,.06); border: 2px solid rgba(32,160,232,.25); }
+  #s6 .fa h3 { font-size: 42px; font-weight: 700; margin: 18px 0 14px; }
+  #s6 .fa .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  #s6 .fa .chips span { padding: 8px 20px; border-radius: 12px; background: #f1f5f9; font-size: 24px; color: rgba(10,17,15,.6); font-weight: 500; }
+  #s6 .fa .pr { display: flex; justify-content: space-between; font-family: "Geist Mono", monospace; font-size: 22px; color: var(--muted); margin: 22px 0 10px; }
+  #s6 .fa .pr b { color: var(--fg); }
+  #s6 .fa .tk { height: 18px; border-radius: 18px; background: #e5e7eb; overflow: hidden; }
+  #s6 .fa .tk i { display: block; height: 100%; border-radius: 18px; background: linear-gradient(90deg, var(--p), var(--violet)); box-shadow: 0 0 24px rgba(32,160,232,.5);
+    width: 0; animation: grow 1.6s cubic-bezier(.3,.7,.2,1) both; animation-delay: calc(var(--s) + var(--d, 0s) + .5s); }
+
+  /* ================= SCENE 7: projects ================= */
+  #s7 .wrap { position: absolute; inset: 0; padding: 70px 130px 0; }
+  #s7 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+  #s7 .pj { padding: 28px 34px; display: flex; flex-direction: column; }
+  #s7 .pj .hd { display: flex; justify-content: space-between; align-items: center; }
+  #s7 .pj .gi { width: 64px; height: 64px; border-radius: 20px; background: rgba(32,160,232,.1); color: var(--p); display: flex; align-items: center; justify-content: center; }
+  #s7 .pj .no { font-family: "Geist Mono", monospace; font-weight: 700; font-size: 24px; letter-spacing: .15em; color: #b4b4bb; }
+  #s7 .pj h3 { font-size: 33px; font-weight: 700; margin: 22px 0 16px; letter-spacing: -.01em; white-space: nowrap; }
+  #s7 .pj .tg { display: flex; gap: 10px; flex-wrap: wrap; }
+  #s7 .pj .tg span { padding: 8px 18px; border-radius: 999px; background: #f4f4f5; border: 2px solid var(--border); font-size: 20px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(10,17,15,.65); }
+  #s7 .pj .ft { margin-top: auto; padding-top: 18px; display: flex; align-items: center; gap: 12px; font-size: 26px; color: var(--muted); font-weight: 500; }
+  #s7 .pj .ft i { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
+  #s7 .gh { position: absolute; left: 0; right: 0; bottom: 26px; font-family: "Geist Mono", monospace; font-size: 26px; color: var(--muted); text-align: center; }
+  #s7 .gh b { color: var(--p); font-weight: 600; }
+
+  /* ================= SCENE 8: outro ================= */
+  #s8 .stack { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; color: #fff; }
+  #s8 h2 { font-size: 112px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+  #s8 .links { display: flex; gap: 28px; justify-content: center; margin-top: 52px; }
+  #s8 .links span { padding: 18px 40px; border-radius: 999px; border: 2px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); font-size: 30px; color: rgba(255,255,255,.85); font-family: "Geist Mono", monospace; }
+  #s8 .links span b { color: var(--p300); font-weight: 600; }
+  #s8 .sig { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-size: 26px; letter-spacing: .35em; color: rgba(255,255,255,.45); }
+
+  /* =================== 9:16 VERTICAL OVERRIDES (1080 x 1920) =================== */
+  html, body { width: 1080px; height: 1920px; }
+  #stage { width: 1080px; height: 1920px; }
+  #cv { width: 1080px; height: 1920px; }
+  h2.title { font-size: 84px; }
+  .eyebrow { font-size: 22px; }
+
+  /* S1 */
+  #s1 .brand { left: 60px; top: 100px; font-size: 22px; }
+  #s1 .cap { top: 230px; font-size: 46px; line-height: 1.3; padding: 0 70px; }
+  #s1 .term { left: 60px; bottom: 150px; font-size: 30px; }
+  #s1 .tag { right: auto; left: 60px; bottom: 90px; font-size: 22px; }
+
+  /* S2 */
+  #s2 .wrap { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 110px; padding: 0 80px; }
+  #s2 h1 { font-size: 172px; margin: 30px 0 18px; }
+  #s2 .pill { font-size: 24px; padding: 12px 26px; }
+  #s2 .tl { font-size: 40px; }
+  #s2 .tl .cur { height: 42px; vertical-align: -6px; }
+  #s2 .tags { flex-wrap: wrap; margin-top: 36px; }
+  #s2 .tags span { font-size: 26px; padding: 12px 28px; }
+  #s2 .pc { display: grid; grid-template-columns: 210px 1fr; column-gap: 38px; align-items: center; padding: 44px 44px; }
+  #s2 .pc .av { grid-row: 1 / span 4; width: 210px; height: 210px; }
+  #s2 .pc h3 { font-size: 50px; margin-top: 0; }
+  #s2 .pc .role { font-size: 27px; }
+  #s2 .pc .row { font-size: 25px; margin-top: 12px; }
+
+  /* S3 */
+  #s3 .wrap { padding: 180px 80px 0; }
+  #s3 .grid { grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
+  #s3 .st { padding: 38px 36px 44px; }
+  #s3 .st .n { font-size: 160px; margin: 24px 0 14px; }
+  #s3 .st .l { font-size: 28px; }
+  #s3 .marq { bottom: 120px; }
+
+  /* S4: vertical timeline */
+  #s4 .wrap { padding: 170px 80px 0; }
+  #s4 .tl { width: 920px; margin-top: 80px; }
+  #s4 .cols { grid-template-columns: 1fr; gap: 54px; }
+  #s4 .col { flex-direction: row; align-items: center; gap: 36px; }
+  #s4 .node { flex: none; }
+  #s4 .jc { margin-top: 0; text-align: left; flex: 1; padding: 34px 36px; }
+  #s4 .jc h3 { font-size: 36px; }
+  #s4 .jc p { font-size: 26px; }
+  #s4 .line { left: 71px; right: auto; top: 90px; bottom: 90px; width: 6px; height: auto; }
+  #s4 .line b { transform-origin: top; animation-name: drawY; }
+
+  /* S5: stacked horizontal cards */
+  #s5 .wrap { padding: 150px 70px 0; }
+  #s5 .grid { grid-template-columns: 1fr; gap: 30px; margin-top: 60px; }
+  #s5 .ex { display: flex; }
+  #s5 .ex .im { flex: none; width: 420px; height: auto; min-height: 380px; }
+  #s5 .ex .bd { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 30px 34px; }
+  #s5 .ex h3 { font-size: 40px; }
+  #s5 .ex p { font-size: 28px; }
+  #s5 .ex .ty { left: 18px; top: 18px; font-size: 19px; padding: 8px 18px; }
+  #s5 .title { font-size: 80px !important; }
+
+  /* S6: single column */
+  #s6 .wrap { padding: 150px 80px 0; }
+  #s6 .grid { grid-template-columns: 1fr; gap: 28px; margin-top: 60px; }
+  #s6 .fa { padding: 32px 40px 36px; }
+
+  /* S7: 2 x 3 grid */
+  #s7 .wrap { padding: 150px 70px 0; }
+  #s7 .grid { grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 60px; }
+  #s7 .pj { padding: 30px 30px; min-height: 360px; }
+  #s7 .pj h3 { font-size: 28px; }
+  #s7 .pj .tg span { font-size: 17px; padding: 7px 15px; }
+  #s7 .gh { bottom: 80px; font-size: 28px; }
+  #s7 .title { font-size: 80px !important; }
+
+  /* S8 */
+  #s8 .sig { top: 110px; font-size: 22px; }
+  #s8 .stack { bottom: 170px; padding: 0 70px; }
+  #s8 h2 { font-size: 104px; }
+  #s8 .links { flex-direction: column; align-items: center; gap: 18px; margin-top: 48px; }
+  #s8 .links span { font-size: 28px; padding: 16px 38px; }
+
+  /* ---- pass 2: keep content in the social safe zone & vertically centred ---- */
+  #s3 .wrap, #s4 .wrap, #s5 .wrap, #s6 .wrap, #s7 .wrap { display: flex; flex-direction: column; justify-content: center; padding-top: 0; padding-bottom: 0; }
+  #s1 .term { bottom: 290px; } #s1 .tag { bottom: 220px; } #s1 .cap { top: 250px; }
+  #s8 .stack { bottom: 300px; } #s8 .sig { top: 200px; }
+
+  #s3 .grid { gap: 32px; margin-top: 80px; }
+  #s3 .st { padding: 44px 40px 52px; }
+  #s3 .st .n { font-size: 190px; margin: 28px 0 16px; }
+  #s3 .st .l { font-size: 30px; }
+  #s3 .marq { bottom: 250px; }
+
+  #s4 .tl { margin-top: 110px; }
+  #s4 .cols { gap: 80px; }
+  #s4 .jc { padding: 46px 40px; }
+  #s4 .jc h3 { font-size: 40px; }
+  #s4 .jc p { font-size: 28px; }
+  #s4 .line { top: 140px; bottom: 140px; }
+
+  #s5 .grid { margin-top: 50px; gap: 28px; }
+  #s5 .ex .im { height: 340px; min-height: 0; }
+
+  #s6 .grid { grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
+  #s6 .fa { padding: 34px 34px 38px; }
+  #s6 .fa h3 { font-size: 38px; margin: 22px 0 16px; }
+  #s6 .fa .stt { font-size: 18px; padding: 8px 16px; }
+  #s6 .fa .chips span { font-size: 21px; padding: 7px 16px; }
+  #s6 .fa .pr { font-size: 21px; margin: 26px 0 12px; }
+
+  #s7 .grid { margin-top: 56px; }
+  #s7 .gh { bottom: 250px; }
+</style>
+
+</head>
+<body>
+<div id="stage">
+  <canvas id="cv" width="1080" height="1920"></canvas>
+
+  <!-- ============ 1. SWARM INTRO ============ -->
+  <section class="scene" id="s1" style="--s:0s;--len:4.3s">
+    <div class="brand mono a fade" style="--d:.2s"><b>//</b> HADI RAMDHANI &nbsp;·&nbsp; PORTFOLIO 2026</div>
+    <div class="cap a up" style="--d:.5s">Ide kecil. Bergerak bebas. <span class="grad">Dirakit jadi nyata.</span></div>
+    <div class="term mono">
+      <div><span class="pr">&gt;</span> <span id="t1"></span></div>
+      <div><span class="pr">&gt;</span> <span id="t2"></span></div>
+    </div>
+    <div class="tag mono a fade" style="--d:1s">swarm / rebuild</div>
+  </section>
+
+  <!-- ============ 2. HERO ============ -->
+  <section class="scene light" id="s2" style="--s:4.2s;--len:5.1s">
+    <div class="gridbg"></div>
+    <div class="blob" style="left:-200px;top:200px;width:700px;height:700px;background:rgba(32,160,232,.28)"></div>
+    <div class="blob" style="right:-200px;bottom:-100px;width:760px;height:760px;background:rgba(88,101,242,.2);animation-delay:-4s"></div>
+    <div class="wrap">
+      <div>
+        <div class="pill a up" style="--d:.45s"><span class="live"></span> Open to collaborate · Kota Bandung</div>
+        <h1>
+          <div class="mask"><span style="--d:.6s">Hadi</span></div>
+          <div class="mask"><span class="grad" style="--d:.78s;display:block">Ramdhani</span></div>
+        </h1>
+        <div class="tl mono a fade" style="--d:1.35s"><span class="gt">&gt;</span> <span id="t3"></span><span class="cur"></span></div>
+        <div class="tags">
+          <span class="a pop" style="--d:2.2s">Coding</span>
+          <span class="a pop" style="--d:2.35s">Hacking</span>
+          <span class="a pop" style="--d:2.5s">Electrical</span>
+          <span class="a pop" style="--d:2.65s">Coffee</span>
+        </div>
+      </div>
+      <div style="position:relative">
+        <div class="a right" style="--d:.7s">
+          <div class="card pc" style="animation: floaty 5s ease-in-out infinite">
+            <div class="av"><img src="../public/avatar.jpg" alt="" /></div>
+            <h3>Hadi Ramdhani</h3>
+            <div class="role">Software Engineering Student</div>
+            <div class="row"><i></i> Kota Bandung, Jawa Barat</div>
+            <div class="row"><i></i> SMK Bani Ma'sum</div>
+          </div>
+        </div>
+        <div class="badge a pop" style="--d:1.5s;right:-40px;top:-50px;animation-name:pop,floaty;animation-duration:.9s,4s;animation-iteration-count:1,infinite;animation-fill-mode:both,none">&lt;/&gt;</div>
+        <div class="badge a pop" style="--d:1.7s;left:-50px;bottom:-50px;color:var(--violet)">{ }</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. STATS ============ -->
+  <section class="scene light" id="s3" style="--s:9.2s;--len:4.6s">
+    <div class="gridbg"></div>
+    <div class="blob" style="left:700px;top:-300px;width:900px;height:600px;background:rgba(32,160,232,.2)"></div>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow a up" style="--d:.4s"><b>01</b><i></i>By the numbers</span>
+        <h2 class="title a up" style="--d:.55s;margin-top:34px">Small start, <span class="grad">big curiosity.</span></h2>
+      </div>
+      <div class="grid">
+        <div class="card st a up" style="--d:.9s"><div class="id">01</div><div class="n" data-count="4" data-from="9.2" data-at="1.0">0</div><div class="l">Interests</div><div class="bar a" style="animation-name:draw;--d:1.8s"></div></div>
+        <div class="card st a up" style="--d:1.05s"><div class="id">02</div><div class="n" data-count="3" data-from="9.2" data-at="1.15">0</div><div class="l">School Levels Completed</div><div class="bar a" style="animation-name:draw;--d:1.95s"></div></div>
+        <div class="card st a up" style="--d:1.2s"><div class="id">03</div><div class="n" data-count="6" data-from="9.2" data-at="1.3">0</div><div class="l">Featured Projects</div><div class="bar a" style="animation-name:draw;--d:2.1s"></div></div>
+        <div class="card st a up" style="--d:1.35s"><div class="id">04</div><div class="n grad">∞</div><div class="l">Things To Learn</div><div class="bar a" style="animation-name:draw;--d:2.25s"></div></div>
+      </div>
+    </div>
+    <div class="marq a fade" style="--d:1.6s"><div class="tr">
+      <span>Flutter</span><span>Dart</span><span>Next.js</span><span>TypeScript</span><span>React</span><span>Tailwind CSS</span><span>Kotlin</span><span>Swift</span><span>Node.js</span><span>PostgreSQL</span><span>Firebase</span><span>Go</span><span>Figma</span><span>Linux</span><span>Arduino</span><span>ESP32</span>
+      <span>Flutter</span><span>Dart</span><span>Next.js</span><span>TypeScript</span><span>React</span><span>Tailwind CSS</span><span>Kotlin</span><span>Swift</span><span>Node.js</span><span>PostgreSQL</span><span>Firebase</span><span>Go</span><span>Figma</span><span>Linux</span><span>Arduino</span><span>ESP32</span>
+    </div></div>
+  </section>
+
+  <!-- ============ 4. JOURNEY ============ -->
+  <section class="scene light" id="s4" style="--s:13.7s;--len:4.6s;background:#f8fafc">
+    <div class="gridbg"></div>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow a up" style="--d:.4s"><b>02</b><i></i>Journey</span>
+        <h2 class="title a up" style="--d:.55s;margin-top:34px">My <span class="grad">Journey</span></h2>
+      </div>
+      <div class="tl">
+        <div class="line"><b></b></div>
+        <div class="cols">
+          <div class="col">
+            <div class="node a pop" style="--d:.9s">01</div>
+            <div class="card jc a up" style="--d:1.15s"><div class="st">STEP 01</div><h3>SDN Cipageran Mandiri 1</h3><p>Elementary School</p><span class="pl">Completed</span></div>
+          </div>
+          <div class="col">
+            <div class="node a pop" style="--d:1.7s">02</div>
+            <div class="card jc a up" style="--d:1.95s"><div class="st">STEP 02</div><h3>MTs Bani Ma'sum</h3><p>Junior High School</p><span class="pl">Completed</span></div>
+          </div>
+          <div class="col">
+            <div class="node act a pop" style="--d:2.5s">03</div>
+            <div class="card jc act a up" style="--d:2.75s"><div class="st">STEP 03</div><h3>SMK Bani Ma'sum</h3><p>Software Engineering</p><span class="pl">● Currently Studying</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. EXPERIENCE ============ -->
+  <section class="scene light" id="s5" style="--s:18.2s;--len:5.1s">
+    <div class="gridbg"></div>
+    <div class="blob" style="left:-300px;bottom:-300px;width:800px;height:800px;background:rgba(32,160,232,.18)"></div>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow a up" style="--d:.4s"><b>03</b><i></i>Experience</span>
+        <h2 class="title a up" style="--d:.55s;margin-top:30px;font-size:92px">Experience &amp; <span class="grad">Affiliations</span></h2>
+      </div>
+      <div class="grid">
+        <div class="card ex a up" style="--d:.95s">
+          <div class="im"><img src="../public/sbm-itb.jpg" alt="" /><div class="ty" style="color:var(--p)">Professional</div></div>
+          <div class="bd"><div class="dt">Apr 13 – Jun 30, 2026</div><h3>Software Engineer</h3><p>at SBM ITB</p></div>
+        </div>
+        <div class="card ex a up" style="--d:1.2s">
+          <div class="im"><img src="../public/imphnen.png" alt="" /><div class="ty" style="color:#3b82f6">Community</div></div>
+          <div class="bd"><div class="dt">2023 – Present</div><h3>Part of IMPHNEN</h3><p>Active Member</p></div>
+        </div>
+        <div class="card ex a up" style="--d:1.45s">
+          <div class="im ct"><img src="../public/sbm-itb-certificate.jpg" alt="" /><div class="ty" style="color:#f59e0b">Achievement</div></div>
+          <div class="bd"><div class="dt">Jun 30, 2026</div><h3>Internship Certificate</h3><p>SBM ITB</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. FOCUS ============ -->
+  <section class="scene light" id="s6" style="--s:23.2s;--len:4.6s">
+    <div class="gridbg"></div>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow a up" style="--d:.4s"><b>04</b><i></i>Focus</span>
+        <h2 class="title a up" style="--d:.55s;margin-top:24px;font-size:88px">Areas of <span class="grad">Focus</span></h2>
+      </div>
+      <div class="grid">
+        <div class="card fa a up" style="--d:.9s;--w:90%"><div class="top"><div class="ic">M</div><div class="stt">● ACTIVE</div></div><h3>Mobile Development</h3><div class="chips"><span>Flutter</span><span>Dart</span><span>React Native</span><span>+2</span></div><div class="pr"><span>PROGRESS</span><b data-count="90" data-from="23.2" data-at="1.4" data-suffix="%">0%</b></div><div class="tk"><i style="--d:.9s;--w:90%"></i></div></div>
+        <div class="card fa a up" style="--d:1.05s"><div class="top"><div class="ic">F</div><div class="stt">● BUILDING</div></div><h3>Frontend Development</h3><div class="chips"><span>React.js</span><span>Next.js</span><span>TypeScript</span><span>+2</span></div><div class="pr"><span>PROGRESS</span><b data-count="85" data-from="23.2" data-at="1.55" data-suffix="%">0%</b></div><div class="tk"><i style="--d:1.05s;--w:85%"></i></div></div>
+        <div class="card fa a up" style="--d:1.2s"><div class="top"><div class="ic">B</div><div class="stt">● LEARNING</div></div><h3>Backend Development</h3><div class="chips"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>+2</span></div><div class="pr"><span>PROGRESS</span><b data-count="75" data-from="23.2" data-at="1.7" data-suffix="%">0%</b></div><div class="tk"><i style="--d:1.2s;--w:75%"></i></div></div>
+        <div class="card fa a up" style="--d:1.35s"><div class="top"><div class="ic">U</div><div class="stt">● DESIGNING</div></div><h3>UI/UX Design</h3><div class="chips"><span>Figma</span><span>Adobe XD</span><span>Prototyping</span><span>+2</span></div><div class="pr"><span>PROGRESS</span><b data-count="80" data-from="23.2" data-at="1.85" data-suffix="%">0%</b></div><div class="tk"><i style="--d:1.35s;--w:80%"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. PROJECTS ============ -->
+  <section class="scene light" id="s7" style="--s:27.7s;--len:4.6s">
+    <div class="gridbg"></div>
+    <div class="blob" style="right:-300px;top:-250px;width:800px;height:800px;background:rgba(88,101,242,.16)"></div>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow a up" style="--d:.4s"><b>05</b><i></i>Projects</span>
+        <h2 class="title a up" style="--d:.55s;margin-top:24px;font-size:84px">Featured <span class="grad">Projects</span></h2>
+      </div>
+      <div class="grid">
+        <div class="card pj a up" style="--d:.9s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">01</div></div><h3>workshop_manager</h3><div class="tg"><span>dart</span><span>c++</span><span>cmake</span></div><div class="ft"><i style="background:#00B4AB"></i>Dart</div></div>
+        <div class="card pj a up" style="--d:1.05s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">02</div></div><h3>CodeCraftersNewVersion</h3><div class="tg"><span>dart</span><span>html</span><span>c++</span></div><div class="ft"><i style="background:#00B4AB"></i>Dart</div></div>
+        <div class="card pj a up" style="--d:1.2s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">03</div></div><h3>sbm-ticketing-app</h3><div class="tg"><span>dart</span><span>swift</span><span>kotlin</span></div><div class="ft"><i style="background:#00B4AB"></i>Dart</div></div>
+        <div class="card pj a up" style="--d:1.35s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">04</div></div><h3>imphnen-tools-mobile</h3><div class="tg"><span>mobile</span><span>tools</span><span>imphnen</span></div><div class="ft"><i style="background:#00B4AB"></i>Dart</div></div>
+        <div class="card pj a up" style="--d:1.5s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">05</div></div><h3>imphnen-online-tools</h3><div class="tg"><span>web</span><span>tools</span><span>imphnen</span></div><div class="ft"><i style="background:#3178c6"></i>TypeScript</div></div>
+        <div class="card pj a up" style="--d:1.65s"><div class="hd"><div class="gi"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></div><div class="no">06</div></div><h3>Ai-Manuver-Scanner</h3><div class="tg"><span>ai</span><span>scanner</span><span>python</span></div><div class="ft"><i style="background:#3572A5"></i>Python</div></div>
+      </div>
+      <div class="gh a fade" style="--d:2.4s">github.com/<b>0xHadiRamdhani</b></div>
+    </div>
+  </section>
+
+  <!-- ============ 8. OUTRO ============ -->
+  <section class="scene" id="s8" style="--s:32.2s;--len:5.1s">
+    <div class="sig mono a fade" style="--d:.6s">// HADI RAMDHANI</div>
+    <div class="stack">
+      <h2 class="a up" style="--d:2.1s">Let's build something <span class="grad">together.</span></h2>
+      <div class="links">
+        <span class="a up" style="--d:2.7s"><b>@</b> hadsxdev@icloud.com</span>
+        <span class="a up" style="--d:2.85s"><b>IG</b> @hadiramdhani.tsx</span>
+        <span class="a up" style="--d:3s"><b>GH</b> 0xHadiRamdhani</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRANSITION WIPES (centre of each wipe lands on the cut) ============ -->
+  <div class="wipe a1" style="--at:3.75s"></div><div class="wipe a2" style="--at:3.75s"></div>
+  <div class="wipe a1" style="--at:8.75s"></div><div class="wipe a2" style="--at:8.75s"></div>
+  <div class="wipe a1" style="--at:13.25s"></div><div class="wipe a2" style="--at:13.25s"></div>
+  <div class="wipe a1" style="--at:17.75s"></div><div class="wipe a2" style="--at:17.75s"></div>
+  <div class="wipe a1" style="--at:22.75s"></div><div class="wipe a2" style="--at:22.75s"></div>
+  <div class="wipe a1" style="--at:27.25s"></div><div class="wipe a2" style="--at:27.25s"></div>
+  <div class="wipe a1" style="--at:31.75s"></div><div class="wipe a2" style="--at:31.75s"></div>
+</div>
+
+<script>
+(() => {
+  const FPS = 30;
+  const DURATION = 37.2;
+
+  /* ---------------- deterministic swarm (port of SwarmField) ---------------- */
+  const VW = 720, VH = 1280, N = 560, SCALE = 1.5, TAU = Math.PI * 2;
+  function mulberry(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const rand = mulberry(20260);
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const px = new Float32Array(N), py = new Float32Array(N), vx = new Float32Array(N), vy = new Float32Array(N);
+  const tx = new Float32Array(N), ty = new Float32Array(N), hasT = new Uint8Array(N), tint = new Uint8Array(N), size = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    px[i] = rand() * VW; py[i] = rand() * VH;
+    const a = rand() * TAU, s = .6 + rand() * 1.2; vx[i] = Math.cos(a) * s; vy[i] = Math.sin(a) * s;
+    tint[i] = Math.floor(rand() * 4); size[i] = 1.2 + rand() * 1.6;
+  }
+  const DOTS = ["#3eb0f2", "#81cbf8", "#a5b4fc", "#e1f0fd"];
+  let phase = 'swarm', blend = 0, time = 0, shapeCx = VW / 2, shapeCy = VH / 2;
+  const pointer = { x: 0, y: 0, active: false };
+
+  function setShape(text, cx, cy, wf) {
+    const s = .5, ow = Math.floor(VW * s), oh = Math.floor(VH * s);
+    const off = document.createElement('canvas'); off.width = ow; off.height = oh;
+    const o = off.getContext('2d', { willReadFrequently: true });
+    const fam = '"Geist Mono", ui-monospace, Menlo, monospace';
+    o.font = `800 100px ${fam}`;
+    let fs = (wf * ow / (o.measureText(text).width || 1)) * 100; fs = Math.min(fs, oh * .78);
+    o.font = `800 ${fs}px ${fam}`; o.textAlign = 'center'; o.textBaseline = 'middle'; o.fillStyle = '#000';
+    o.fillText(text, cx * ow, cy * oh);
+    shapeCx = cx * VW; shapeCy = cy * VH;
+    const d = o.getImageData(0, 0, ow, oh).data;
+    let pts = [];
+    for (let step = 2; step <= 40; step++) {
+      pts = [];
+      for (let y = 0; y < oh; y += step) for (let x = 0; x < ow; x += step) if (d[(y * ow + x) * 4 + 3] > 140) pts.push(x / s, y / s);
+      if (pts.length / 2 <= N) break;
+    }
+    const M = pts.length / 2, used = new Uint8Array(M); hasT.fill(0);
+    const order = Array.from({ length: N }, (_, i) => i);
+    for (let i = N - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    let assigned = 0;
+    for (const i of order) {
+      if (assigned >= M) break;
+      let best = -1, bd = Infinity;
+      for (let k = 0; k < M; k++) { if (used[k]) continue; const dx = pts[k*2] - px[i], dy = pts[k*2+1] - py[i], dd = dx*dx + dy*dy; if (dd < bd) { bd = dd; best = k; } }
+      if (best < 0) break;
+      used[best] = 1; tx[i] = pts[best*2]; ty[i] = pts[best*2+1]; hasT[i] = 1; assigned++;
+    }
+    // leftover particles become a loose halo around the shape instead of clumping in the middle
+    for (const i of order) {
+      if (hasT[i] || !M) continue;
+      const k = Math.floor(rand() * M);
+      tx[i] = pts[k*2] + (rand() - .5) * 90; ty[i] = pts[k*2+1] + (rand() - .5) * 90; hasT[i] = 1;
+    }
+  }
+  function kick(power = 1) { for (let i = 0; i < N; i++) { const a = rand() * TAU, s = (2 + rand() * 2.5) * power; vx[i] += Math.cos(a) * s; vy[i] += Math.sin(a) * s; } }
+
+  function simStep(dt) {
+    const R = 74, R2 = R * R, SEP = 24, SEP2 = SEP * SEP;
+    blend += ((phase === 'rebuild' ? 1 : 0) - blend) * Math.min(1, .05 * dt);
+    for (let i = 0; i < N; i++) {
+      let ax = 0, ay = 0, sx = 0, sy = 0, avx = 0, avy = 0, ccx = 0, ccy = 0, n = 0;
+      for (let j = 0; j < N; j++) {
+        if (j === i) continue;
+        const dx = px[j] - px[i], dy = py[j] - py[i], d2 = dx*dx + dy*dy;
+        if (d2 > R2 || d2 < .0001) continue;
+        n++; avx += vx[j]; avy += vy[j]; ccx += px[j]; ccy += py[j];
+        if (d2 < SEP2) { const d = Math.sqrt(d2), f = (1 - d / SEP) / d; sx -= dx * f; sy -= dy * f; }
+      }
+      if (n > 0) { ax += (avx / n - vx[i]) * .05 + (ccx / n - px[i]) * .0012; ay += (avy / n - vy[i]) * .05 + (ccy / n - py[i]) * .0012; }
+      ax += sx * .07; ay += sy * .07;
+      ax += Math.cos(time * .0007 + i * 1.7) * .016; ay += Math.sin(time * .0009 + i * 2.3) * .016;
+      const mg = 40;
+      if (px[i] < mg) ax += (mg - px[i]) * .004; else if (px[i] > VW - mg) ax -= (px[i] - (VW - mg)) * .004;
+      if (py[i] < mg) ay += (mg - py[i]) * .004; else if (py[i] > VH - mg) ay -= (py[i] - (VH - mg)) * .004;
+      if (pointer.active && blend < .5) {
+        const dx = pointer.x - px[i], dy = pointer.y - py[i], d = Math.sqrt(dx*dx + dy*dy) || 1;
+        if (d < 280) { const k = 1 - d / 280, rad = d < 46 ? -.08 : .05; ax += ((dx/d) * rad + (-dy/d) * .05) * k; ay += ((dy/d) * rad + (dx/d) * .05) * k; }
+      }
+      if (hasT[i] && blend > .001) {
+        ax = ax * (1 - blend) + (tx[i] - px[i]) * .03 * blend; ay = ay * (1 - blend) + (ty[i] - py[i]) * .03 * blend;
+        const damp = Math.max(0, 1 - .16 * blend * dt); vx[i] *= damp; vy[i] *= damp;
+      } else if (blend > .001) { ax += (shapeCx - px[i]) * .0006 * blend; ay += (shapeCy - py[i]) * .0006 * blend; }
+      vx[i] += ax * dt; vy[i] += ay * dt;
+      const sp = Math.hypot(vx[i], vy[i]), maxSp = hasT[i] ? 2 + 11 * blend : 2.1;
+      if (sp > maxSp) { vx[i] = vx[i] / sp * maxSp; vy[i] = vy[i] / sp * maxSp; }
+      else if (sp < .5 && (!hasT[i] || blend < .3)) { const a = sp > .0001 ? .5 / sp : 1; vx[i] = sp > .0001 ? vx[i] * a : .5; vy[i] *= a; }
+      px[i] += vx[i] * dt; py[i] += vy[i] * dt;
+      if (hasT[i] && blend > .9) { px[i] += Math.sin(time * .004 + i) * .12; py[i] += Math.cos(time * .0035 + i * 1.3) * .12; }
+    }
+  }
+  function drawSwarm() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, 1080, 1920); ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+    const link = 64 - 36 * blend, L2 = link * link, paths = [new Path2D(), new Path2D(), new Path2D()];
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+      const dx = px[i] - px[j], dy = py[i] - py[j], d2 = dx*dx + dy*dy; if (d2 >= L2) continue;
+      const t = 1 - Math.sqrt(d2) / link, b = t < .34 ? 0 : t < .67 ? 1 : 2;
+      paths[b].moveTo(px[i], py[i]); paths[b].lineTo(px[j], py[j]);
+    }
+    ctx.lineWidth = 1;
+    for (let b = 0; b < 3; b++) { ctx.strokeStyle = `rgba(129,203,248,${.4 * (b + 1) / 3})`; ctx.stroke(paths[b]); }
+    for (let t = 0; t < 4; t++) {
+      ctx.fillStyle = DOTS[t]; ctx.beginPath();
+      for (let i = 0; i < N; i++) { if (tint[i] !== t) continue; const r = size[i] * (1 + .45 * blend * hasT[i]); ctx.moveTo(px[i] + r, py[i]); ctx.arc(px[i], py[i], r, 0, TAU); }
+      ctx.fill();
+    }
+  }
+
+  // swarm timeline events (seconds)
+  const events = [
+    { t: 0,    fn: () => { setShape('</>', .5, .5, .84); phase = 'swarm'; } },
+    { t: 1.2,  fn: () => { phase = 'rebuild'; } },
+    { t: 31.0, fn: () => { phase = 'swarm'; kick(1.3); setShape('HADI', .5, .34, .88); } },
+    { t: 33.0, fn: () => { phase = 'rebuild'; } },
+  ];
+  let evIdx = 0, simFrames = 0; // simFrames counts 1/60s sub-steps
+
+  function advanceTo(frame) {
+    const target = frame * 2; // two 1/60s sub-steps per 1/30s video frame
+    while (simFrames < target) {
+      const tSec = simFrames / 60;
+      while (evIdx < events.length && events[evIdx].t <= tSec) events[evIdx++].fn();
+      time += 1000 / 60;
+      pointer.active = phase === 'swarm';
+      pointer.x = VW * (.5 + .32 * Math.sin(tSec * .9)); pointer.y = VH * (.5 + .3 * Math.sin(tSec * 1.3 + 1));
+      simStep(1);
+      simFrames++;
+    }
+  }
+
+  /* ---------------- text + counters ---------------- */
+  function typed(id, text, start, cps, t) {
+    const n = Math.max(0, Math.min(text.length, Math.floor((t - start) * cps)));
+    document.getElementById(id).textContent = text.slice(0, n);
+  }
+  const counters = [...document.querySelectorAll('[data-count]')];
+
+  /* ---------------- animations: pause all & seek ---------------- */
+  let anims = [];
+  function collect() { anims = document.getAnimations(); anims.forEach(a => a.pause()); }
+
+  window.__ready = false;
+  window.__fps = FPS; window.__frames = Math.round(DURATION * FPS);
+  window.__seek = (frame) => {
+    const t = frame / FPS;
+    advanceTo(frame);
+    drawSwarm();
+    typed('t1', 'swarm.init({ particles: 560 })', .6, 28, t);
+    typed('t2', "rebuild('</>')", 1.2, 20, t);
+    typed('t3', 'Code. Create. Explore.', 4.2 + 1.4, 22, t);
+    for (const c of counters) {
+      const from = +c.dataset.from + +c.dataset.at, to = +c.dataset.count;
+      const p = Math.max(0, Math.min(1, (t - from) / 1.2)), e = 1 - Math.pow(1 - p, 3);
+      c.textContent = Math.round(to * e) + (c.dataset.suffix || '');
+    }
+    for (const a of anims) a.currentTime = t * 1000;
+  };
+
+  const start = async () => {
+    try {
+      await Promise.all([
+        document.fonts.load('700 100px Poppins'), document.fonts.load('500 30px Poppins'), document.fonts.load('400 30px Poppins'),
+        document.fonts.load('800 100px "Geist Mono"'), document.fonts.load('600 30px "Geist Mono"'),
+      ]);
+      await document.fonts.ready;
+    } catch (e) {}
+    await Promise.all([...document.images].map(im => im.complete ? 1 : new Promise(r => { im.onload = im.onerror = r; })));
+    collect();
+    window.__seek(0);
+    window.__ready = true;
+  };
+  start();
+})();
+</script>
+</body>
+</html>
