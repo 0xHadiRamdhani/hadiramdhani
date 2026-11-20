@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Terminal, Zap, Coffee, ArrowRight, X, CheckCircle2, type LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import { Code2, Terminal, Zap, Coffee, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import Spotlight from "./Spotlight";
+import { Modal, useModalItem } from "./Modal";
 
 const HOBBY_RGB: Record<string, string> = {
   Coding: "32,160,232",
@@ -84,7 +84,8 @@ const hobbies: Hobby[] = [
 ];
 
 export default function Hobbies() {
-  const [selectedHobby, setSelectedHobby] = useState<Hobby | null>(null);
+  const modal = useModalItem<Hobby>();
+  const selectedHobby = modal.item;
 
   return (
     <section id="hobbies" className="relative w-full py-20 sm:py-28 bg-white overflow-hidden scroll-mt-16">
@@ -115,7 +116,7 @@ export default function Hobbies() {
               >
                 <Spotlight
                   color={HOBBY_RGB[hobby.title]}
-                  onClick={() => setSelectedHobby(hobby)}
+                  onClick={() => modal.show(hobby)}
                   className={`group h-full overflow-hidden p-6 sm:p-7 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-3xl hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
                 >
                   {/* Big faint index */}
@@ -143,62 +144,55 @@ export default function Hobbies() {
         </div>
       </div>
 
-      {/* Modal / Popup Overlay */}
-      <AnimatePresence>
-        {selectedHobby && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 sm:p-6"
-            onClick={() => setSelectedHobby(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-lg bg-white border border-border rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedHobby(null)}
-                className="absolute top-4 right-4 z-50 p-2 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground transition-colors"
+      {/* Detail modal */}
+      {selectedHobby && (
+        <Modal
+          open={modal.open}
+          onClose={modal.hide}
+          accent={HOBBY_RGB[selectedHobby.title]}
+          label={selectedHobby.title}
+        >
+          <div className="relative overflow-hidden px-5 pb-6 pt-10 sm:px-8 sm:pb-8 sm:pt-12">
+            <div
+              className="pointer-events-none absolute -top-24 -left-16 h-64 w-64 rounded-full blur-3xl opacity-40"
+              style={{ background: `rgb(${HOBBY_RGB[selectedHobby.title]})` }}
+            />
+            <div className="pointer-events-none absolute inset-0 dot-grid opacity-40 mask-fade-y" />
+
+            <div className="relative">
+              <motion.div
+                initial={{ scale: 0.6, rotate: -12, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                transition={{ type: "spring", damping: 14, stiffness: 220, delay: 0.1 }}
+                className={`flex h-20 w-20 items-center justify-center rounded-3xl border ${selectedHobby.border} ${selectedHobby.bg} ${selectedHobby.color} shadow-lg`}
               >
-                <X size={20} />
-              </button>
+                <selectedHobby.icon size={36} />
+              </motion.div>
 
-              <div className="flex flex-col gap-6">
-                <div className={`w-16 h-16 rounded-2xl ${selectedHobby.bg} border ${selectedHobby.border} flex items-center justify-center ${selectedHobby.color}`}>
-                  <selectedHobby.icon size={32} />
-                </div>
-                
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                    {selectedHobby.title}
-                  </h2>
-                  <p className="text-muted-foreground font-medium text-base">
-                    {selectedHobby.description}
-                  </p>
-                </div>
+              <h2 className="mt-5 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">{selectedHobby.title}</h2>
+              <p className="mt-1.5 text-sm sm:text-base text-muted-foreground">{selectedHobby.description}</p>
 
-                <div className="pt-6 border-t border-border/50">
-                  <h4 className="font-semibold text-foreground text-lg mb-4">Hal yang saya lakukan:</h4>
-                  <ul className="space-y-4">
-                    {selectedHobby.details.map((detail, idx) => (
-                      <li key={idx} className="flex gap-3 text-muted-foreground">
-                        <CheckCircle2 size={20} className={`${selectedHobby.color} shrink-0 mt-0.5`} />
-                        <span className="text-sm sm:text-base leading-relaxed">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <h3 className="mt-7 mb-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                Hal yang saya lakukan
+              </h3>
+              <ul className="space-y-2.5">
+                {selectedHobby.details.map((detail, idx) => (
+                  <motion.li
+                    key={idx}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + idx * 0.08 }}
+                    className="flex gap-3.5 rounded-2xl border border-border bg-white/80 p-3.5 sm:p-4 backdrop-blur"
+                  >
+                    <CheckCircle2 size={20} className={`${selectedHobby.color} mt-0.5 shrink-0`} />
+                    <span className="text-sm sm:text-[15px] leading-relaxed text-foreground/75">{detail}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Modal>
+      )}
     </section>
   );
 }

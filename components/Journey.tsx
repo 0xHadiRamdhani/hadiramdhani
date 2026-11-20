@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, School, BookOpen } from "lucide-react";
+import { GraduationCap, School, BookOpen, HardHat } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
 const journeys = [
   { id: "01", title: "SDN Cipageran Mandiri 1", subtitle: "Elementary School", status: "Completed", active: false, icon: BookOpen },
   { id: "02", title: "MTs Bani Ma'sum", subtitle: "Junior High School", status: "Completed", active: false, icon: School },
-  { id: "03", title: "SMK Bani Ma'sum", subtitle: "Software Engineering", status: "Currently Studying", active: true, icon: GraduationCap },
+  { id: "03", title: "SMK Bani Ma'sum", subtitle: "Software Engineering", status: "Completed", active: false, icon: GraduationCap },
+  { id: "04", title: "SEKOLAH PROFESI INSINYUR", subtitle: "Engineering Profession", status: "Currently Studying", active: true, icon: HardHat },
 ];
 
 export default function Journey() {
@@ -26,9 +27,9 @@ export default function Journey() {
           subtitle="Jejak pendidikan Hadi Ramdhani."
         />
 
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           {/* Animated connector (desktop) */}
-          <div className="hidden md:block absolute top-[2.25rem] left-[16.6%] right-[16.6%] h-px bg-border overflow-hidden">
+          <div className="hidden md:block absolute top-[2.25rem] left-[12.5%] right-[12.5%] h-px bg-border overflow-hidden">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}

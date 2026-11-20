@@ -43,15 +43,7 @@ export default function MacLookupTool() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
-            <Hash className="text-primary" />
-            MAC Vendor Lookup
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            Cari nama pabrikan atau vendor dari sebuah perangkat keras berdasarkan alamat MAC (Media Access Control).
-          </p>
-        </div>
+        <p className="tool-hint">Cari nama pabrikan atau vendor dari sebuah perangkat keras berdasarkan alamat MAC (Media Access Control).</p>
 
         <div className="bg-card border border-border rounded-xl p-4 sm:p-6 mb-8">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">

@@ -32,14 +32,7 @@ export default function CodeScreenshotPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
-            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Code size={28} /></span>
-            {/* Code Screenshot Generator */}
-            Code Screenshot Generator
-          </h1>
-          <p className="text-muted-foreground text-sm">Buat screenshot kode yang cantik seperti VS Code. Cocok untuk share di sosmed.</p>
-        </div>
+        <p className="tool-hint">Buat screenshot kode yang cantik seperti VS Code. Cocok untuk share di sosmed.</p>
 
         <div className="grid sm:grid-cols-[1fr_220px] gap-6">
           <div className="space-y-4">

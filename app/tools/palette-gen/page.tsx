@@ -55,14 +55,7 @@ export default function PaletteGenPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
-            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Palette size={28} /></span>
-            {/* Image Palette Generator */}
-            Image Palette Generator
-          </h1>
-          <p className="text-muted-foreground text-sm">Ekstrak palet warna dominan dari gambar apapun secara otomatis.</p>
-        </div>
+        <p className="tool-hint">Ekstrak palet warna dominan dari gambar apapun secara otomatis.</p>
 
         <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
         <canvas ref={canvasRef} className="hidden" />

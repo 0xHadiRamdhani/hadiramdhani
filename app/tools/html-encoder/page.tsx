@@ -23,10 +23,7 @@ export default function HtmlEncoderPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Globe className="text-primary" />HTML Encoder / Decoder</h1>
-          <p className="text-muted-foreground text-sm">Encode karakter HTML (&lt; &gt; &amp; " ') atau decode entitas HTML kembali ke teks asli.</p>
-        </div>
+        <p className="tool-hint">Encode karakter HTML (&lt; &gt; &amp; " ') atau decode entitas HTML kembali ke teks asli.</p>
         <div className="flex bg-muted p-1 rounded-xl w-fit mb-6">
           {(["encode", "decode"] as const).map((m) => (
             <button key={m} onClick={() =>setMode(m)} className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${mode === m ? "bg-white shadow text-primary" : "text-muted-foreground"}`}>{m}</button>

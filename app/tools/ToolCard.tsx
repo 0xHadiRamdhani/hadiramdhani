@@ -2,100 +2,121 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, Zap, Clock } from "lucide-react";
-import { Tool, ToolStatus } from "./data";
-
-const statusConfig: Record<ToolStatus, { label: string; className: string; icon: React.ReactNode }> = {
-  live: {
-    label: "Live",
-    className: "bg-green-500/15 text-green-600 border-green-500/20",
-    icon: <Zap size={10} />,
-  },
-  "coming-soon": {
-    label: "Soon",
-    className: "bg-amber-500/15 text-amber-600 border-amber-500/20",
-    icon: <Clock size={10} />,
-  },
-  external: {
-    label: "External",
-    className: "bg-blue-500/15 text-blue-600 border-blue-500/20",
-    icon: <ExternalLink size={10} />,
-  },
-};
+import { ArrowRight, ArrowUpRight, Clock } from "lucide-react";
+import Spotlight from "@/components/Spotlight";
+import { Tool } from "./data";
 
 type Props = {
   tool: Tool;
   index: number;
+  /** rgb triplet of the tool's category */
+  accent: string;
 };
 
-export function ToolCard({ tool, index }: Props) {
-  const status = statusConfig[tool.status];
-  const isClickable = tool.status === "live" || tool.status === "external";
+export function ToolCard({ tool, index, accent }: Props) {
+  const isLive = tool.status === "live";
+  const isExternal = tool.status === "external";
+  const isClickable = isLive || isExternal;
 
-  const cardContent = (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: (index % 10) * 0.04 }}
-      className={`relative group h-full flex flex-col bg-card border border-border rounded-xl p-4 transition-all duration-300 overflow-hidden ${
+  const body = (
+    <Spotlight
+      color={accent}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card p-5 transition-all duration-300 ${
         isClickable
-          ? "cursor-pointer hover:shadow-md hover:border-primary/30"
-          : "opacity-70 cursor-default"
+          ? "border-border hover:-translate-y-1 hover:shadow-xl"
+          : "border-dashed border-border opacity-70"
       }`}
+      style={
+        isClickable
+          ? ({ "--hover-border": `rgba(${accent},0.45)`, "--hover-shadow": `rgba(${accent},0.18)` } as React.CSSProperties)
+          : undefined
+      }
     >
-      {/* Swipe hover bg */}
+      {/* Accent hairline on hover */}
       {isClickable && (
-        <div className="absolute inset-0 bg-primary/[0.025] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out pointer-events-none" />
+        <span
+          className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
+          style={{ background: `linear-gradient(90deg, transparent, rgb(${accent}), transparent)` }}
+        />
       )}
 
-      <div className="relative z-10 flex items-start justify-between gap-2 mb-3">
-        <span className="text-primary bg-primary/10 p-1.5 rounded-lg flex items-center justify-center">
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <span
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+          style={{ background: `rgba(${accent},0.12)`, color: `rgb(${accent})` }}
+        >
           {tool.icon}
         </span>
-        <span
-          className={`flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${status.className}`}
+
+        {isLive && (
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-green-600">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+            Live
+          </span>
+        )}
+        {isExternal && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-blue-600">
+            <ArrowUpRight size={10} />
+            Link
+          </span>
+        )}
+        {!isClickable && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-amber-600">
+            <Clock size={10} />
+            Soon
+          </span>
+        )}
+      </div>
+
+      <h3 className="mb-1.5 text-[15px] font-semibold leading-snug text-foreground">{tool.name}</h3>
+      <p className="flex-1 text-xs leading-relaxed text-muted-foreground">{tool.description}</p>
+
+      {isClickable && (
+        <div
+          className="mt-4 flex items-center gap-1.5 border-t border-border/60 pt-3 text-xs font-semibold"
+          style={{ color: `rgb(${accent})` }}
         >
-          {status.icon}
-          {status.label}
-        </span>
-      </div>
-
-      <div className="relative z-10 flex-1">
-        <h3 className="font-semibold text-foreground text-sm leading-snug mb-1 group-hover:text-primary transition-colors">
-          {tool.name}
-        </h3>
-        <p className="text-xs text-muted-foreground leading-relaxed">{tool.description}</p>
-      </div>
-
-      {tool.status === "external" && (
-        <div className="relative z-10 mt-3 pt-3 border-t border-border/50 flex items-center gap-1 text-[11px] text-blue-500 font-medium">
-          <ExternalLink size={11} />Buka layanan
+          {isLive ? "Buka tool" : "Buka layanan"}
+          {isLive ? (
+            <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+          ) : (
+            <ArrowUpRight
+              size={13}
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          )}
         </div>
       )}
-      {tool.status === "live" && (
-        <div className="relative z-10 mt-3 pt-3 border-t border-border/50 flex items-center gap-1 text-[11px] text-green-600 font-medium">
-          <Zap size={11} />Buka tool
-        </div>
-      )}
-    </motion.div>
+    </Spotlight>
   );
 
-  if (tool.status === "external" && tool.externalUrl) {
+  const motionProps = {
+    initial: { opacity: 0, y: 14 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-40px" },
+    transition: { duration: 0.35, delay: (index % 8) * 0.04 },
+    className: "h-full",
+  } as const;
+
+  if (isExternal && tool.externalUrl) {
     return (
-      <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="h-full">
-        {cardContent}
-      </a>
+      <motion.div {...motionProps}>
+        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="tool-card-link block h-full">
+          {body}
+        </a>
+      </motion.div>
     );
   }
 
-  if (tool.status === "live") {
+  if (isLive) {
     return (
-      <Link href={`/tools/${tool.id}`} className="h-full">
-        {cardContent}
-      </Link>
+      <motion.div {...motionProps}>
+        <Link href={`/tools/${tool.id}`} className="tool-card-link block h-full">
+          {body}
+        </Link>
+      </motion.div>
     );
   }
 
-  return <div className="h-full">{cardContent}</div>;
+  return <motion.div {...motionProps}>{body}</motion.div>;
 }

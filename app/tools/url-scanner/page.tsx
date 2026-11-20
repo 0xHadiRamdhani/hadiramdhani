@@ -47,15 +47,7 @@ export default function UrlScannerTool() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
-            <ShieldAlert className="text-primary" />
-            URL Scanner (urlscan.io)
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            Cari hasil pindaian situs web sebelumnya dari database urlscan.io untuk menganalisis aktivitas berbahaya atau informasi domain.
-          </p>
-        </div>
+        <p className="tool-hint">Cari hasil pindaian situs web sebelumnya dari database urlscan.io untuk menganalisis aktivitas berbahaya atau informasi domain.</p>
 
         <div className="bg-card border border-border rounded-xl p-4 sm:p-6 mb-8">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">

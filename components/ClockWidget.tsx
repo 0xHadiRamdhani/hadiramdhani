@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Cloud, X, MapPin, Clock, ThermometerSun, Wind, Droplets } from "lucide-react";
+import { motion } from "framer-motion";
+import { Modal } from "./Modal";
+import { Cloud, MapPin, Clock, ThermometerSun, Wind, Droplets } from "lucide-react";
 
 export function ClockWidget({ compact = false }: { compact?: boolean }) {
   const [time, setTime] = useState<string>("");
@@ -80,85 +81,49 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 sm:p-6"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-sm bg-white border border-border rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 z-50 p-2 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground transition-colors"
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} size="sm" label="Waktu dan cuaca di Kota Bandung" closeTone="light">
+        <div className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary-400 to-primary-600 px-6 pb-8 pt-12 text-white">
+          <div className="absolute inset-0 dot-grid-dark opacity-60" />
+          <div className="absolute -top-16 -left-10 h-44 w-44 rounded-full bg-white/25 blur-3xl" />
+          <div className="relative">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest backdrop-blur">
+              <MapPin size={12} /> Kota Bandung
+            </span>
+            <div className="mt-4 text-5xl sm:text-6xl font-bold tracking-tight tabular-nums">
+              {time.split(" ")[0]}
+              <span className="ml-2 text-xl font-medium text-white/75">{time.split(" ")[1]}</span>
+            </div>
+            <p className="mt-1.5 text-sm text-white/80">{dateStr}</p>
+            <p className="text-sm text-white/65">Jawa Barat, Indonesia</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 p-5 sm:p-6">
+          {[
+            { icon: Clock, label: "Zona Waktu", value: "WIB (UTC+7)", color: "text-primary", bg: "bg-primary/10" },
+            { icon: ThermometerSun, label: "Cuaca", value: "Cerah Berawan, 29.0°C", color: "text-amber-500", bg: "bg-amber-500/10" },
+            { icon: Droplets, label: "Kelembapan", value: "65%", color: "text-blue-500", bg: "bg-blue-500/10" },
+            { icon: Wind, label: "Angin", value: "12 km/h", color: "text-teal-500", bg: "bg-teal-500/10" },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.07 }}
+                className="rounded-2xl border border-border bg-muted/30 p-3.5"
               >
-                <X size={20} />
-              </button>
-
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col items-center justify-center text-center mt-2">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <MapPin className="text-primary" size={32} />
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground">Kota Bandung</h2>
-                  <p className="text-muted-foreground">Jawa Barat, Indonesia</p>
-                </div>
-
-                <div className="bg-muted/30 rounded-xl p-4 flex flex-col gap-4 border border-border/50">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-white border border-border/50 shadow-sm">
-                      <Clock size={18} className="text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground font-mono">ZONA WAKTU</div>
-                      <div className="font-medium text-sm">WIB (UTC+7)</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-white border border-border/50 shadow-sm">
-                      <ThermometerSun size={18} className="text-amber-500" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground font-mono">CUACA SAAT INI</div>
-                      <div className="font-medium text-sm">Cerah Berawan, 29.0°C</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-white border border-border/50 shadow-sm">
-                      <Droplets size={18} className="text-blue-500" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground font-mono">KELEMBAPAN</div>
-                      <div className="font-medium text-sm">65%</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-white border border-border/50 shadow-sm">
-                      <Wind size={18} className="text-teal-500" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground font-mono">KECEPATAN ANGIN</div>
-                      <div className="font-medium text-sm">12 km/h</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <span className={`mb-3 flex h-9 w-9 items-center justify-center rounded-xl ${item.bg} ${item.color}`}>
+                  <Icon size={17} />
+                </span>
+                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{item.label}</div>
+                <div className="mt-0.5 text-sm font-semibold leading-snug text-foreground">{item.value}</div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </Modal>
     </>
   );
 }

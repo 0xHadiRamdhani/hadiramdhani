@@ -31,10 +31,7 @@ export default function RegexTesterPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Search className="text-primary" />Regex Tester</h1>
-          <p className="text-muted-foreground text-sm">Test dan debug Regular Expression secara real-time dengan highlight match.</p>
-        </div>
+        <p className="tool-hint">Test dan debug Regular Expression secara real-time dengan highlight match.</p>
 
         <div className="bg-card border border-border rounded-xl p-4 mb-4 flex flex-col sm:flex-row gap-3">
           <div className="flex-1">

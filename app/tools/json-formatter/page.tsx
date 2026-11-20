@@ -40,11 +40,7 @@ export default function JsonFormatterPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Braces className="text-primary" />JSON Formatter & Validator
-          </h1>
-          <p className="text-muted-foreground text-sm">Format, minify, dan validasi JSON. Semua berjalan di browser.</p>
-        </div>
+        <p className="tool-hint">Format, minify, dan validasi JSON. Semua berjalan di browser.</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
           <button onClick={format} className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">

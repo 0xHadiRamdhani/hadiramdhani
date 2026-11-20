@@ -24,11 +24,7 @@ export default function TextCounterPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Type className="text-primary" />Text & Word Counter
-          </h1>
-          <p className="text-muted-foreground text-sm">Analisis teks secara real-time: kata, karakter, kalimat, dan estimasi waktu baca.</p>
-        </div>
+        <p className="tool-hint">Analisis teks secara real-time: kata, karakter, kalimat, dan estimasi waktu baca.</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
           {stats.map((s) => (

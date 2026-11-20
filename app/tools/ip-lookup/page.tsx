@@ -50,15 +50,7 @@ export default function IPLookupTool() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
-            <Globe className="text-primary" />
-            IP & Geolocation Lookup
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            Lacak informasi rinci tentang alamat IPv4 atau IPv6, termasuk lokasi geografis, ISP, zona waktu, dan ASN.
-          </p>
-        </div>
+        <p className="tool-hint">Lacak informasi rinci tentang alamat IPv4 atau IPv6, termasuk lokasi geografis, ISP, zona waktu, dan ASN.</p>
 
         <div className="bg-card border border-border rounded-xl p-4 sm:p-6 mb-8">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">

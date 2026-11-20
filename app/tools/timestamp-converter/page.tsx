@@ -35,10 +35,7 @@ export default function TimestampConverterPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Clock className="text-primary" />Timestamp Converter</h1>
-          <p className="text-muted-foreground text-sm">Konversi Unix timestamp ke tanggal/waktu dan sebaliknya.</p>
-        </div>
+        <p className="tool-hint">Konversi Unix timestamp ke tanggal/waktu dan sebaliknya.</p>
 
         <div className="text-center mb-4 p-3 bg-primary/5 border border-primary/20 rounded-xl text-sm text-muted-foreground">Waktu sekarang: <span className="font-mono font-semibold text-foreground">{Math.floor(Date.now() / 1000)}</span>
           <button onClick={() =>setUnix(Math.floor(Date.now() / 1000).toString())} className="ml-2 text-primary text-xs hover:underline">(Pakai sekarang)</button>

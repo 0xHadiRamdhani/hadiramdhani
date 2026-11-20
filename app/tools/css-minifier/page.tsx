@@ -25,10 +25,7 @@ export default function CssMinifierPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Zap className="text-primary" />CSS Minifier</h1>
-          <p className="text-muted-foreground text-sm">Minify CSS untuk mengurangi ukuran file dan meningkatkan performa loading.</p>
-        </div>
+        <p className="tool-hint">Minify CSS untuk mengurangi ukuran file dan meningkatkan performa loading.</p>
 
         {input && output && (
           <div className="flex gap-6 mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-xl">

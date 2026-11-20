@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, GraduationCap, MapPin, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Briefcase, Cake, Camera, GraduationCap, Heart, MapPin, MessageCircle, Music2 } from "lucide-react";
+import { Modal } from "./Modal";
+import HeroVisual from "./HeroVisual";
 import SwarmField from "./SwarmField";
 
 export default function Hero() {
@@ -37,13 +39,13 @@ export default function Hero() {
             className="flex flex-col space-y-7 sm:space-y-8"
           >
             {/* Status pill */}
-            <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary/20 bg-white/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
+            {/* <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary/20 bg-white/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inset-0 rounded-full bg-green-500 animate-pulse-ring" />
                 <span className="relative h-2 w-2 rounded-full bg-green-500" />
               </span>
               Open to collaborate · Kota Bandung
-            </div>
+            </div> */}
 
             {/* Headline */}
             <div className="space-y-4">
@@ -81,7 +83,7 @@ export default function Hero() {
             <div className="flex items-stretch w-fit rounded-2xl border border-border bg-white/60 backdrop-blur divide-x divide-border">
               {[
                 { value: "4", label: "Interests" },
-                { value: "3", label: "School Levels" },
+                { value: "4", label: "School Levels" },
                 { value: "∞", label: "Things To Learn" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col px-4 sm:px-6 py-3">
@@ -92,92 +94,14 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Right visual - Profile card */}
+          {/* Right visual */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="flex justify-center lg:justify-end"
+            className="w-full"
           >
-            <div className="relative w-full max-w-sm group/card">
-              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/25 via-secondary-400/10 to-transparent blur-2xl opacity-70 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-              <div className="gradient-border group-hover/card:-translate-y-1 transition-transform duration-300">
-                <div
-                  onClick={() => setIsModalOpen(true)}
-                  className="relative bg-white/85 backdrop-blur-xl rounded-[calc(1.25rem-1px)] p-6 sm:p-8 shadow-xl shadow-primary/10 overflow-hidden cursor-pointer group"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary-400 to-primary-600" />
-                  <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
-                  <div className="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-primary/15 blur-2xl pointer-events-none" />
-
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden ring-2 ring-primary/25 ring-offset-2 ring-offset-white shrink-0">
-                        <Image
-                          src="/avatar.jpg"
-                          alt="Hadi Ramdhani"
-                          width={80}
-                          height={80}
-                          className="w-full h-full object-cover object-top"
-                          priority
-                        />
-                      </div>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 border border-green-500/20 px-2.5 py-1 text-[11px] font-semibold text-green-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                        Studying
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-1">Hadi Ramdhani</h3>
-                    <p className="text-primary font-medium text-sm mb-4">Software Engineering Student</p>
-
-                    <div className="space-y-2.5 border-t border-border pt-4">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <MapPin size={14} className="text-primary shrink-0" />
-                        Kota Bandung, Jawa Barat
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <GraduationCap size={14} className="text-primary shrink-0" />
-                        SMK Bani Ma&apos;sum
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mt-4 mb-5">
-                      {["Coding", "Hacking", "Electrical", "Coffee"].map((tag) => (
-                        <span
-                          key={tag}
-                          className="inline-flex items-center rounded-full bg-primary/5 border border-primary/20 px-2.5 py-1 text-xs font-medium text-primary"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="w-full bg-primary text-white rounded-xl px-4 py-3 flex items-center justify-between shadow-sm group-hover:bg-primary-500 group-hover:shadow-md transition-all duration-300">
-                      <span className="text-xs sm:text-sm font-semibold">Lihat Biodata Lengkap</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative floating elements */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-5 -right-3 w-11 h-11 rounded-xl bg-white/90 backdrop-blur border border-primary/20 shadow-md flex items-center justify-center text-primary text-xs font-bold font-mono pointer-events-none"
-              >
-                {"</>"}
-              </motion.div>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-5 -left-3 w-11 h-11 rounded-xl bg-white/90 backdrop-blur border border-secondary-400/20 shadow-md flex items-center justify-center text-secondary-400 text-xs font-bold font-mono pointer-events-none"
-              >
-                {"{}"}
-              </motion.div>
-            </div>
+            <HeroVisual onOpen={() => setIsModalOpen(true)} />
           </motion.div>
         </div>
       </div>
@@ -194,92 +118,108 @@ export default function Hero() {
         </span>
       </Link>
 
-      {/* Biodata Modal Overlay */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-3 sm:p-4"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto bg-white border border-border rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl custom-scrollbar"
-              onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
-            >
-              {/* Top accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary-300 to-primary-600" />
+      {/* Biodata modal */}
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} label="Biodata Hadi Ramdhani" closeTone="light">
+        {/* Banner */}
+        <div className="relative h-32 sm:h-40 overflow-hidden bg-gradient-to-br from-primary via-secondary-400 to-primary-600">
+          <div className="absolute inset-0 dot-grid-dark opacity-70" />
+          <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/25 blur-3xl" />
+          <div className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-primary-200/40 blur-3xl" />
+          <span className="absolute bottom-4 right-5 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            {"// biodata"}
+          </span>
+        </div>
 
-              {/* Close Button */}
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <X size={16} className="sm:w-5 sm:h-5" />
-              </button>
+        <div className="relative px-5 pb-6 sm:px-8 sm:pb-8">
+          {/* Identity */}
+          <div className="-mt-12 sm:-mt-14 flex items-end justify-between gap-3">
+            <div className="h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-3xl ring-4 ring-white shadow-xl">
+              <Image
+                src="/avatar.jpg"
+                alt="Hadi Ramdhani"
+                width={112}
+                height={112}
+                className="h-full w-full object-cover object-top"
+                priority
+              />
+            </div>
+            <span className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-[11px] font-semibold text-green-700">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+              Open to collaborate
+            </span>
+          </div>
 
-              <div className="flex flex-col items-center text-center mt-0 sm:mt-2 mb-3 sm:mb-6">
-                <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 sm:border-4 border-primary/10 mb-2 sm:mb-4 shadow-sm">
-                  <Image
-                    src="/avatar.jpg"
-                    alt="Hadi Ramdhani"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover object-top"
-                    priority
-                  />
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight">Hadi Ramdhani</h2>
+          <p className="text-primary font-medium text-sm sm:text-base">Software Engineering Student</p>
+
+          {/* Details */}
+          <dl className="mt-6 divide-y divide-border/70 overflow-hidden rounded-2xl border border-border bg-muted/30">
+            {[
+              { icon: Cake, label: "Umur", value: "19 Tahun" },
+              { icon: MapPin, label: "Alamat", value: "Komp. Puri Cipageran Indah 1, Kota Cimahi" },
+              { icon: GraduationCap, label: "Sekolah", value: "SEKOLAH PROFESI INSINYUR" },
+              { icon: Briefcase, label: "Pekerjaan", value: "Software Engineer di SBM ITB" },
+            ].map((row) => {
+              const Icon = row.icon;
+              return (
+                <div key={row.label} className="flex items-start gap-3.5 px-4 py-3.5">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon size={16} />
+                  </span>
+                  <div className="min-w-0">
+                    <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{row.label}</dt>
+                    <dd className="text-sm font-semibold text-foreground leading-snug">{row.value}</dd>
+                  </div>
                 </div>
-                <h2 className="text-lg sm:text-3xl font-bold tracking-tight mb-0 sm:mb-1">Hadi Ramdhani</h2>
-                <p className="text-primary font-medium text-[11px] sm:text-base">Software Engineering Student</p>
+              );
+            })}
+            <div className="flex items-start gap-3.5 px-4 py-3.5">
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Heart size={16} />
+              </span>
+              <div className="min-w-0">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Hobi</dt>
+                <dd className="mt-1.5 flex flex-wrap gap-1.5">
+                  {["Coding", "Hacking", "Electrical", "Coffee"].map((h) => (
+                    <span key={h} className="rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-xs font-medium text-primary">
+                      {h}
+                    </span>
+                  ))}
+                </dd>
               </div>
+            </div>
+          </dl>
 
-              <div className="space-y-1.5 sm:space-y-4 bg-muted/30 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-border/50">
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Nama</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right">Hadi Ramdhani</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Umur</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right">19 Tahun</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Alamat</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Komp. Puri Cipageran Indah 1, Kota Cimahi</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Sekolah</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">SMK Bani Ma&apos;sum</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Pekerjaan</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Software Engineer di SBM ITB</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Hobi</span>
-                  <span className="font-semibold text-foreground text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">Coding, Hacking, Electrical, Coffee</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">Instagram</span>
-                  <Link href="https://instagram.com/hadiramdhani.tsx" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">@hadiramdhani.tsx</Link>
-                </div>
-                <div className="flex items-center justify-between border-b border-border/50 pb-1.5 sm:pb-3 gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">TikTok</span>
-                  <Link href="https://tiktok.com/@hadimobileengineer" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">@hadimobileengineer</Link>
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-muted-foreground font-medium text-[11px] sm:text-sm shrink-0">WhatsApp</span>
-                  <Link href="https://wa.me/6283199456915" target="_blank" className="font-semibold text-primary hover:underline text-[11px] sm:text-sm text-right max-w-[180px] sm:max-w-[340px]">083199456915</Link>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Socials */}
+          <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+            {[
+              { icon: Camera, name: "Instagram", handle: "@hadiramdhani.tsx", href: "https://instagram.com/hadiramdhani.tsx" },
+              { icon: Music2, name: "TikTok", handle: "@hadimobileengineer", href: "https://tiktok.com/@hadimobileengineer" },
+              { icon: MessageCircle, name: "WhatsApp", handle: "083199456915", href: "https://wa.me/6283199456915" },
+            ].map((s) => {
+              const Icon = s.icon;
+              return (
+                <Link
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 rounded-2xl border border-border bg-white px-3.5 py-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                    <Icon size={16} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs font-bold text-foreground">{s.name}</span>
+                    <span className="block truncate text-[11px] text-muted-foreground">{s.handle}</span>
+                  </span>
+                  <ArrowUpRight size={14} className="shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 }

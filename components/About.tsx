@@ -7,7 +7,7 @@ import SectionHeader from "./SectionHeader";
 import Spotlight from "./Spotlight";
 
 const facts = [
-  { icon: BookOpen, label: "School", value: "SMK Bani Ma'sum" },
+  { icon: BookOpen, label: "School", value: "SEKOLAH PROFESI INSINYUR" },
   { icon: GraduationCap, label: "Major", value: "Software Engineering" },
   { icon: MapPin, label: "Location", value: "Kota Bandung, Jawa Barat" },
   { icon: Briefcase, label: "Status", value: "Open to Collaborate" },
@@ -42,7 +42,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-8 max-w-xl"
             >
-              Saya adalah Hadi Ramdhani, siswa jurusan Software Engineering di SMK Bani Ma&apos;sum. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.
+              Saya adalah Hadi Ramdhani, lulusan Software Engineering dari SMK Bani Ma&apos;sum yang kini menempuh Sekolah Profesi Insinyur. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.
             </motion.p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

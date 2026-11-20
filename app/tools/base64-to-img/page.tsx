@@ -29,14 +29,7 @@ export default function Base64ToImgPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
-            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><ImageIcon size={28} /></span>
-            {/* ️ Base64  Image */}
-            ️ Base64  Image
-          </h1>
-          <p className="text-muted-foreground text-sm">Paste string Base64 dan preview langsung sebagai gambar.</p>
-        </div>
+        <p className="tool-hint">Paste string Base64 dan preview langsung sebagai gambar.</p>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">

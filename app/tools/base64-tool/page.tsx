@@ -27,11 +27,7 @@ export default function Base64ToolPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Binary className="text-primary" />Base64 Encoder / Decoder
-          </h1>
-          <p className="text-muted-foreground text-sm">Encode teks ke Base64 atau decode Base64 kembali ke teks asli.</p>
-        </div>
+        <p className="tool-hint">Encode teks ke Base64 atau decode Base64 kembali ke teks asli.</p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
           <div className="flex bg-muted p-1 rounded-xl w-full sm:w-auto">

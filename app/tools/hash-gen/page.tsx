@@ -70,10 +70,7 @@ export default function HashGenPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-3xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 mb-2"><Lock className="text-primary" />Hash Generator</h1>
-          <p className="text-muted-foreground text-sm">Generate MD5, SHA-1, dan SHA-256 hash dari teks apapun. Berguna untuk verifikasi integritas data.</p>
-        </div>
+        <p className="tool-hint">Generate MD5, SHA-1, dan SHA-256 hash dari teks apapun. Berguna untuk verifikasi integritas data.</p>
 
         <div className="flex flex-col gap-3 mb-6">
           <textarea value={input} onChange={(e) =>setInput(e.target.value)} placeholder="Masukkan teks yang ingin di-hash..."

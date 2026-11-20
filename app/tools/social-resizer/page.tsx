@@ -61,14 +61,7 @@ export default function SocialResizerPage() {
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-5xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
-            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Maximize2 size={28} /></span>
-            {/* Social Media Resizer */}
-            Social Media Resizer
-          </h1>
-          <p className="text-muted-foreground text-sm">Upload satu gambar  dapatkan semua ukuran media sosial sekaligus.</p>
-        </div>
+        <p className="tool-hint">Upload satu gambar dapatkan semua ukuran media sosial sekaligus.</p>
 
         <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) =>e.target.files?.[0] && handleFile(e.target.files[0])} />
 

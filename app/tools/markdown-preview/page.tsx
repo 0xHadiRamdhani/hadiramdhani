@@ -50,14 +50,7 @@ Markdown previewer ini berjalan 100% di browser!
   return (
     <main className="min-h-screen pb-20 px-4">
       <div className="container max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
-            <span className="text-primary bg-primary/10 p-2 rounded-xl flex items-center justify-center"><Eye size={28} /></span>
-            {/* ️ Markdown Previewer */}
-            ️ Markdown Previewer
-          </h1>
-          <p className="text-muted-foreground text-sm">Tulis Markdown dan lihat preview-nya secara real-time.</p>
-        </div>
+        <p className="tool-hint">Tulis Markdown dan lihat preview-nya secara real-time.</p>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">

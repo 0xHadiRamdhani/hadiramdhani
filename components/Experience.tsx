@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Users, Award, ExternalLink, X, Calendar, CheckCircle2, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import { Building2, Users, Award, ExternalLink, Calendar, ArrowUpRight, type LucideIcon } from "lucide-react";
 import SectionHeader from "./SectionHeader";
+import { Modal, useModalItem } from "./Modal";
+
+const EXP_RGB: Record<string, string> = {
+  "sbm-itb": "32,160,232",
+  imphnen: "59,130,246",
+  "sbm-itb-cert": "245,158,11",
+};
 
 type ExperienceData = {
   id: string;
@@ -85,7 +91,8 @@ const experiences: ExperienceData[] = [
 ];
 
 export default function Experience() {
-  const [selectedExp, setSelectedExp] = useState<ExperienceData | null>(null);
+  const modal = useModalItem<ExperienceData>();
+  const selectedExp = modal.item;
 
   return (
     <section id="experience" className="relative w-full py-20 sm:py-28 bg-white border-t border-border overflow-hidden scroll-mt-16">
@@ -114,7 +121,7 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                onClick={() => setSelectedExp(exp)}
+                onClick={() => modal.show(exp)}
                 className={`relative group flex flex-col bg-card border border-border rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 ${exp.hoverBorderClass} transition-all duration-500 cursor-pointer ${exp.colSpanClass || ""}`}
               >
                 <div className={`relative h-64 sm:h-72 w-full overflow-hidden ${exp.imageContainerClass || "bg-muted"}`}>
@@ -174,94 +181,90 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Detail Modal Overlay */}
-      <AnimatePresence>
-        {selectedExp && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 sm:p-6"
-            onClick={() => setSelectedExp(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white border border-border rounded-2xl sm:rounded-3xl shadow-2xl custom-scrollbar flex flex-col"
-              onClick={(e) => e.stopPropagation()} 
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedExp(null)}
-                className={`absolute top-4 right-4 z-50 p-2 rounded-full transition-colors ${
-                  selectedExp.imageFit === "contain" 
-                    ? "bg-muted hover:bg-muted/80 text-muted-foreground" 
-                    : "bg-black/20 hover:bg-black/40 text-white backdrop-blur-sm"
-                }`}
+      {/* Detail modal */}
+      {selectedExp && (
+        <Modal
+          open={modal.open}
+          onClose={modal.hide}
+          size="lg"
+          closeTone={selectedExp.imageFit === "contain" ? "dark" : "light"}
+          accent={EXP_RGB[selectedExp.id]}
+          label={`${selectedExp.title} ${selectedExp.subtitle}`}
+        >
+          {/* Cover */}
+          <div className={`relative h-52 sm:h-72 w-full shrink-0 ${selectedExp.imageFit === "contain" ? "bg-slate-50" : "bg-muted"}`}>
+            <Image
+              src={selectedExp.image}
+              alt={selectedExp.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 672px"
+              className={selectedExp.imageFit === "contain" ? "object-contain p-6 sm:p-8 drop-shadow-sm" : "object-cover object-center"}
+            />
+            {selectedExp.imageFit !== "contain" && (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                    <selectedExp.icon size={13} className={selectedExp.colorClass} />
+                    <span className={selectedExp.colorClass}>{selectedExp.type}</span>
+                  </span>
+                  <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-md">{selectedExp.title}</h2>
+                  <p className="mt-0.5 text-sm sm:text-base font-medium text-white/85 drop-shadow-md">{selectedExp.subtitle}</p>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="p-5 sm:p-8">
+            {selectedExp.imageFit === "contain" && (
+              <div className="mb-5">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
+                  <selectedExp.icon size={13} className={selectedExp.colorClass} />
+                  <span className={selectedExp.colorClass}>{selectedExp.type}</span>
+                </span>
+                <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight text-foreground">{selectedExp.title}</h2>
+                <p className="mt-0.5 text-sm sm:text-base font-medium text-muted-foreground">{selectedExp.subtitle}</p>
+              </div>
+            )}
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-muted-foreground">
+              <Calendar size={14} className={selectedExp.colorClass} />
+              {selectedExp.date}
+            </div>
+
+            <h3 className="mt-6 mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              Key Responsibilities &amp; Achievements
+            </h3>
+            <ul className="space-y-2.5">
+              {selectedExp.details.map((detail, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12 + idx * 0.07 }}
+                  className="flex gap-3.5 rounded-2xl border border-border bg-muted/30 p-3.5 sm:p-4"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white font-mono text-xs font-bold shadow-sm ring-1 ring-border">
+                    <span className={selectedExp.colorClass}>{idx + 1}</span>
+                  </span>
+                  <span className="text-sm sm:text-[15px] leading-relaxed text-foreground/75">{detail}</span>
+                </motion.li>
+              ))}
+            </ul>
+
+            {selectedExp.imageFit === "contain" && (
+              <a
+                href={selectedExp.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:-translate-y-0.5 hover:bg-amber-600 sm:w-auto"
               >
-                <X size={20} />
-              </button>
-
-              {/* Cover Image Header */}
-              <div className={`relative h-48 sm:h-64 w-full shrink-0 ${selectedExp.imageFit === "contain" ? "bg-slate-50 p-4" : ""}`}>
-                <Image
-                  src={selectedExp.image}
-                  alt={selectedExp.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className={selectedExp.imageFit === "contain" ? "object-contain drop-shadow-sm p-4" : "object-cover object-center"}
-                />
-                <div className={`absolute inset-0 ${selectedExp.imageFit === "contain" ? "bg-gradient-to-t from-black/80 via-black/20 to-transparent" : "bg-gradient-to-t from-black/60 to-transparent"}`} />
-                <div className="absolute bottom-4 left-6 sm:bottom-6 sm:left-8 right-6">
-                  <div className={`flex items-center gap-2 text-white/90 mb-2`}>
-                    <selectedExp.icon size={18} />
-                    <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider">{selectedExp.type}</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1 drop-shadow-md">{selectedExp.title}</h2>
-                  <p className="text-white/90 font-medium text-sm sm:text-base drop-shadow-md">{selectedExp.subtitle}</p>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6 sm:p-8 bg-white flex-1">
-                <div className="flex items-center gap-2 text-muted-foreground mb-6 pb-6 border-b border-border/50">
-                  <Calendar size={18} />
-                  <span className="text-sm font-medium">{selectedExp.date}</span>
-                </div>
-
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-foreground text-lg">Key Responsibilities & Achievements</h4>
-                  <ul className="space-y-3">
-                    {selectedExp.details.map((detail, idx) => (
-                      <li key={idx} className="flex gap-3 text-muted-foreground">
-                        <CheckCircle2 size={18} className={`${selectedExp.colorClass} shrink-0 mt-0.5`} />
-                        <span className="text-sm sm:text-base leading-relaxed">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  {/* Additional Action for Certificate */}
-                  {selectedExp.imageFit === "contain" && (
-                    <div className="mt-8 pt-6 border-t border-border/50">
-                      <a 
-                        href={selectedExp.image} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-all shadow-sm hover:shadow group"
-                      >
-                        <ExternalLink size={18} />
-                        Lihat Gambar Penuh
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <ExternalLink size={16} />
+                Lihat Gambar Penuh
+              </a>
+            )}
+          </div>
+        </Modal>
+      )}
     </section>
   );
 }

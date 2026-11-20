@@ -7,6 +7,7 @@ import {
   Hash, Code, Type, Layout, Terminal, Clock, Lock, Zap, Box, FileEdit, Link2,
   List, Check, BookOpen, Wind, GitBranch, Globe, Shield, Radar, ShieldAlert
 } from "lucide-react";
+import type { LucideProps } from "lucide-react";
 import type { ReactNode } from "react";
 
 export type ToolStatus = "live" | "coming-soon" | "external";
@@ -24,6 +25,10 @@ export type Tool = {
 export type Category = {
   id: string;
   label: string;
+  /** Short line shown under the category title */
+  blurb: string;
+  /** rgb triplet used to tint cards, chips and the tool page header */
+  accent: string;
   icon: ReactNode;
   tools: Tool[];
 };
@@ -35,14 +40,16 @@ export const categories: Category[] = [
   {
     id: "image-editor",
     label: "Image Editor",
+    blurb: "Ubah ukuran, kompres, konversi, dan ambil warna dari gambar.",
+    accent: "32,160,232",
     icon: <Image {...iconProps} />,
     tools: [
       { id: "image-resizer", name: "Image Resizer", description: "Ubah dimensi gambar sesuai kebutuhan", status: "live", icon: <Maximize2 {...smallIconProps} /> },
       { id: "image-rotator", name: "Image Rotator & Flipper", description: "Putar dan balik gambar", status: "live", icon: <RotateCw {...smallIconProps} /> },
       { id: "image-compressor", name: "Image Compressor", description: "Kompres ukuran file gambar", status: "live", icon: <Minimize2 {...smallIconProps} /> },
       { id: "format-converter", name: "Image Format Converter", description: "PNG, JPG, WebP, AVIF dll", status: "live", icon: <FileImage {...smallIconProps} /> },
-      { id: "img-to-base64", name: "Image  Base64", description: "Konversi gambar ke string Base64", status: "live", icon: <Binary {...smallIconProps} /> },
-      { id: "base64-to-img", name: "Base64  Image", description: "Konversi Base64 kembali ke gambar", status: "live", icon: <Image {...smallIconProps} /> },
+      { id: "img-to-base64", name: "Image to Base64", description: "Konversi gambar ke string Base64", status: "live", icon: <Binary {...smallIconProps} /> },
+      { id: "base64-to-img", name: "Base64 to Image", description: "Konversi Base64 kembali ke gambar", status: "live", icon: <Image {...smallIconProps} /> },
       { id: "color-picker", name: "Image Color Picker", description: "Ambil kode warna dari gambar manapun", status: "live", icon: <Search {...smallIconProps} /> },
       { id: "palette-gen", name: "Image Palette Generator", description: "Ekstrak palet warna dari gambar", status: "live", icon: <Palette {...smallIconProps} /> },
     ],
@@ -50,15 +57,19 @@ export const categories: Category[] = [
   {
     id: "social-media",
     label: "Social Media",
+    blurb: "Ukuran gambar yang pas untuk setiap platform.",
+    accent: "236,72,153",
     icon: <Users {...iconProps} />,
     tools: [
       { id: "ig-post-resizer", name: "Instagram Post Resizer", description: "1:1, 4:5, 1.91:1 siap posting", status: "live", icon: <Image {...smallIconProps} /> },
-      { id: "social-resizer", name: "Social Media Resizer", description: "Satu gambar  semua format sosmed", status: "live", icon: <Maximize2 {...smallIconProps} /> },
+      { id: "social-resizer", name: "Social Media Resizer", description: "Satu gambar untuk semua format sosmed", status: "live", icon: <Maximize2 {...smallIconProps} /> },
     ],
   },
   {
     id: "screenshot",
     label: "Screenshot Tools",
+    blurb: "Bikin screenshot dan potongan kode yang enak dilihat.",
+    accent: "139,92,246",
     icon: <CameraIcon {...iconProps} />,
     tools: [
       { id: "screenshot-beautifier", name: "Screenshot Beautifier", description: "Percantik screenshot dengan frame & background", status: "live", icon: <Palette {...smallIconProps} /> },
@@ -68,6 +79,8 @@ export const categories: Category[] = [
   {
     id: "ai-text",
     label: "AI Text Tools",
+    blurb: "Bantuan menulis dokumentasi project.",
+    accent: "245,158,11",
     icon: <Type {...iconProps} />,
     tools: [
       { id: "ai-readme", name: "AI README Generator", description: "Buat README.md untuk project GitHub", status: "live", icon: <GitBranch {...smallIconProps} /> },
@@ -76,6 +89,8 @@ export const categories: Category[] = [
   {
     id: "dev-tools",
     label: "Developer Tools",
+    blurb: "Format, encode, hash, dan debug langsung di browser.",
+    accent: "16,185,129",
     icon: <Code {...iconProps} />,
     tools: [
       { id: "json-formatter", name: "JSON Formatter", description: "Format dan validasi JSON", status: "live", icon: <FileJson {...smallIconProps} /> },
@@ -84,7 +99,7 @@ export const categories: Category[] = [
       { id: "url-encoder", name: "URL Encoder/Decoder", description: "Encode dan decode URL string", status: "live", icon: <Link2 {...smallIconProps} /> },
       { id: "html-encoder", name: "HTML Encoder/Decoder", description: "Encode entitas HTML", status: "live", icon: <Code {...smallIconProps} /> },
       { id: "regex-tester", name: "Regex Tester", description: "Test dan debug regular expression", status: "live", icon: <Search {...smallIconProps} /> },
-      { id: "color-converter", name: "Color Converter", description: "HEX  RGB  HSL konversi warna", status: "live", icon: <Palette {...smallIconProps} /> },
+      { id: "color-converter", name: "Color Converter", description: "Konversi warna HEX, RGB, dan HSL", status: "live", icon: <Palette {...smallIconProps} /> },
       { id: "timestamp-converter", name: "Timestamp Converter", description: "Unix timestamp ke tanggal dan sebaliknya", status: "live", icon: <Clock {...smallIconProps} /> },
       { id: "uuid-gen", name: "UUID Generator", description: "Generate UUID/GUID v4 secara acak", status: "live", icon: <FingerprintIcon {...smallIconProps} /> },
       { id: "hash-gen", name: "Hash Generator", description: "MD5, SHA-1, SHA-256 hash dari teks", status: "live", icon: <Lock {...smallIconProps} /> },
@@ -96,6 +111,8 @@ export const categories: Category[] = [
   {
     id: "osint-tools",
     label: "OSINT Tools",
+    blurb: "Riset jaringan, domain, dan keamanan dari sumber terbuka.",
+    accent: "244,63,94",
     icon: <Radar {...iconProps} />,
     tools: [
       { id: "ip-lookup", name: "IP & Geo Lookup", description: "Lacak lokasi, ISP, dan ASN dari sebuah IP Address secara realtime", status: "live", icon: <Globe {...smallIconProps} /> },
@@ -120,9 +137,5 @@ export const categories: Category[] = [
 ];
 
 // Fallbacks for lucide icons
-function AlignLeftIcon(props: any) { return <List {...props} />; }
-function GlobeIcon(props: any) { return <Search {...props} />; }
-function MailIcon(props: any) { return <FileText {...props} />; }
-function MessageSquareIcon(props: any) { return <Type {...props} />; }
-function FingerprintIcon(props: any) { return <Hash {...props} />; }
-function CameraIcon(props: any) { return <Image {...props} />; }
+function FingerprintIcon(props: LucideProps) { return <Hash {...props} />; }
+function CameraIcon(props: LucideProps) { return <Image {...props} />; }

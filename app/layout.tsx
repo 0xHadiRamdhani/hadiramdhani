@@ -20,7 +20,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Hadi Ramdhani - Software Engineering Student",
-  description: "Saya adalah Hadi Ramdhani, siswa jurusan Software Engineering di SMK Bani Ma'sum. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.",
+  description: "Saya adalah Hadi Ramdhani, lulusan Software Engineering dari SMK Bani Ma'sum yang kini menempuh Sekolah Profesi Insinyur. Saya tertarik dengan dunia teknologi, coding, hacking, electrical, dan coffee.",
   applicationName: "Hadi Ramdhani - NexoraLabStudio",
   openGraph: {
     siteName: "Hadi Ramdhani - NexoraLabStudio",
