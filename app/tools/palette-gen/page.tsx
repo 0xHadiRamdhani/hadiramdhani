@@ -78,7 +78,7 @@ export default function PaletteGenPage() {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-semibold text-foreground">Palet Warna ({palette.length})</h2>
                 {palette.length > 0 && (
-                  <button onClick={copyAll} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">
+                  <button onClick={copyAll} className="flex items-center gap-1.5 text-xs text-primary-300 font-semibold hover:underline">
                     {copied === "all" ? <Check size={12} /> : <Copy size={12} />} Copy All
                   </button>
                 )}
@@ -94,7 +94,7 @@ export default function PaletteGenPage() {
                   <div key={c} className="flex items-center gap-2 bg-card border border-border rounded-xl px-3 py-2 group">
                     <div className="w-7 h-7 rounded-lg border border-border shrink-0" style={{ background: c }} />
                     <code className="font-mono text-xs flex-1">{c}</code>
-                    <button onClick={() =>copy(c)} className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-lime-ink transition-all">
+                    <button onClick={() =>copy(c)} className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary-300 transition-all">
                       {copied === c ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
                     </button>
                   </div>

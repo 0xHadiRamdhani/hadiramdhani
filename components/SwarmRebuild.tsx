@@ -79,7 +79,7 @@ export default function SwarmRebuild() {
                 aria-pressed={mode === m.id}
                 className={`rounded-lg px-4 py-1.5 text-sm font-medium transition-all ${
                   mode === m.id
-                    ? "bg-primary text-bg-dark shadow-lg shadow-primary/30"
+                    ? "bg-primary text-white shadow-lg shadow-primary/30"
                     : "text-white/60 hover:text-white"
                 }`}
               >
@@ -158,7 +158,7 @@ export default function SwarmRebuild() {
                 className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.07] hover:-translate-y-1"
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary-300 transition-colors group-hover:bg-primary group-hover:text-bg-dark">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary-300 transition-colors group-hover:bg-primary group-hover:text-white">
                     <Icon size={18} />
                   </span>
                   <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-white/35">{p.tag}</span>

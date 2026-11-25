@@ -220,7 +220,7 @@ export default function ToolsHero({ search, onSearch, searchRef, totalTools, tot
                   }}
                   onPointerDown={(e) => e.stopPropagation()}
                   className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
-                    mode === m.id ? "bg-primary text-bg-dark shadow-md shadow-primary/30" : "text-white/60 hover:text-white"
+                    mode === m.id ? "bg-primary text-white shadow-md shadow-primary/30" : "text-white/60 hover:text-white"
                   }`}
                 >
                   {m.label}

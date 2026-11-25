@@ -23,7 +23,7 @@ type SwarmFieldProps = {
   /** Canvas area (px²) per particle when `count` is not set. Lower = more particles */
   density?: number;
   theme?: "light" | "dark";
-  /** rgb triplet ("163,230,53") that tints dots and links instead of the theme palette */
+  /** rgb triplet ("207,140,118") that tints dots and links instead of the theme palette */
   accent?: string;
   formation?: SwarmFormation;
   /** Used instead of `formation` below 640px width */
@@ -38,14 +38,14 @@ type SwarmFieldProps = {
 
 const PALETTES = {
   light: {
-    dots: ["#0a0a0a", "#3f6212", "#84cc16", "#a3e635"],
-    line: "63,98,18",
-    lineMax: 0.28,
+    dots: ["#cf8c76", "#dfb5ad", "#ad4a37", "#f4e9e5"],
+    line: "207,140,118",
+    lineMax: 0.3,
   },
   dark: {
-    dots: ["#a3e635", "#bef264", "#d9f99d", "#ffffff"],
-    line: "190,242,100",
-    lineMax: 0.38,
+    dots: ["#cf8c76", "#dfb5ad", "#f4e9e5", "#c26a52"],
+    line: "223,181,173",
+    lineMax: 0.36,
   },
 } as const;
 

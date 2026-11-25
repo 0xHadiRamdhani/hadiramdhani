@@ -14,7 +14,7 @@ function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
             <>
               <span
                 className="flex h-7 w-7 items-center justify-center rounded-lg"
-                style={{ background: `rgba(${cat.accent},0.14)`, color: "var(--color-lime-ink)" }}
+                style={{ background: `rgba(${cat.accent},0.14)`, color: "var(--color-primary-300)" }}
               >
                 {tool.icon}
               </span>
@@ -22,7 +22,7 @@ function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
             </>
           );
           const cls =
-            "flex shrink-0 items-center gap-2.5 rounded-full border border-border bg-white py-1.5 pl-1.5 pr-4 text-sm font-medium text-foreground/75 shadow-sm transition-colors hover:border-primary/40 hover:text-foreground";
+            "flex shrink-0 items-center gap-2.5 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-4 text-sm font-medium text-foreground/75 shadow-sm transition-colors hover:border-primary/40 hover:text-foreground";
           // Second copy is decorative: keep it out of the tab order and the a11y tree.
           return tool.status === "live" ? (
             <Link

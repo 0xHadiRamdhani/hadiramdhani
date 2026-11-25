@@ -76,7 +76,7 @@ export default function HashGenPage() {
           <textarea value={input} onChange={(e) =>setInput(e.target.value)} placeholder="Masukkan teks yang ingin di-hash..."
             rows={4} className="w-full p-4 rounded-xl border border-border bg-muted/20 text-sm resize-none focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
           <button onClick={generate} disabled={!input || loading}
-            className="px-6 py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 w-fit">
+            className="px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 w-fit">
             {loading ? "Generating..." : " Generate Hash"}
           </button>
         </div>
@@ -87,7 +87,7 @@ export default function HashGenPage() {
               <div key={algo} className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{algo}</span>
-                  <button onClick={() =>copy(val, algo)} className="text-muted-foreground hover:text-lime-ink">
+                  <button onClick={() =>copy(val, algo)} className="text-muted-foreground hover:text-primary-300">
                     {copied === algo ? <Check size={15} className="text-green-500" /> : <Copy size={15} />}
                   </button>
                 </div>

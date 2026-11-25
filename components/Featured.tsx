@@ -7,9 +7,9 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Featured() {
   return (
-    <section className="w-full py-0 bg-[#f1f8e0] relative overflow-hidden">
-      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
-      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-white/60 blur-3xl pointer-events-none" />
+    <section className="w-full py-0 bg-[#180805] relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_90%_at_15%_105%,rgba(173,74,55,0.55),transparent_70%),radial-gradient(45%_60%_at_60%_0%,rgba(79,10,1,0.6),transparent_70%)]" />
+      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-card/60 blur-3xl pointer-events-none" />
       <div className="absolute left-[38%] top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent lg:block pointer-events-none" />
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] sm:min-h-[580px]">
 
@@ -26,7 +26,7 @@ export default function Featured() {
             <div className="text-primary/30 font-serif text-7xl sm:text-8xl leading-none mb-1 select-none">&ldquo;</div>
             <p className="text-foreground text-2xl sm:text-3xl lg:text-4xl font-light leading-snug tracking-tight -mt-4">
               I don&apos;t just write code.{" "}
-              <span className="text-lime-ink font-semibold italic">I build things</span>{" "}
+              <span className="text-primary-300 font-semibold italic">I build things</span>{" "}
               that mean something.
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function Featured() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Link
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg-dark hover:bg-primary-500 hover:-translate-y-0.5 transition-all shadow-lg shadow-primary/25"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 hover:-translate-y-0.5 transition-all shadow-lg shadow-primary/25"
             >
               Let&apos;s talk
               <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -97,12 +97,12 @@ export default function Featured() {
           />
 
           {/* Left gradient blend */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#f1f8e0] via-[#f1f8e0]/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#180805] via-[#180805]/20 to-transparent" />
           {/* Bottom gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f1f8e0]/70 via-transparent to-transparent lg:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#180805]/70 via-transparent to-transparent lg:hidden" />
 
           {/* Glass badge */}
-          <div className="absolute top-5 right-5 sm:top-8 sm:right-8 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
+          <div className="absolute top-5 right-5 sm:top-8 sm:right-8 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-foreground/70 shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-500 animate-pulse" />
             Open to collaborate
           </div>

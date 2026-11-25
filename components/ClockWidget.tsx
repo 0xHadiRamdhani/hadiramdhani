@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Modal } from "./Modal";
-import { Cloud, MapPin, Clock, ThermometerSun, Wind, Droplets } from "lucide-react";
+import { PopupHead, SpecList } from "./PopupParts";
+import { Cloud, MapPin } from "lucide-react";
 
 export function ClockWidget({ compact = false }: { compact?: boolean }) {
   const [time, setTime] = useState<string>("");
@@ -42,7 +42,7 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
     return (
       <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-muted-foreground">
         <span className="hidden sm:inline">BANDUNG</span>
-        <span className="text-lime-ink font-bold">{time}</span>
+        <span className="text-primary-300 font-bold">{time}</span>
         <span>WIB</span>
       </div>
     );
@@ -52,12 +52,12 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
     <>
       <div className="gradient-border w-full max-w-xs shadow-xl shadow-primary/10 hover:-translate-y-1 transition-transform duration-300">
         <div
-          className="relative bg-white rounded-[calc(1.25rem-1px)] p-6 flex flex-col w-full cursor-pointer group overflow-hidden"
+          className="relative bg-card rounded-[calc(1.25rem-1px)] p-6 flex flex-col w-full cursor-pointer group overflow-hidden"
           onClick={() => setIsModalOpen(true)}
         >
           <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl pointer-events-none" />
           <div className="relative flex flex-col gap-1.5">
-            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-lime-ink">
+            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-primary-300">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 rounded-full bg-primary animate-pulse-ring" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-primary" />
@@ -72,56 +72,42 @@ export function ClockWidget({ compact = false }: { compact?: boolean }) {
             <div className="text-sm text-muted-foreground/70">Kota Bandung, Jawa Barat</div>
           </div>
           <div className="relative mt-5 pt-4 border-t border-border group-hover:border-primary/20 transition-colors">
-            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-lime-ink mb-2">Weather</div>
+            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary-300 mb-2">Weather</div>
             <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-              <Cloud size={22} className="text-muted-foreground group-hover:text-lime-ink transition-colors" strokeWidth={1.5} />
+              <Cloud size={22} className="text-muted-foreground group-hover:text-primary-300 transition-colors" strokeWidth={1.5} />
               <span>29.0°C</span>
             </div>
           </div>
         </div>
       </div>
 
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} size="sm" label="Waktu dan cuaca di Kota Bandung" closeTone="light">
-        <div className="relative overflow-hidden bg-bg-dark px-6 pb-8 pt-12 text-white">
-          <div className="absolute inset-0 dot-grid-dark opacity-60" />
-          <div className="absolute -top-16 -left-10 h-44 w-44 rounded-full bg-primary/40 blur-3xl" />
-          <div className="relative">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest backdrop-blur">
-              <MapPin size={12} /> Kota Bandung
-            </span>
-            <div className="mt-4 text-5xl sm:text-6xl font-bold tracking-tight tabular-nums">
-              {time.split(" ")[0]}
-              <span className="ml-2 text-xl font-medium text-white/75">{time.split(" ")[1]}</span>
-            </div>
-            <p className="mt-1.5 text-sm text-white/80">{dateStr}</p>
-            <p className="text-sm text-white/65">Jawa Barat, Indonesia</p>
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} size="md" label="Waktu dan cuaca di Kota Bandung">
+        <div className="px-5 pb-8 pt-16 sm:px-9 sm:pb-9 sm:pt-20">
+          <PopupHead
+            kicker={
+              <>
+                <MapPin size={13} />
+                Kota Bandung
+              </>
+            }
+            title={
+              <span className="tabular-nums">
+                {time.split(" ")[0]}
+                <span className="ml-3 text-2xl text-foreground/50">{time.split(" ")[1]}</span>
+              </span>
+            }
+            subtitle={`${dateStr} · Jawa Barat, Indonesia`}
+          />
+          <div className="mt-8">
+            <SpecList
+              rows={[
+                { label: "Zona waktu", value: "WIB (UTC+7)" },
+                { label: "Cuaca", value: "Cerah berawan, 29.0°C" },
+                { label: "Kelembapan", value: "65%" },
+                { label: "Angin", value: "12 km/h" },
+              ]}
+            />
           </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 p-5 sm:p-6">
-          {[
-            { icon: Clock, label: "Zona Waktu", value: "WIB (UTC+7)", color: "text-lime-ink", bg: "bg-primary/10" },
-            { icon: ThermometerSun, label: "Cuaca", value: "Cerah Berawan, 29.0°C", color: "text-lime-ink", bg: "bg-primary/10" },
-            { icon: Droplets, label: "Kelembapan", value: "65%", color: "text-lime-ink", bg: "bg-primary/10" },
-            { icon: Wind, label: "Angin", value: "12 km/h", color: "text-lime-ink", bg: "bg-primary/10" },
-          ].map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.07 }}
-                className="rounded-2xl border border-border bg-muted/30 p-3.5"
-              >
-                <span className={`mb-3 flex h-9 w-9 items-center justify-center rounded-xl ${item.bg} ${item.color}`}>
-                  <Icon size={17} />
-                </span>
-                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{item.label}</div>
-                <div className="mt-0.5 text-sm font-semibold leading-snug text-foreground">{item.value}</div>
-              </motion.div>
-            );
-          })}
         </div>
       </Modal>
     </>

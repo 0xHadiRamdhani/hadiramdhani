@@ -48,13 +48,13 @@ export default function IgPostResizerPage() {
             <div className="flex flex-wrap gap-2">
               {ratios.map((r) => (
                 <button key={r[2]} onClick={() => { setRatio(r); setResult(null); }}
-                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${JSON.stringify(ratio) === JSON.stringify(r) ? "bg-primary text-bg-dark" : "bg-muted text-muted-foreground"}`}>
+                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${JSON.stringify(ratio) === JSON.stringify(r) ? "bg-primary text-white" : "bg-muted text-muted-foreground"}`}>
                   {r[2]} ({r[0]}×{r[1]})
                 </button>
               ))}
             </div>
             <div className="flex gap-2">
-              <button onClick={process} className="px-6 py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90">Resize</button>
+              <button onClick={process} className="px-6 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90">Resize</button>
               {result && <a href={result} download="instagram_post.jpg" className="flex items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl text-sm font-semibold hover:bg-green-600"><Download size={14} />Download</a>}
             </div>
             <div className="grid sm:grid-cols-2 gap-4">

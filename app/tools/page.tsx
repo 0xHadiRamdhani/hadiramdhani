@@ -92,13 +92,13 @@ export default function ToolsPage() {
       <ToolsMarquee items={allTools} />
 
       {/* ================= CATEGORY BAR ================= */}
-      <div ref={listRef} className="sticky top-16 z-30 mt-6 scroll-mt-16 border-y border-border/70 bg-white/80 backdrop-blur-xl sm:top-20 sm:scroll-mt-20">
+      <div ref={listRef} className="sticky top-16 z-30 mt-6 scroll-mt-16 border-y border-border/70 bg-card/80 backdrop-blur-xl sm:top-20 sm:scroll-mt-20">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="scrollbar-hide flex gap-1.5 overflow-x-auto py-2.5" role="tablist" aria-label="Kategori tools">
             <CategoryPill
               active={activeCategory === "all"}
               onClick={() => setActiveCategory("all")}
-              accent="163,230,53"
+              accent="207,140,118"
               count={totalTools}
             >
               Semua
@@ -144,7 +144,7 @@ export default function ToolsPage() {
                 setSearch("");
                 setActiveCategory("all");
               }}
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
             >
               Reset pencarian
               <ArrowRight size={15} />
@@ -210,7 +210,7 @@ export default function ToolsPage() {
                       <span
                         className="rounded-full border px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-widest"
                         style={{
-                          color: "var(--color-lime-ink)",
+                          color: "var(--color-primary-300)",
                           borderColor: `rgba(${cat.accent},0.55)`,
                           background: `rgba(${cat.accent},0.18)`,
                         }}
@@ -285,7 +285,7 @@ function CategoryPill({
       <span className="relative">{children}</span>
       <span
         className={`relative rounded-full px-1.5 font-mono text-[10px] font-bold ${
-          active ? "bg-white/25 text-white" : "bg-muted text-muted-foreground"
+          active ? "bg-card/25 text-white" : "bg-muted text-muted-foreground"
         }`}
       >
         {count}

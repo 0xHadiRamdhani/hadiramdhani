@@ -33,7 +33,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 space-y-4 lg:col-span-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-bg-dark shadow-lg shadow-primary/30">
+              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
                 <Code2 size={18} strokeWidth={2.5} />
               </div>
               <span className="font-bold text-lg">Hadi Ramdhani</span>
@@ -95,7 +95,7 @@ export default function Footer() {
           {/* Time */}
           <div className="col-span-2 space-y-4 lg:col-span-1">
             <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Local Time</h3>
-            <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 w-fit [&_*]:!text-white/70 [&_.text-lime-ink]:!text-primary-300">
+            <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 w-fit [&_*]:!text-white/70 [&_.text-primary-300]:!text-primary-300">
               <ClockWidget compact />
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function Footer() {
             <a
               href="#"
               aria-label="Kembali ke atas"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 hover:bg-primary hover:border-primary hover:text-bg-dark transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 hover:bg-primary hover:border-primary hover:text-white transition-all"
             >
               <ArrowUp size={14} />
             </a>

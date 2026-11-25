@@ -79,7 +79,7 @@ export default function ImageResizerPage() {
             <div className="flex flex-wrap gap-2">
               {presets.map((p) => (
                 <button key={p.label} onClick={() => { setW(p.w); setH(p.h); setLock(false); }}
-                  className="px-3 py-1.5 bg-muted text-xs font-semibold rounded-lg hover:bg-primary/10 hover:text-lime-ink transition-colors">{p.label}</button>
+                  className="px-3 py-1.5 bg-muted text-xs font-semibold rounded-lg hover:bg-primary/10 hover:text-primary-300 transition-colors">{p.label}</button>
               ))}
             </div>
 
@@ -88,14 +88,14 @@ export default function ImageResizerPage() {
                 <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">Width (px)</label>
                 <input type="number" value={w} onChange={(e) =>updateW(+e.target.value)} className="w-28 px-3 py-2 border border-border rounded-xl font-mono text-sm outline-none focus:ring-2 focus:ring-primary/20" />
               </div>
-              <button onClick={() =>setLock(!lock)} className={`p-2 rounded-xl border text-sm font-bold transition-colors ${lock ? "border-primary text-lime-ink bg-primary/10" : "border-border text-muted-foreground"}`}>
+              <button onClick={() =>setLock(!lock)} className={`p-2 rounded-xl border text-sm font-bold transition-colors ${lock ? "border-primary text-primary-300 bg-primary/10" : "border-border text-muted-foreground"}`}>
                 {lock ? "" : ""}
               </button>
               <div>
                 <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">Height (px)</label>
                 <input type="number" value={h} onChange={(e) =>updateH(+e.target.value)} className="w-28 px-3 py-2 border border-border rounded-xl font-mono text-sm outline-none focus:ring-2 focus:ring-primary/20" />
               </div>
-              <button onClick={resize} className="px-5 py-2.5 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Resize</button>
+              <button onClick={resize} className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">Resize</button>
               {result && <button onClick={download} className="flex items-center gap-2 px-4 py-2.5 bg-green-500 text-white rounded-xl text-sm font-semibold hover:bg-green-600 transition-colors"><Download size={14} />Download</button>}
             </div>
 

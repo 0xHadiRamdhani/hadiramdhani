@@ -68,7 +68,7 @@ export default function IPLookupTool() {
               <button
                 type="submit"
                 disabled={loading || !ip}
-                className="flex-1 sm:flex-none px-6 py-3 bg-primary text-bg-dark rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                className="flex-1 sm:flex-none px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {loading ? "Mencari..." : "Lacak IP"}
               </button>
@@ -94,7 +94,7 @@ export default function IPLookupTool() {
         {result && (
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="bg-card border border-border rounded-xl p-5">
-              <div className="flex items-center gap-2 text-lime-ink font-semibold mb-4 pb-3 border-b border-border/50">
+              <div className="flex items-center gap-2 text-primary-300 font-semibold mb-4 pb-3 border-b border-border/50">
                 <MapPin size={18} />
                 Geographic Location
               </div>
@@ -122,7 +122,7 @@ export default function IPLookupTool() {
             </div>
 
             <div className="bg-card border border-border rounded-xl p-5">
-              <div className="flex items-center gap-2 text-lime-ink font-semibold mb-4 pb-3 border-b border-border/50">
+              <div className="flex items-center gap-2 text-primary-300 font-semibold mb-4 pb-3 border-b border-border/50">
                 <Server size={18} />
                 Network Information
               </div>

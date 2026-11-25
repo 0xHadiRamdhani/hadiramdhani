@@ -41,7 +41,7 @@ export const categories: Category[] = [
     id: "image-editor",
     label: "Image Editor",
     blurb: "Ubah ukuran, kompres, konversi, dan ambil warna dari gambar.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <Image {...iconProps} />,
     tools: [
       { id: "image-resizer", name: "Image Resizer", description: "Ubah dimensi gambar sesuai kebutuhan", status: "live", icon: <Maximize2 {...smallIconProps} /> },
@@ -58,7 +58,7 @@ export const categories: Category[] = [
     id: "social-media",
     label: "Social Media",
     blurb: "Ukuran gambar yang pas untuk setiap platform.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <Users {...iconProps} />,
     tools: [
       { id: "ig-post-resizer", name: "Instagram Post Resizer", description: "1:1, 4:5, 1.91:1 siap posting", status: "live", icon: <Image {...smallIconProps} /> },
@@ -69,7 +69,7 @@ export const categories: Category[] = [
     id: "screenshot",
     label: "Screenshot Tools",
     blurb: "Bikin screenshot dan potongan kode yang enak dilihat.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <CameraIcon {...iconProps} />,
     tools: [
       { id: "screenshot-beautifier", name: "Screenshot Beautifier", description: "Percantik screenshot dengan frame & background", status: "live", icon: <Palette {...smallIconProps} /> },
@@ -80,7 +80,7 @@ export const categories: Category[] = [
     id: "ai-text",
     label: "AI Text Tools",
     blurb: "Bantuan menulis dokumentasi project.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <Type {...iconProps} />,
     tools: [
       { id: "ai-readme", name: "AI README Generator", description: "Buat README.md untuk project GitHub", status: "live", icon: <GitBranch {...smallIconProps} /> },
@@ -90,7 +90,7 @@ export const categories: Category[] = [
     id: "dev-tools",
     label: "Developer Tools",
     blurb: "Format, encode, hash, dan debug langsung di browser.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <Code {...iconProps} />,
     tools: [
       { id: "json-formatter", name: "JSON Formatter", description: "Format dan validasi JSON", status: "live", icon: <FileJson {...smallIconProps} /> },
@@ -112,7 +112,7 @@ export const categories: Category[] = [
     id: "osint-tools",
     label: "OSINT Tools",
     blurb: "Riset jaringan, domain, dan keamanan dari sumber terbuka.",
-    accent: "163,230,53",
+    accent: "207,140,118",
     icon: <Radar {...iconProps} />,
     tools: [
       { id: "ip-lookup", name: "IP & Geo Lookup", description: "Lacak lokasi, ISP, dan ASN dari sebuah IP Address secara realtime", status: "live", icon: <Globe {...smallIconProps} /> },

@@ -44,7 +44,7 @@ export function ToolCard({ tool, index, accent }: Props) {
       <div className="mb-3 flex items-start justify-between gap-2 sm:mb-4 sm:gap-3">
         <span
           className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:h-11 sm:w-11"
-          style={{ background: `rgba(${accent},0.12)`, color: "var(--color-lime-ink)" }}
+          style={{ background: `rgba(${accent},0.12)`, color: "var(--color-primary-300)" }}
         >
           {isClickable && (
             <span
@@ -56,19 +56,19 @@ export function ToolCard({ tool, index, accent }: Props) {
         </span>
 
         {isLive && (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-primary-300">
             <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
             Live
           </span>
         )}
         {isExternal && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-primary-300">
             <ArrowUpRight size={10} />
             Link
           </span>
         )}
         {!isClickable && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-primary-300">
             <Clock size={10} />
             Soon
           </span>
@@ -81,7 +81,7 @@ export function ToolCard({ tool, index, accent }: Props) {
       {isClickable && (
         <div
           className="mt-3 flex items-center gap-1.5 border-t border-border/60 pt-2.5 text-[11px] font-semibold sm:mt-4 sm:pt-3 sm:text-xs"
-          style={{ color: "var(--color-lime-ink)" }}
+          style={{ color: "var(--color-primary-300)" }}
         >
           {isLive ? "Buka tool" : "Buka layanan"}
           {isLive ? (

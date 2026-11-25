@@ -17,7 +17,7 @@ function parseMarkdown(md: string) {
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/~~(.+?)~~/g, "<del>$1</del>")
     .replace(/`([^`]+)`/g, "<code class='bg-muted px-1.5 py-0.5 rounded text-sm font-mono'>$1</code>")
-    .replace(/\[(.+?)\]\((.+?)\)/g, "<a href='$2' class='text-lime-ink underline' target='_blank'>$1</a>")
+    .replace(/\[(.+?)\]\((.+?)\)/g, "<a href='$2' class='text-primary-300 underline' target='_blank'>$1</a>")
     .replace(/^>\s(.+)/gm, "<blockquote class='border-l-4 border-primary pl-4 italic text-muted-foreground my-2'>$1</blockquote>")
     .replace(/^- (.+)/gm, "<li class='ml-4 list-disc'>$1</li>")
     .replace(/^(\d+)\. (.+)/gm, "<li class='ml-4 list-decimal'>$2</li>")
@@ -61,7 +61,7 @@ Markdown previewer ini berjalan 100% di browser!
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Preview</label>
             <div
-              className="w-full min-h-[600px] p-6 rounded-xl border border-border bg-white overflow-auto prose prose-sm max-w-none text-foreground leading-relaxed"
+              className="w-full min-h-[600px] p-6 rounded-xl border border-border bg-card overflow-auto prose prose-sm max-w-none text-foreground leading-relaxed"
               dangerouslySetInnerHTML={{ __html: parseMarkdown(md) }}
             />
           </div>

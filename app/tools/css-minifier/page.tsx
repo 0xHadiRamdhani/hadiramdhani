@@ -45,7 +45,7 @@ export default function CssMinifierPage() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Minified Output</label>
-              {output && <button onClick={() => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(() =>setCopied(false), 2000); }} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">{copied ? <Check size={12} /> : <Copy size={12} />} {copied ? "Copied!" : "Copy"}</button>}
+              {output && <button onClick={() => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(() =>setCopied(false), 2000); }} className="flex items-center gap-1.5 text-xs text-primary-300 font-semibold hover:underline">{copied ? <Check size={12} /> : <Copy size={12} />} {copied ? "Copied!" : "Copy"}</button>}
             </div>
             <textarea readOnly value={output} className="w-full min-h-[450px] p-4 rounded-xl border border-border bg-muted/10 font-mono text-sm resize-none outline-none" />
           </div>

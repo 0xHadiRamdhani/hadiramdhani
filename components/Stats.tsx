@@ -60,12 +60,12 @@ export default function Stats() {
   return (
     <section className="relative w-full border-y border-border bg-muted/30 overflow-hidden">
       {/* Tech marquee */}
-      <div className="border-b border-border/70 bg-white/60 py-4 mask-fade-x overflow-hidden" aria-hidden="true">
+      <div className="border-b border-border/70 bg-card/60 py-4 mask-fade-x overflow-hidden" aria-hidden="true">
         <div className="flex w-max animate-marquee gap-3 pr-3">
           {[...stack, ...stack].map((item, i) => (
             <span
               key={`${item}-${i}`}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-1.5 text-xs sm:text-sm font-medium text-foreground/70 whitespace-nowrap"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs sm:text-sm font-medium text-foreground/70 whitespace-nowrap"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
               {item}
@@ -87,8 +87,8 @@ export default function Stats() {
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-[11px] font-bold tracking-widest text-lime-ink">{stat.id}</span>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lime-ink group-hover:bg-primary group-hover:text-bg-dark transition-colors">
+                  <span className="font-mono text-[11px] font-bold tracking-widest text-primary-300">{stat.id}</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary-300 group-hover:bg-primary group-hover:text-white transition-colors">
                     <Icon size={15} />
                   </span>
                 </div>

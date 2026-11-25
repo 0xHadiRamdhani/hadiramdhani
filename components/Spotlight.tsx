@@ -5,18 +5,21 @@ import { useRef, type ReactNode, type MouseEvent, type HTMLAttributes } from "re
 type SpotlightProps = {
   children: ReactNode;
   className?: string;
-  /** rgb triplet, e.g. "163,230,53" */
+  /** rgb triplet, e.g. "207,140,118" */
   color?: string;
   /** Tilt the card towards the cursor (max degrees). 0 disables. */
   tilt?: number;
+  /** Draw crop marks on the four corners */
+  ticks?: boolean;
 } & Omit<HTMLAttributes<HTMLDivElement>, "color">;
 
 /** Card wrapper with a cursor-following glow (see `.spot` in globals.css). */
 export default function Spotlight({
   children,
   className = "",
-  color = "163,230,53",
+  color = "207,140,118",
   tilt = 0,
+  ticks = false,
   ...rest
 }: SpotlightProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +51,7 @@ export default function Spotlight({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ "--spot": color } as React.CSSProperties}
-      className={`spot ${tilt ? "spot-tilt" : ""} ${className}`}
+      className={`spot ${tilt ? "spot-tilt" : ""} ${ticks ? "ticks" : ""} ${className}`}
       {...rest}
     >
       {children}

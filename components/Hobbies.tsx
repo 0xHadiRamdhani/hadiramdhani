@@ -1,16 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Terminal, Zap, Coffee, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
+import { Code2, Terminal, Zap, Coffee, ArrowRight, type LucideIcon } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import Spotlight from "./Spotlight";
 import { Modal, useModalItem } from "./Modal";
+import { NumberedList, PopupHead, PopupLabel } from "./PopupParts";
 
 const HOBBY_RGB: Record<string, string> = {
-  Coding: "163,230,53",
-  Hacking: "163,230,53",
-  Electrical: "163,230,53",
-  Coffee: "163,230,53",
+  Coding: "207,140,118",
+  Hacking: "207,140,118",
+  Electrical: "207,140,118",
+  Coffee: "207,140,118",
 };
 
 type Hobby = {
@@ -34,7 +35,7 @@ const hobbies: Hobby[] = [
       "Mempelajari arsitektur frontend dan performa aplikasi.",
       "Selalu antusias dalam mengikuti perkembangan bahasa pemrograman terbaru."
     ],
-    color: "text-lime-ink",
+    color: "text-primary-300",
     bg: "bg-primary/5",
     border: "border-primary/20",
     hoverBorder: "hover:border-primary/50",
@@ -48,7 +49,7 @@ const hobbies: Hobby[] = [
       "Suka memecahkan masalah dalam tantangan Capture The Flag (CTF).",
       "Eksperimen dengan penetration testing secara etis."
     ],
-    color: "text-lime-ink",
+    color: "text-primary-300",
     bg: "bg-primary/5",
     border: "border-primary/20",
     hoverBorder: "hover:border-primary/50",
@@ -62,7 +63,7 @@ const hobbies: Hobby[] = [
       "Membuat prototipe inovatif menggunakan mikrokontroler (Arduino/ESP32).",
       "Menggabungkan software dan hardware (IoT)."
     ],
-    color: "text-lime-ink",
+    color: "text-primary-300",
     bg: "bg-primary/5",
     border: "border-primary/20",
     hoverBorder: "hover:border-primary/50",
@@ -76,7 +77,7 @@ const hobbies: Hobby[] = [
       "Mencicipi karakteristik rasa biji kopi dari berbagai roastery lokal.",
       "Membantu menjaga fokus, energi dan produktivitas saat menulis kode."
     ],
-    color: "text-lime-ink",
+    color: "text-primary-300",
     bg: "bg-primary/5",
     border: "border-primary/20",
     hoverBorder: "hover:border-primary/50",
@@ -88,7 +89,7 @@ export default function Hobbies() {
   const selectedHobby = modal.item;
 
   return (
-    <section id="hobbies" className="relative w-full py-20 sm:py-28 bg-white overflow-hidden scroll-mt-16">
+    <section id="hobbies" className="relative w-full py-20 sm:py-28 bg-card overflow-hidden scroll-mt-16">
       <div className="absolute inset-0 dot-grid opacity-40 mask-fade-y pointer-events-none" />
       <div className="container relative">
         <SectionHeader
@@ -112,7 +113,7 @@ export default function Hobbies() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="h-full"
               >
-                <Spotlight tilt={5}
+                <Spotlight tilt={5} ticks
                   color={HOBBY_RGB[hobby.title]}
                   onClick={() => modal.show(hobby)}
                   className={`group h-full overflow-hidden p-4 sm:p-7 bg-card border ${hobby.border} ${hobby.hoverBorder} rounded-2xl sm:rounded-3xl hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
@@ -147,46 +148,32 @@ export default function Hobbies() {
         <Modal
           open={modal.open}
           onClose={modal.hide}
+          size="lg"
           accent={HOBBY_RGB[selectedHobby.title]}
           label={selectedHobby.title}
         >
-          <div className="relative overflow-hidden px-5 pb-6 pt-10 sm:px-8 sm:pb-8 sm:pt-12">
-            <div
-              className="pointer-events-none absolute -top-24 -left-16 h-64 w-64 rounded-full blur-3xl opacity-40"
-              style={{ background: `rgb(${HOBBY_RGB[selectedHobby.title]})` }}
+          <div className="relative overflow-hidden px-5 pb-8 pt-16 sm:px-10 sm:pb-10 sm:pt-20">
+            {/* oversized outline icon as a backdrop */}
+            <selectedHobby.icon
+              aria-hidden="true"
+              strokeWidth={0.6}
+              className="pointer-events-none absolute -right-6 top-10 h-56 w-56 text-primary-300/20 sm:h-72 sm:w-72"
             />
-            <div className="pointer-events-none absolute inset-0 dot-grid opacity-40 mask-fade-y" />
-
             <div className="relative">
-              <motion.div
-                initial={{ scale: 0.6, rotate: -12, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ type: "spring", damping: 14, stiffness: 220, delay: 0.1 }}
-                className={`flex h-20 w-20 items-center justify-center rounded-3xl border ${selectedHobby.border} ${selectedHobby.bg} ${selectedHobby.color} shadow-lg`}
-              >
-                <selectedHobby.icon size={36} />
-              </motion.div>
-
-              <h2 className="mt-5 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">{selectedHobby.title}</h2>
-              <p className="mt-1.5 text-sm sm:text-base text-muted-foreground">{selectedHobby.description}</p>
-
-              <h3 className="mt-7 mb-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                Hal yang saya lakukan
-              </h3>
-              <ul className="space-y-2.5">
-                {selectedHobby.details.map((detail, idx) => (
-                  <motion.li
-                    key={idx}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.15 + idx * 0.08 }}
-                    className="flex gap-3.5 rounded-2xl border border-border bg-white/80 p-3.5 sm:p-4 backdrop-blur"
-                  >
-                    <CheckCircle2 size={20} className={`${selectedHobby.color} mt-0.5 shrink-0`} />
-                    <span className="text-sm sm:text-[15px] leading-relaxed text-foreground/75">{detail}</span>
-                  </motion.li>
-                ))}
-              </ul>
+              <PopupHead
+                kicker={
+                  <>
+                    <selectedHobby.icon size={13} />
+                    Minat
+                  </>
+                }
+                title={selectedHobby.title}
+                subtitle={selectedHobby.description}
+              />
+              <div className="mt-9">
+                <PopupLabel>Hal yang saya lakukan</PopupLabel>
+                <NumberedList items={selectedHobby.details} delay={0.3} />
+              </div>
             </div>
           </div>
         </Modal>

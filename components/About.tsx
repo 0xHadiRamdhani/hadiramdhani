@@ -15,7 +15,7 @@ const facts = [
 
 export default function About() {
   return (
-    <section id="about" className="relative w-full py-20 sm:py-28 bg-white overflow-hidden scroll-mt-16">
+    <section id="about" className="relative w-full py-20 sm:py-28 bg-card overflow-hidden scroll-mt-16">
       <div className="absolute inset-0 dot-grid opacity-40 mask-fade-y pointer-events-none" />
       <div className="absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
@@ -55,7 +55,7 @@ export default function About() {
                     transition={{ duration: 0.4, delay: 0.15 + i * 0.07 }}
                   >
                     <Spotlight tilt={5} className="flex flex-col items-start gap-2.5 sm:flex-row sm:items-center sm:gap-3.5 rounded-xl bg-card border border-border px-3.5 py-3.5 sm:px-4 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 h-full">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lime-ink">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary-300">
                         <Icon size={18} />
                       </span>
                       <span className="flex flex-col min-w-0">

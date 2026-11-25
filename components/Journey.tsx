@@ -55,8 +55,8 @@ export default function Journey() {
                   <div
                     className={`relative shrink-0 w-14 h-14 md:w-[4.5rem] md:h-[4.5rem] rounded-2xl flex items-center justify-center border-2 transition-all duration-300 group-hover:-translate-y-1 ${
                       item.active
-                        ? "bg-primary border-primary text-bg-dark shadow-xl shadow-primary/30"
-                        : "bg-white border-border text-muted-foreground group-hover:border-primary/50 group-hover:text-lime-ink group-hover:shadow-lg group-hover:shadow-primary/10"
+                        ? "bg-primary border-primary text-white shadow-xl shadow-primary/30"
+                        : "bg-card border-border text-muted-foreground group-hover:border-primary/50 group-hover:text-primary-300 group-hover:shadow-lg group-hover:shadow-primary/10"
                     }`}
                   >
                     <Icon size={22} />
@@ -67,19 +67,19 @@ export default function Journey() {
                   <div
                     className={`flex-1 w-full flex flex-col gap-1.5 md:items-center md:text-center rounded-2xl border p-4 sm:p-5 transition-all duration-300 group-hover:-translate-y-1 ${
                       item.active
-                        ? "bg-white border-primary/30 shadow-lg shadow-primary/10"
-                        : "bg-white/70 border-border group-hover:border-primary/30 group-hover:shadow-md"
+                        ? "bg-card border-primary/30 shadow-lg shadow-primary/10"
+                        : "bg-card/70 border-border group-hover:border-primary/30 group-hover:shadow-md"
                     }`}
                   >
-                    <span className="font-mono text-[11px] font-bold tracking-widest text-lime-ink">STEP {item.id}</span>
-                    <h3 className={`font-bold text-base sm:text-lg leading-tight ${item.active ? "text-lime-ink" : "text-foreground"}`}>
+                    <span className="font-mono text-[11px] font-bold tracking-widest text-primary-300">STEP {item.id}</span>
+                    <h3 className={`font-bold text-base sm:text-lg leading-tight ${item.active ? "text-primary-300" : "text-foreground"}`}>
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground text-xs sm:text-sm">{item.subtitle}</p>
                     <span
                       className={`inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium mt-1.5 ${
                         item.active
-                          ? "bg-primary/10 text-lime-ink border border-primary/20"
+                          ? "bg-primary/10 text-primary-300 border border-primary/20"
                           : "bg-muted text-muted-foreground border border-border"
                       }`}
                     >

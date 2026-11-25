@@ -61,7 +61,7 @@ export default function CodeScreenshotPage() {
             </div>
 
             <button onClick={download}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
+              className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
               <Download size={16} />Download PNG (2x)
             </button>
           </div>

@@ -43,7 +43,7 @@ export default function JsonFormatterPage() {
         <p className="tool-hint">Format, minify, dan validasi JSON. Semua berjalan di browser.</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          <button onClick={format} className="flex items-center gap-2 px-4 py-2.5 bg-primary text-bg-dark rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
+          <button onClick={format} className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
             <RefreshCw size={15} />Format
           </button>
           <button onClick={minify} className="flex items-center gap-2 px-4 py-2.5 bg-muted text-foreground rounded-xl text-sm font-semibold hover:bg-muted/80 transition-colors">
@@ -79,7 +79,7 @@ export default function JsonFormatterPage() {
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Output</label>
               {output && (
-                <button onClick={copy} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">
+                <button onClick={copy} className="flex items-center gap-1.5 text-xs text-primary-300 font-semibold hover:underline">
                   {copied ? <Check size={12} /> : <Copy size={12} />} {copied ? "Copied!" : "Copy"}
                 </button>
               )}

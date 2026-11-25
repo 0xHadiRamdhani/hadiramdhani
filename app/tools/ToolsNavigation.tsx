@@ -147,7 +147,7 @@ export function ToolsNavigation({ children }: { children: ReactNode }) {
               </div>
               <Link
                 href="/tools"
-                className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-lime-ink sm:inline-flex"
+                className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-primary-300 sm:inline-flex"
               >
                 Semua tools
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />

@@ -42,7 +42,7 @@ export default function Base64ToImgPage() {
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Preview</label>
               {isValid && (
-                <button onClick={download} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline"><Download size={12} />Download</button>
+                <button onClick={download} className="flex items-center gap-1.5 text-xs text-primary-300 font-semibold hover:underline"><Download size={12} />Download</button>
               )}
             </div>
             <div className="w-full min-h-[400px] rounded-xl border border-border bg-muted/10 flex items-center justify-center overflow-hidden">

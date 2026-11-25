@@ -38,7 +38,7 @@ export default function TimestampConverterPage() {
         <p className="tool-hint">Konversi Unix timestamp ke tanggal/waktu dan sebaliknya.</p>
 
         <div className="text-center mb-4 p-3 bg-primary/5 border border-primary/20 rounded-xl text-sm text-muted-foreground">Waktu sekarang: <span className="font-mono font-semibold text-foreground">{Math.floor(Date.now() / 1000)}</span>
-          <button onClick={() =>setUnix(Math.floor(Date.now() / 1000).toString())} className="ml-2 text-lime-ink text-xs hover:underline">(Pakai sekarang)</button>
+          <button onClick={() =>setUnix(Math.floor(Date.now() / 1000).toString())} className="ml-2 text-primary-300 text-xs hover:underline">(Pakai sekarang)</button>
         </div>
 
         <div className="grid gap-4">
@@ -51,7 +51,7 @@ export default function TimestampConverterPage() {
                 {[{ label: "Lokal (ID)", val: fromUnix.local }, { label: "UTC", val: fromUnix.utc }, { label: "ISO 8601", val: fromUnix.iso }, { label: "Relatif", val: fromUnix.relative }].map((row) => (
                   <div key={row.label} className="flex items-center justify-between bg-muted/30 rounded-xl px-4 py-3">
                     <div><span className="text-xs text-muted-foreground">{row.label}: </span><span className="font-mono text-sm">{row.val}</span></div>
-                    <button onClick={() =>copy(row.val, row.label)} className="ml-2 text-muted-foreground hover:text-lime-ink"><Check size={14} className={copied === row.label ? "text-green-500" : "hidden"} /><Copy size={14} className={copied === row.label ? "hidden" : ""} /></button>
+                    <button onClick={() =>copy(row.val, row.label)} className="ml-2 text-muted-foreground hover:text-primary-300"><Check size={14} className={copied === row.label ? "text-green-500" : "hidden"} /><Copy size={14} className={copied === row.label ? "hidden" : ""} /></button>
                   </div>
                 ))}
               </div>
@@ -64,8 +64,8 @@ export default function TimestampConverterPage() {
               className="w-full px-4 py-3 border border-border rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary/20 mb-4" />
             {fromDate && (
               <div className="flex items-center justify-between bg-muted/30 rounded-xl px-4 py-3">
-                <span className="font-mono text-lg font-bold text-lime-ink">{fromDate}</span>
-                <button onClick={() =>copy(fromDate, "date")} className="text-muted-foreground hover:text-lime-ink">
+                <span className="font-mono text-lg font-bold text-primary-300">{fromDate}</span>
+                <button onClick={() =>copy(fromDate, "date")} className="text-muted-foreground hover:text-primary-300">
                   {copied === "date" ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
                 </button>
               </div>

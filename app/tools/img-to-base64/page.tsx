@@ -52,7 +52,7 @@ export default function ImgToBase64Page() {
               <div key={row.id} className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{row.label}</span>
-                  <button onClick={() =>copy(row.val, row.id)} className="flex items-center gap-1.5 text-xs text-lime-ink font-semibold hover:underline">
+                  <button onClick={() =>copy(row.val, row.id)} className="flex items-center gap-1.5 text-xs text-primary-300 font-semibold hover:underline">
                     {copied === row.id ? <Check size={12} /> : <Copy size={12} />} {copied === row.id ? "Copied!" : "Copy"}
                   </button>
                 </div>

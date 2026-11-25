@@ -56,7 +56,7 @@ const projects: Project[] = [
     host: "ppdb-smk-bani-masum.vercel.app",
     tags: ["Website", "PPDB"],
     icon: GraduationCap,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
   {
     name: "None Cafe",
@@ -66,7 +66,7 @@ const projects: Project[] = [
     host: "nonecafe.site",
     tags: ["Website", "Menu Digital"],
     icon: Coffee,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
   {
     name: "BrewLogic",
@@ -76,7 +76,7 @@ const projects: Project[] = [
     host: "brewlogicdownload.vercel.app",
     tags: ["Android", "iOS", "Download"],
     icon: Timer,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
   {
     name: "Nex Downloader",
@@ -86,7 +86,7 @@ const projects: Project[] = [
     host: "nexdownload.vercel.app",
     tags: ["Android", "iOS", "Download"],
     icon: Download,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
   {
     name: "NexoraLabStudio",
@@ -96,7 +96,7 @@ const projects: Project[] = [
     host: "nexoralabstudios.vercel.app",
     tags: ["Website", "Web App", "Mobile"],
     icon: Code2,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
   {
     name: "IMPHNEN",
@@ -106,7 +106,7 @@ const projects: Project[] = [
     host: "imphnen.dev",
     tags: ["Komunitas", "Web"],
     icon: Users,
-    accent: "163,230,53",
+    accent: "207,140,118",
   },
 ];
 
@@ -142,7 +142,7 @@ export default function Projects() {
                   aria-label={`Buka ${project.name} (${project.host})`}
                   className="block h-full rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-ink"
                 >
-                  <Spotlight tilt={5}
+                  <Spotlight tilt={5} ticks
                     color={project.accent}
                     className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
                   >
@@ -160,7 +160,7 @@ export default function Projects() {
                       />
 
                       {/* window bar */}
-                      <div className="relative mx-4 mt-4 flex items-center gap-3 rounded-xl border border-white/80 bg-white/80 px-3 py-2 shadow-sm backdrop-blur">
+                      <div className="relative mx-4 mt-4 flex items-center gap-3 rounded-xl border border-border bg-card/80 px-3 py-2 shadow-sm backdrop-blur">
                         <span className="flex gap-1.5">
                           <span className="h-2 w-2 rounded-full bg-zinc-300" />
                           <span className="h-2 w-2 rounded-full bg-zinc-300" />
@@ -185,7 +185,7 @@ export default function Projects() {
                         </span>
                       </div>
 
-                      <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-lime-ink shadow-sm">
+                      <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-card/90 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary-300 shadow-sm">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary-500 animate-pulse" />
                         Live
                       </span>
@@ -196,7 +196,7 @@ export default function Projects() {
                       <div className="mb-2 flex items-center justify-between gap-3">
                         <span
                           className="font-mono text-[11px] font-bold uppercase tracking-[0.15em]"
-                          style={{ color: "var(--color-lime-ink)" }}
+                          style={{ color: "var(--color-primary-300)" }}
                         >
                           {project.category}
                         </span>
@@ -218,9 +218,9 @@ export default function Projects() {
                         ))}
                       </div>
 
-                      <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm font-semibold text-foreground/80 transition-colors group-hover:text-lime-ink">
+                      <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-sm font-semibold text-foreground/80 transition-colors group-hover:text-primary-300">
                         Kunjungi situs
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-bg-dark">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-white">
                           <ArrowUpRight
                             size={15}
                             className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -240,7 +240,7 @@ export default function Projects() {
             href="https://github.com/0xHadiRamdhani"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-medium hover:border-primary/40 hover:-translate-y-0.5 hover:shadow-md transition-all shadow-sm"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-medium hover:border-primary/40 hover:-translate-y-0.5 hover:shadow-md transition-all shadow-sm"
           >
             <GithubIcon size={16} />
             Lihat kode di GitHub

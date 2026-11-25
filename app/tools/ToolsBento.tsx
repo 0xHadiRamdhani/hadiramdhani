@@ -83,14 +83,14 @@ function Tile({ item }: { item: Item }) {
         {/* oversized watermark icon */}
         <span
           className="pointer-events-none absolute -bottom-5 -right-5 opacity-[0.07] transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:opacity-[0.14] [&_svg]:h-28 [&_svg]:w-28"
-          style={{ color: "var(--color-lime-ink)" }}
+          style={{ color: "var(--color-primary-300)" }}
         >
           {tool.icon}
         </span>
         <div className="relative flex items-start justify-between">
           <span
             className="flex h-10 w-10 items-center justify-center rounded-xl"
-            style={{ background: `rgba(${cat.accent},0.13)`, color: "var(--color-lime-ink)" }}
+            style={{ background: `rgba(${cat.accent},0.13)`, color: "var(--color-primary-300)" }}
           >
             <span className="icon-wiggle">{tool.icon}</span>
           </span>
@@ -156,7 +156,7 @@ export default function ToolsBento({ items, total, onBrowse }: { items: Item[]; 
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, ease, delay: 0.06 * rest.length }}
-          className="group relative flex min-h-[8.5rem] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-4 text-left text-bg-dark shadow-lg shadow-primary/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/35 sm:p-5"
+          className="group relative flex min-h-[8.5rem] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-4 text-left text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/35 sm:p-5"
         >
           <span className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/15 blur-2xl transition-transform duration-500 group-hover:scale-150" />
           <span className="relative font-mono text-3xl font-bold tabular-nums">{total}</span>

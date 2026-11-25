@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 
 export default function LocalTime() {
   return (
-    <section className="relative w-full py-20 sm:py-28 bg-white border-b border-border overflow-hidden">
+    <section className="relative w-full py-20 sm:py-28 bg-card border-b border-border overflow-hidden">
       <div className="absolute inset-0 aurora opacity-80 pointer-events-none" />
       <div className="container relative">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20 max-w-4xl mx-auto">

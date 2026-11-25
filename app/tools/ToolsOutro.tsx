@@ -63,7 +63,7 @@ export default function ToolsOutro() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/#contact"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/30 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
+                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:-translate-y-0.5 hover:bg-primary-500"
               >
                 Request tool baru
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />

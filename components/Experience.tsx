@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Building2, Users, Award, ExternalLink, Calendar, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { Building2, Users, Award, Calendar, ArrowUpRight, type LucideIcon } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { Modal, useModalItem } from "./Modal";
 import MobileCarousel from "./MobileCarousel";
+import { NumberedList, PopupHead, PopupLabel, SpecList } from "./PopupParts";
 
 const EXP_RGB: Record<string, string> = {
-  "sbm-itb": "163,230,53",
-  imphnen: "163,230,53",
-  "sbm-itb-cert": "163,230,53",
+  "sbm-itb": "207,140,118",
+  imphnen: "207,140,118",
+  "sbm-itb-cert": "207,140,118",
 };
 
 type ExperienceData = {
@@ -39,8 +40,8 @@ const experiences: ExperienceData[] = [
     subtitle: "at SBM ITB",
     image: "/sbm-itb.jpg",
     icon: Building2,
-    colorClass: "text-lime-ink",
-    hoverColorClass: "group-hover:text-lime-ink",
+    colorClass: "text-primary-300",
+    hoverColorClass: "group-hover:text-primary-300",
     hoverBorderClass: "hover:border-primary/40",
     hoverBgClass: "bg-primary/[0.02]",
     date: "April 13, 2026 - June 30, 2026",
@@ -57,8 +58,8 @@ const experiences: ExperienceData[] = [
     subtitle: "Active Member",
     image: "/imphnen.png",
     icon: Users,
-    colorClass: "text-lime-ink",
-    hoverColorClass: "group-hover:text-lime-ink",
+    colorClass: "text-primary-300",
+    hoverColorClass: "group-hover:text-primary-300",
     hoverBorderClass: "hover:border-primary/40",
     hoverBgClass: "bg-primary/[0.02]",
     date: "2023 - Present",
@@ -75,8 +76,8 @@ const experiences: ExperienceData[] = [
     subtitle: "SBM ITB",
     image: "/sbm-itb-certificate.jpg",
     icon: Award,
-    colorClass: "text-lime-ink",
-    hoverColorClass: "group-hover:text-lime-ink",
+    colorClass: "text-primary-300",
+    hoverColorClass: "group-hover:text-primary-300",
     hoverBorderClass: "hover:border-primary/40",
     hoverBgClass: "bg-primary/[0.02]",
     date: "June 30, 2026",
@@ -96,7 +97,7 @@ export default function Experience() {
   const selectedExp = modal.item;
 
   return (
-    <section id="experience" className="relative w-full py-20 sm:py-28 bg-white border-t border-border overflow-hidden scroll-mt-16">
+    <section id="experience" className="relative w-full py-20 sm:py-28 bg-card border-t border-border overflow-hidden scroll-mt-16">
       <div className="absolute inset-0 aurora opacity-70 pointer-events-none" />
       <div className="container relative">
         <SectionHeader
@@ -149,13 +150,13 @@ export default function Experience() {
                   )}
 
                   {/* Type badge */}
-                  <div className={`absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 shadow-sm ${exp.colorClass}`}>
+                  <div className={`absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur px-3 py-1.5 shadow-sm ${exp.colorClass}`}>
                     <IconComponent size={14} />
                     <span className="font-mono text-[11px] font-bold uppercase tracking-wider">{exp.type}</span>
                   </div>
 
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors z-10 flex items-center justify-center">
-                    <span className="bg-white/95 text-foreground text-sm font-semibold py-2 px-4 rounded-full opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-300 shadow-md inline-flex items-center gap-1.5">
+                    <span className="bg-card/95 text-foreground text-sm font-semibold py-2 px-4 rounded-full opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-300 shadow-md inline-flex items-center gap-1.5">
                       View Details
                       <ArrowUpRight size={14} />
                     </span>
@@ -185,82 +186,65 @@ export default function Experience() {
         <Modal
           open={modal.open}
           onClose={modal.hide}
-          size="lg"
-          closeTone={selectedExp.imageFit === "contain" ? "dark" : "light"}
+          size="xl"
           accent={EXP_RGB[selectedExp.id]}
           label={`${selectedExp.title} ${selectedExp.subtitle}`}
         >
-          {/* Cover */}
-          <div className={`relative h-52 sm:h-72 w-full shrink-0 ${selectedExp.imageFit === "contain" ? "bg-slate-50" : "bg-muted"}`}>
-            <Image
-              src={selectedExp.image}
-              alt={selectedExp.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 672px"
-              className={selectedExp.imageFit === "contain" ? "object-contain p-6 sm:p-8 drop-shadow-sm" : "object-cover object-center"}
-            />
-            {selectedExp.imageFit !== "contain" && (
-              <>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider shadow-sm">
-                    <selectedExp.icon size={13} className={selectedExp.colorClass} />
-                    <span className={selectedExp.colorClass}>{selectedExp.type}</span>
-                  </span>
-                  <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-md">{selectedExp.title}</h2>
-                  <p className="mt-0.5 text-sm sm:text-base font-medium text-white/85 drop-shadow-md">{selectedExp.subtitle}</p>
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="p-5 sm:p-8">
-            {selectedExp.imageFit === "contain" && (
-              <div className="mb-5">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
-                  <selectedExp.icon size={13} className={selectedExp.colorClass} />
-                  <span className={selectedExp.colorClass}>{selectedExp.type}</span>
-                </span>
-                <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight text-foreground">{selectedExp.title}</h2>
-                <p className="mt-0.5 text-sm sm:text-base font-medium text-muted-foreground">{selectedExp.subtitle}</p>
-              </div>
-            )}
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-muted-foreground">
-              <Calendar size={14} className={selectedExp.colorClass} />
-              {selectedExp.date}
+          <div className="grid md:grid-cols-[0.95fr_1.05fr]">
+            {/* Visual */}
+            <div className="relative min-h-[15rem] bg-black/40 sm:min-h-[20rem] md:min-h-[34rem]">
+              <Image
+                src={selectedExp.image}
+                alt={selectedExp.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 440px"
+                className={
+                  selectedExp.imageFit === "contain"
+                    ? "object-contain p-8 sm:p-10"
+                    : "object-cover object-center grayscale-[0.25]"
+                }
+              />
+              {selectedExp.imageFit !== "contain" && (
+                <>
+                  <div className="absolute inset-0 bg-[#ad4a37]/20 mix-blend-color" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#130503] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#130503]" />
+                </>
+              )}
+              <span className="absolute bottom-4 left-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-foreground/70">
+                <selectedExp.icon size={13} className="text-primary-300" />
+                {selectedExp.type}
+              </span>
             </div>
 
-            <h3 className="mt-6 mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-              Key Responsibilities &amp; Achievements
-            </h3>
-            <ul className="space-y-2.5">
-              {selectedExp.details.map((detail, idx) => (
-                <motion.li
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12 + idx * 0.07 }}
-                  className="flex gap-3.5 rounded-2xl border border-border bg-muted/30 p-3.5 sm:p-4"
-                >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white font-mono text-xs font-bold shadow-sm ring-1 ring-border">
-                    <span className={selectedExp.colorClass}>{idx + 1}</span>
-                  </span>
-                  <span className="text-sm sm:text-[15px] leading-relaxed text-foreground/75">{detail}</span>
-                </motion.li>
-              ))}
-            </ul>
+            {/* Details */}
+            <div className="px-5 pb-8 pt-8 sm:px-8 md:pb-10 md:pt-16">
+              <PopupHead
+                kicker={selectedExp.type}
+                title={selectedExp.title}
+                subtitle={selectedExp.subtitle}
+              />
 
-            {selectedExp.imageFit === "contain" && (
-              <a
-                href={selectedExp.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-500 px-6 py-3.5 text-sm font-semibold text-bg-dark shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-500 sm:w-auto"
-              >
-                <ExternalLink size={16} />
-                Lihat Gambar Penuh
-              </a>
-            )}
+              <div className="mt-8">
+                <SpecList rows={[{ label: "Periode", value: selectedExp.date }]} delay={0.3} />
+              </div>
+
+              <div className="mt-8">
+                <PopupLabel>Tanggung jawab &amp; pencapaian</PopupLabel>
+                <NumberedList items={selectedExp.details} delay={0.4} />
+              </div>
+
+              {selectedExp.imageFit === "contain" && (
+                <a
+                  href={selectedExp.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-8 inline-flex items-center gap-2 border-b border-foreground/40 pb-0.5 text-sm text-foreground transition-colors hover:border-primary-300 hover:text-primary-300"
+                >
+                  Lihat gambar penuh
+                  <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              )}
+            </div>
           </div>
         </Modal>
       )}
